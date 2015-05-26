@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="appController">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{{tittle}}</title>
+  <meta name="renderer" content="webkit">
+  <meta name="description" content="黑舞堂">
+  <meta name="viewport" content="width=640,user-scalable=no">
+  <!--<link rel="stylesheet" href="bower_components/normalize.css/normalize.css"/>-->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="style/app.css">
+</head>
+<body  class="mainBg">
+  <div ui-view></div>
+  <!--scripts-->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/ngStorage/src/angularLocalStorage.js"></script>
+  <!--vendor-->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <!--app-->
+  <script src="app.js"></script>
+  <script src="app.router.js"></script>
+
+  <!--service-->
+  <script src="service/authentication.js"></script>
+</body>
+</html>
