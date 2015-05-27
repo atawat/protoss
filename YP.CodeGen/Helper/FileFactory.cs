@@ -89,5 +89,17 @@ namespace YP.CodeGen.Helper
             var iOutPutPath = _outputPath + "Services\\" + NormalizeTableName + "\\I" + NormalizeTableName + "Service.cs";
             File.WriteAllText(iOutPutPath, iOutPut);
         }
+
+        public void RenderControllerFile( List<SearchModel> search, List<EntityModel> entity)
+        {
+            if (!Directory.Exists(_outputPath + "Controller\\"))
+            {
+                Directory.CreateDirectory(_outputPath + "Controller\\");
+            }
+            var controllerTemplate = new ControllerTemplate(_projectName,_tableName,search,entity);
+            var output = controllerTemplate.TransformText();
+            var outputpath = _outputPath + "Controller\\" + NormalizeTableName + "Controller.cs";
+            File.WriteAllText(output,outputpath);
+        }
     }
 }

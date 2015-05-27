@@ -110,6 +110,12 @@
       <DependentUpon>ConditionTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="Templates\ConditionTemplatePartial.cs" />
+    <Compile Include="Templates\ControllerTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControllerTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ControllerTemplatePartial.cs" />
     <Compile Include="Templates\EnumTemplate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -150,6 +156,10 @@
     <None Include="Templates\ConditionTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ConditionTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ControllerTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ControllerTemplate.cs</LastGenOutput>
     </None>
     <None Include="Templates\EnumTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

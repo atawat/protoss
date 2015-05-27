@@ -69,6 +69,7 @@ namespace YP.CodeGen
                     fac.RenderEnumFile(sheet.Enums);
                     fac.RenderSearchFile(sheet.Search);
                     fac.RenderServiceFile(sheet.Search);
+                    fac.RenderControllerFile(sheet.Search, sheet.Entity);
                 }
                 return true;
             }
