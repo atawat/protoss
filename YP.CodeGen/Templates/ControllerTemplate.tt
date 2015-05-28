@@ -14,11 +14,11 @@ using <#=_projectName#>.Entity.Model;
 using <#=_projectName#>.Service.<#=_tableName#>;
 using YooPoon.Core.Site;
 using YooPoon.WebFramework.API;
-using Web.Models;
+using <#=_projectName#>.Models;
 
-namespace Web.Controllers
+namespace <#=_projectName#>.Controllers
 {
-	public class <#=_tableName#>Controller
+	public class <#=_tableName#>Controller : ApiController
 	{
 		private readonly I<#=_tableName#>Service _<#=_tableName#>Service;
 

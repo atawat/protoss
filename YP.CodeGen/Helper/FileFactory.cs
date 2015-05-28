@@ -99,7 +99,19 @@ namespace YP.CodeGen.Helper
             var controllerTemplate = new ControllerTemplate(_projectName,_tableName,search,entity);
             var output = controllerTemplate.TransformText();
             var outputpath = _outputPath + "Controller\\" + NormalizeTableName + "Controller.cs";
-            File.WriteAllText(output,outputpath);
+            File.WriteAllText(outputpath,output);
+        }
+
+        public void RenderViewModel(List<EntityModel> entity, List<EnumModel> enums)
+        {
+            if (!Directory.Exists(_outputPath + "Model\\"))
+            {
+                Directory.CreateDirectory(_outputPath + "Model\\");
+            }
+            var controllerTemplate = new ViewModelTemplate(_projectName, _tableName, enums, entity);
+            var output = controllerTemplate.TransformText();
+            var outputpath = _outputPath + "Model\\" + NormalizeTableName + "Model.cs";
+            File.WriteAllText(outputpath, output);
         }
     }
 }
