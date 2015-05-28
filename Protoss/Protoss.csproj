@@ -117,9 +117,37 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BannerController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\Channel Controller.cs" />
+    <Compile Include="Controllers\ContentController.cs" />
+    <Compile Include="Controllers\CouponController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\OrderDetailController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductDetailController.cs" />
+    <Compile Include="Controllers\ProductPropertyValueController.cs" />
+    <Compile Include="Controllers\PropertyController.cs" />
+    <Compile Include="Controllers\PropertyValueController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BannerModel.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\Channel Model.cs" />
+    <Compile Include="Models\ContentModel.cs" />
+    <Compile Include="Models\CouponModel.cs" />
+    <Compile Include="Models\MemberModel.cs" />
+    <Compile Include="Models\OrderDetailModel.cs" />
+    <Compile Include="Models\OrderModel.cs" />
+    <Compile Include="Models\ProductDetailModel.cs" />
+    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\ProductPropertyValueModel.cs" />
+    <Compile Include="Models\PropertyModel.cs" />
+    <Compile Include="Models\PropertyValueModel.cs" />
+    <Compile Include="Models\TagModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -134,10 +162,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Protoss.Service\Protoss.Service.csproj">
+      <Project>{b14ce3f9-4262-4d48-9e8f-db2051a38728}</Project>
+      <Name>Protoss.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProtossEntity\Protoss.Entity.csproj">
+      <Project>{a40d5aa5-fc22-4bd8-a240-96507272b2fe}</Project>
+      <Name>Protoss.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YooPoon.Common\YooPoon.Common.csproj">
       <Project>{a09e564c-ec00-4bfa-acfd-371b45abeeed}</Project>
       <Name>YooPoon.Common</Name>

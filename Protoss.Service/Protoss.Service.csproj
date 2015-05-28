@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B14CE3F9-4262-4D48-9E8F-DB2051A38728}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Protoss.Service</RootNamespace>
+    <AssemblyName>Protoss.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Banner\BannerService.cs" />
+    <Compile Include="Banner\IBannerService.cs" />
+    <Compile Include="Category\CategoryService.cs" />
+    <Compile Include="Category\ICategoryService.cs" />
+    <Compile Include="Channel\Channel Service.cs" />
+    <Compile Include="Channel\IChannel Service.cs" />
+    <Compile Include="Content\ContentService.cs" />
+    <Compile Include="Content\IContentService.cs" />
+    <Compile Include="Coupon\CouponService.cs" />
+    <Compile Include="Coupon\ICouponService.cs" />
+    <Compile Include="Member\IMemberService.cs" />
+    <Compile Include="Member\MemberService.cs" />
+    <Compile Include="OrderDetail\IOrderDetailService.cs" />
+    <Compile Include="OrderDetail\OrderDetailService.cs" />
+    <Compile Include="Order\IOrderService.cs" />
+    <Compile Include="Order\OrderService.cs" />
+    <Compile Include="ProductDetail\IProductDetailService.cs" />
+    <Compile Include="ProductDetail\ProductDetailService.cs" />
+    <Compile Include="ProductPropertyValue\IProductPropertyValueService.cs" />
+    <Compile Include="ProductPropertyValue\ProductPropertyValueService.cs" />
+    <Compile Include="Product\IProductService.cs" />
+    <Compile Include="Product\ProductService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyValue\IPropertyValueService.cs" />
+    <Compile Include="PropertyValue\PropertyValueService.cs" />
+    <Compile Include="Property\IPropertyService.cs" />
+    <Compile Include="Property\PropertyService.cs" />
+    <Compile Include="Tag\ITagService.cs" />
+    <Compile Include="Tag\TagService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProtossEntity\Protoss.Entity.csproj">
+      <Project>{a40d5aa5-fc22-4bd8-a240-96507272b2fe}</Project>
+      <Name>Protoss.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YooPoon.Core\YooPoon.Core.csproj">
+      <Project>{9E9ECF02-0EEC-449D-8756-E1515D9F8EC8}</Project>
+      <Name>YooPoon.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YooPoon.WebFramework\YooPoon.WebFramework.csproj">
+      <Project>{AE97A52E-B5F5-469D-95CB-94E14883AD01}</Project>
+      <Name>YooPoon.WebFramework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
