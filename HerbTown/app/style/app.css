@@ -27,13 +27,14 @@ header .content{
 
 header.home{
     height: 210px;
+    z-index: 9999;
 }
 
 footer{
     width: 100%;
-    height: 90px;
+    height: 120px;
     position: fixed;
-    bottom: 0;
+    bottom: 0px;
     color: white;
     padding-top: 20px;
 }
@@ -45,20 +46,22 @@ footer{
 }
 
 .icon{
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     background-color: white;
     color:rgb(35,24,22);
-    line-height: 28px;
+    line-height: 45px;
 }
 .home .main{
-    margin-top: 220px;
+    margin-top: 250px;
     padding-top: 10px;
+    padding-bottom: 120px;
 }
 .main{
     padding-top: 10px;
     margin: 100px auto 0;
     width: 600px;
+    padding-bottom: 120px;
 }
 
 .pItem{
@@ -199,4 +202,21 @@ input{
     font-size: 70px;
     color: white;
     line-height: 90px;
+}
+.arrow-down {
+    width: 100%;
+    height: 0;
+    border-left: 320px solid transparent;
+    border-right: 320px solid transparent;
+    border-top: 100px solid rgb(35,24,22);
+    position: absolute;
+    bottom: -70px;
+}
+.detail{
+    border-top:solid 1px black;
+}
+
+.item.pthumbnail img{
+    width: 640px;
+    max-height: 480px;
 }
