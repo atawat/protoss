@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Autofac.Integration.WebApi;
+using YooPoon.Core.Autofac;
 
 namespace Protoss
 {
@@ -19,6 +21,14 @@ namespace Protoss
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.EnableCors();
+
+            //DI配置
+            var initialize = new InitializeContainer();
+            initialize.Initializing();
+            //TODO:实现自己的Resolver，未实现前暂时使用Auto自带的
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(initialize.ContainerManager.Container);
         }
     }
 }
