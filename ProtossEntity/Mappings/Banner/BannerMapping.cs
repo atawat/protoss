@@ -10,8 +10,8 @@ namespace Protoss.Entity.Mappings.Banner
 		{
 			ToTable("Banner");
 			HasKey(c => c.Id);
-			Property(c => c.Id).HasColumnType("int");
-			Property(c => c.Title).HasColumnType("int");
+//			Property(c => c.Id).HasColumnType("int");
+			Property(c => c.Title).HasColumnType("varchar").HasMaxLength(50);
 			Property(c => c.ImgUrl).HasColumnType("varchar").HasMaxLength(200);
 			Property(c => c.Order).HasColumnType("int");
 			HasRequired(c => c.Adduser);

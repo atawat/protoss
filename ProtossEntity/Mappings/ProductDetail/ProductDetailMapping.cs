@@ -17,7 +17,7 @@ namespace Protoss.Entity.Mappings.ProductDetail
 			Property(c => c.ImgUrl3).HasColumnType("varchar").HasMaxLength(300).IsOptional();
 			Property(c => c.ImgUrl4).HasColumnType("varchar").HasMaxLength(300).IsOptional();
 			Property(c => c.ImgUrl5).HasColumnType("varchar").HasMaxLength(300).IsOptional();
-			HasOptional(c =>c.Product);
+			HasRequired(c =>c.Product);
 		}
 	}
 }

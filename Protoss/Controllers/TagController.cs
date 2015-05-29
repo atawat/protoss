@@ -22,6 +22,7 @@ namespace Protoss.Controllers
 			_TagService = TagService;
 		}
 
+        [AllowAnonymous]
 		public TagModel Get(int id)
 		{
 			var entity =_TagService.GetTagById(id);
