@@ -25,55 +25,55 @@ namespace Protoss.Controllers
 		public BannerModel Get(int id)
 		{
 			var entity =_BannerService.GetBannerById(id);
-			var model = new BannerModel
-			{
+		    var model = new BannerModel
+		    {
 
-				Id = entity.Id
+		        Id = entity.Id,
 
-				Title = entity.Title
+		        Title = entity.Title,
 
-				ImgUrl = entity.ImgUrl
+		        ImgUrl = entity.ImgUrl,
 
-				Order = entity.Order
+		        Order = entity.Order,
 
-				Adduser = entity.Adduser
+		        Adduser = entity.Adduser,
 
-				Addtime = entity.Addtime
+		        Addtime = entity.Addtime,
 
-				Upduser = entity.Upduser
+		        Upduser = entity.Upduser,
 
-				Updtime = entity.Updtime
+		        Updtime = entity.Updtime,
 
-				Content = entity.Content
+//		        Content = entity.Content,
 
-			}
+		    };
 			return model;
 		}
 
-		public List<BannerModel> Get(BannerSearchCondtion condition)
+		public List<BannerModel> Get(BannerSearchCondition condition)
 		{
-			var model = _BannerService.Get_BannersByConditon(condition).Select(c=>new _BannerModel
+			var model = _BannerService.GetBannersByCondition(condition).Select(c=>new BannerModel
 			{
 
-				Id = entity.Id
+				Id = c.Id,
 
-				Title = entity.Title
+				Title = c.Title,
 
-				ImgUrl = entity.ImgUrl
+				ImgUrl = c.ImgUrl,
 
-				Order = entity.Order
+				Order = c.Order,
 
-				Adduser = entity.Adduser
+				Adduser = c.Adduser,
 
-				Addtime = entity.Addtime
+				Addtime = c.Addtime,
 
-				Upduser = entity.Upduser
+				Upduser = c.Upduser,
 
-				Updtime = entity.Updtime
+				Updtime = c.Updtime,
 
-				Content = entity.Content
+//				Content = c.Content,
 
-			});
+			}).ToList();
 			return model;
 		}
 
@@ -82,23 +82,23 @@ namespace Protoss.Controllers
 			var entity = new BannerEntity
 			{
 
-				Title = model.Title
+				Title = model.Title,
 
-				ImgUrl = model.ImgUrl
+				ImgUrl = model.ImgUrl,
 
-				Order = model.Order
+				Order = model.Order,
 
-				Adduser = model.Adduser
+				Adduser = model.Adduser,
 
-				Addtime = model.Addtime
+				Addtime = model.Addtime,
 
-				Upduser = model.Upduser
+				Upduser = model.Upduser,
 
-				Updtime = model.Updtime
+				Updtime = model.Updtime,
 
-				Content = model.Content
+//				Content = model.Content,
 
-			}
+			};
 			if(_BannerService.Create(entity).Id > 0)
 			{
 				return true;
@@ -112,21 +112,21 @@ namespace Protoss.Controllers
 			if(entity == null)
 				return false;
 
-			entity.Title = model.Title
+			entity.Title = model.Title;
 
-			entity.ImgUrl = model.ImgUrl
+			entity.ImgUrl = model.ImgUrl;
 
-			entity.Order = model.Order
+			entity.Order = model.Order;
 
-			entity.Adduser = model.Adduser
+			entity.Adduser = model.Adduser;
 
-			entity.Addtime = model.Addtime
+			entity.Addtime = model.Addtime;
 
-			entity.Upduser = model.Upduser
+			entity.Upduser = model.Upduser;
 
-			entity.Updtime = model.Updtime
+			entity.Updtime = model.Updtime;
 
-			entity.Content = model.Content
+//			entity.Content = model.Content;
 
 			if(_BannerService.Update(entity) != null)
 				return true;
@@ -140,7 +140,7 @@ namespace Protoss.Controllers
 				return false;
 			if(_BannerService.Delete(entity))
 				return true;
-			return false
+			return false;
 		}
 	}
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Protoss.Entity.Model;
+using YooPoon.WebFramework.User.Entity;
+
 
 namespace Protoss.Models
 {
@@ -55,6 +57,7 @@ namespace Protoss.Models
 			get
 			{
 				switch(Status)
+				{
 
 					case EnumOrderStatus.Created:
 						return "新建的";
@@ -75,7 +78,8 @@ namespace Protoss.Models
 						return "已完成";
 
 					default:
-						return:"";
+						return "";
+				}
 			}
 		}
 
@@ -125,13 +129,13 @@ namespace Protoss.Models
 		/// <summary>
         /// 订单明细
         /// </summary>
-		public IList<OrderDetail> Details {get;set;}
+        public IList<OrderDetailModel> Details { get; set; }
 
 
 		/// <summary>
         /// 订单所使用优惠卷
         /// </summary>
-		public IList<Coupon> Coupon {get;set;}
+        public IList<CouponModel> Coupon { get; set; }
 
 
 		/// <summary>
@@ -144,6 +148,7 @@ namespace Protoss.Models
 			get
 			{
 				switch(Type)
+				{
 
 					case EnumOrderType.OnLine:
 						return "线上";
@@ -152,7 +157,8 @@ namespace Protoss.Models
 						return "线下";
 
 					default:
-						return:"";
+						return "";
+				}
 			}
 		}
 
@@ -167,6 +173,7 @@ namespace Protoss.Models
 			get
 			{
 				switch(PayType)
+				{
 
 					case EnumPayType.Cash:
 						return "现金";
@@ -181,7 +188,8 @@ namespace Protoss.Models
 						return "混合";
 
 					default:
-						return:"";
+						return "";
+				}
 			}
 		}
 

@@ -25,51 +25,51 @@ namespace Protoss.Controllers
 		public CategoryModel Get(int id)
 		{
 			var entity =_CategoryService.GetCategoryById(id);
-			var model = new CategoryModel
-			{
+		    var model = new CategoryModel
+		    {
 
-				Id = entity.Id
+		        Id = entity.Id,
 
-				CategoryName = entity.CategoryName
+		        CategoryName = entity.CategoryName,
 
-				Father = entity.Father
+//		        Father = entity.Father,
 
-				Adduser = entity.Adduser
+		        Adduser = entity.Adduser,
 
-				Addtime = entity.Addtime
+		        Addtime = entity.Addtime,
 
-				Upduser = entity.Upduser
+		        Upduser = entity.Upduser,
 
-				Updtime = entity.Updtime
+		        Updtime = entity.Updtime,
 
-				Products = entity.Products
+//		        Products = entity.Products,
 
-			}
+		    };
 			return model;
 		}
 
-		public List<CategoryModel> Get(CategorySearchCondtion condition)
+		public List<CategoryModel> Get(CategorySearchCondition condition)
 		{
-			var model = _CategoryService.Get_CategorysByConditon(condition).Select(c=>new _CategoryModel
+			var model = _CategoryService.GetCategorysByCondition(condition).Select(c=>new CategoryModel
 			{
 
-				Id = entity.Id
+				Id = c.Id,
 
-				CategoryName = entity.CategoryName
+				CategoryName = c.CategoryName,
 
-				Father = entity.Father
+//				Father = c.Father,
 
-				Adduser = entity.Adduser
+				Adduser = c.Adduser,
 
-				Addtime = entity.Addtime
+				Addtime = c.Addtime,
 
-				Upduser = entity.Upduser
+				Upduser = c.Upduser,
 
-				Updtime = entity.Updtime
+				Updtime = c.Updtime,
 
-				Products = entity.Products
+//				Products = c.Products,
 
-			});
+			}).ToList();
 			return model;
 		}
 
@@ -78,21 +78,21 @@ namespace Protoss.Controllers
 			var entity = new CategoryEntity
 			{
 
-				CategoryName = model.CategoryName
+				CategoryName = model.CategoryName,
 
-				Father = model.Father
+//				Father = model.Father,
 
-				Adduser = model.Adduser
+				Adduser = model.Adduser,
 
-				Addtime = model.Addtime
+				Addtime = model.Addtime,
 
-				Upduser = model.Upduser
+				Upduser = model.Upduser,
 
-				Updtime = model.Updtime
+				Updtime = model.Updtime,
 
-				Products = model.Products
+//				Products = model.Products,
 
-			}
+			};
 			if(_CategoryService.Create(entity).Id > 0)
 			{
 				return true;
@@ -106,19 +106,19 @@ namespace Protoss.Controllers
 			if(entity == null)
 				return false;
 
-			entity.CategoryName = model.CategoryName
+			entity.CategoryName = model.CategoryName;
 
-			entity.Father = model.Father
+//			entity.Father = model.Father;
 
-			entity.Adduser = model.Adduser
+			entity.Adduser = model.Adduser;
 
-			entity.Addtime = model.Addtime
+			entity.Addtime = model.Addtime;
 
-			entity.Upduser = model.Upduser
+			entity.Upduser = model.Upduser;
 
-			entity.Updtime = model.Updtime
+			entity.Updtime = model.Updtime;
 
-			entity.Products = model.Products
+//			entity.Products = model.Products;
 
 			if(_CategoryService.Update(entity) != null)
 				return true;
@@ -132,7 +132,7 @@ namespace Protoss.Controllers
 				return false;
 			if(_CategoryService.Delete(entity))
 				return true;
-			return false
+			return false;
 		}
 	}
 }

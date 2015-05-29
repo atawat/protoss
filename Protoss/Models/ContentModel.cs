@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Protoss.Entity.Model;
+using YooPoon.WebFramework.User.Entity;
+
 
 namespace Protoss.Models
 {
@@ -61,6 +63,7 @@ namespace Protoss.Models
 			get
 			{
 				switch(Status)
+				{
 
 					case EnumContentStatus.Created:
 						return "刚新建";
@@ -72,7 +75,8 @@ namespace Protoss.Models
 						return "已删除";
 
 					default:
-						return:"";
+						return "";
+				}
 			}
 		}
 
@@ -98,13 +102,13 @@ namespace Protoss.Models
 		/// <summary>
         /// 标签
         /// </summary>
-		public IList<TagEntity> Tags {get;set;}
+        public IList<TagModel> Tags { get; set; }
 
 
 		/// <summary>
         /// 所属频道
         /// </summary>
-		public IList<ChannelEntity> Channels {get;set;}
+        public IList<ChannelModel> Channels { get; set; }
 
 
 

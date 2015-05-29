@@ -25,39 +25,39 @@ namespace Protoss.Controllers
 		public OrderDetailModel Get(int id)
 		{
 			var entity =_OrderDetailService.GetOrderDetailById(id);
-			var model = new OrderDetailModel
-			{
+		    var model = new OrderDetailModel
+		    {
 
-				Id = entity.Id
+		        Id = entity.Id,
 
-				Product = entity.Product
+//		        Product = entity.Product,
 
-				Count = entity.Count
+		        Count = entity.Count,
 
-				TotalPrice = entity.TotalPrice
+		        TotalPrice = entity.TotalPrice,
 
-				Order = entity.Order
+//		        Order = entity.Order,
 
-			}
+		    };
 			return model;
 		}
 
-		public List<OrderDetailModel> Get(OrderDetailSearchCondtion condition)
+		public List<OrderDetailModel> Get(OrderDetailSearchCondition condition)
 		{
-			var model = _OrderDetailService.Get_OrderDetailsByConditon(condition).Select(c=>new _OrderDetailModel
+			var model = _OrderDetailService.GetOrderDetailsByCondition(condition).Select(c=>new OrderDetailModel
 			{
 
-				Id = entity.Id
+				Id = c.Id,
 
-				Product = entity.Product
+//				Product = c.Product,
 
-				Count = entity.Count
+				Count = c.Count,
 
-				TotalPrice = entity.TotalPrice
+				TotalPrice = c.TotalPrice,
 
-				Order = entity.Order
+//				Order = c.Order,
 
-			});
+			}).ToList();
 			return model;
 		}
 
@@ -66,15 +66,15 @@ namespace Protoss.Controllers
 			var entity = new OrderDetailEntity
 			{
 
-				Product = model.Product
+//				Product = model.Product,
 
-				Count = model.Count
+				Count = model.Count,
 
-				TotalPrice = model.TotalPrice
+				TotalPrice = model.TotalPrice,
 
-				Order = model.Order
+//				Order = model.Order,
 
-			}
+			};
 			if(_OrderDetailService.Create(entity).Id > 0)
 			{
 				return true;
@@ -88,13 +88,13 @@ namespace Protoss.Controllers
 			if(entity == null)
 				return false;
 
-			entity.Product = model.Product
+//			entity.Product = model.Product;
 
-			entity.Count = model.Count
+			entity.Count = model.Count;
 
-			entity.TotalPrice = model.TotalPrice
+			entity.TotalPrice = model.TotalPrice;
 
-			entity.Order = model.Order
+//			entity.Order = model.Order;
 
 			if(_OrderDetailService.Update(entity) != null)
 				return true;
@@ -108,7 +108,7 @@ namespace Protoss.Controllers
 				return false;
 			if(_OrderDetailService.Delete(entity))
 				return true;
-			return false
+			return false;
 		}
 	}
 }

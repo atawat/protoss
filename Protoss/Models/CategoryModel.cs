@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Protoss.Entity.Model;
+using YooPoon.WebFramework.User.Entity;
+
 
 namespace Protoss.Models
 {
@@ -24,7 +26,7 @@ namespace Protoss.Models
 		/// <summary>
         /// 父类
         /// </summary>
-		public Category Father {get;set;}
+        public CategoryModel Father { get; set; }
 
 
 		/// <summary>
@@ -54,7 +56,7 @@ namespace Protoss.Models
 		/// <summary>
         /// 关联产品
         /// </summary>
-		public IList<Prdocut> Products {get;set;}
+        public IList<ProductModel> Products { get; set; }
 
 
 

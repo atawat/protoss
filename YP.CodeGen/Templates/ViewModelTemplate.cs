@@ -36,7 +36,7 @@ namespace YP.CodeGen.Templates
             
             #line default
             #line hidden
-            this.Write(".Entity.Model;\n\nnamespace ");
+            this.Write(".Entity.Model;\nusing YooPoon.WebFramework.User.Entity;\n\n\nnamespace ");
             
             #line 6 "D:\Project_Protoss\YP.CodeGen\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_projectName));
@@ -71,6 +71,19 @@ namespace YP.CodeGen.Templates
             
             #line default
             #line hidden
+            
+            #line 8 "D:\Project_Protoss\YP.CodeGen\Templates\ViewModelTemplate.tt"
+if(filed.IsVirtual){
+            
+            #line default
+            #line hidden
+            this.Write("Entity");
+            
+            #line 8 "D:\Project_Protoss\YP.CodeGen\Templates\ViewModelTemplate.tt"
+}
+            
+            #line default
+            #line hidden
             this.Write(" ");
             
             #line 8 "D:\Project_Protoss\YP.CodeGen\Templates\ViewModelTemplate.tt"
@@ -99,7 +112,7 @@ namespace YP.CodeGen.Templates
             
             #line default
             #line hidden
-            this.Write(")\n");
+            this.Write(")\n\t\t\t\t{\n");
             
             #line 8 "D:\Project_Protoss\YP.CodeGen\Templates\ViewModelTemplate.tt"
  foreach(var value in _enumModels.FirstOrDefault(c=>c.EnumName == filed.Type).Values){
@@ -134,7 +147,7 @@ namespace YP.CodeGen.Templates
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t\tdefault:\n\t\t\t\t\t\treturn:\"\";\n\t\t\t}\n\t\t}\n");
+            this.Write("\n\t\t\t\t\tdefault:\n\t\t\t\t\t\treturn \"\";\n\t\t\t\t}\n\t\t\t}\n\t\t}\n");
             
             #line 8 "D:\Project_Protoss\YP.CodeGen\Templates\ViewModelTemplate.tt"
 }

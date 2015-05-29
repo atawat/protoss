@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Protoss.Entity.Model;
+using YooPoon.WebFramework.User.Entity;
+
 
 namespace Protoss.Models
 {
@@ -54,7 +56,7 @@ namespace Protoss.Models
 		/// <summary>
         /// 商品主体
         /// </summary>
-		public Product Product {get;set;}
+        public ProductModel Product { get; set; }
 
 
 

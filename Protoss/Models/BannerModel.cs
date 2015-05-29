@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Protoss.Entity.Model;
+using YooPoon.WebFramework.User.Entity;
+
 
 namespace Protoss.Models
 {
@@ -36,7 +38,7 @@ namespace Protoss.Models
 		/// <summary>
         /// 添加人
         /// </summary>
-		public int Adduser {get;set;}
+		public UserBase Adduser {get;set;}
 
 
 		/// <summary>
@@ -48,7 +50,7 @@ namespace Protoss.Models
 		/// <summary>
         /// 更新人
         /// </summary>
-		public int Upduser {get;set;}
+		public UserBase Upduser {get;set;}
 
 
 		/// <summary>
@@ -60,9 +62,6 @@ namespace Protoss.Models
 		/// <summary>
         /// 关联内容
         /// </summary>
-		public ContentEntity Content {get;set;}
-
-
-
+		public ContentModel Content {get;set;}
 	}
 }

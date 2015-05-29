@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Protoss.Entity.Model;
+using YooPoon.WebFramework.User.Entity;
+
 
 namespace Protoss.Models
 {
-	public class Channel Model
+	public class ChannelModel
 	{
 
 		/// <summary>
@@ -31,6 +33,7 @@ namespace Protoss.Models
 			get
 			{
 				switch(Status)
+				{
 
 					case EnumChannelStatus.Normal:
 						return "正常";
@@ -39,7 +42,8 @@ namespace Protoss.Models
 						return "已删除";
 
 					default:
-						return:"";
+						return "";
+				}
 			}
 		}
 
@@ -47,7 +51,7 @@ namespace Protoss.Models
 		/// <summary>
         /// 父级
         /// </summary>
-		public ChannelEntity Parent {get;set;}
+        public ChannelModel Parent { get; set; }
 
 
 		/// <summary>

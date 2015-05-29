@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Protoss.Entity.Model;
+using YooPoon.WebFramework.User.Entity;
+
 
 namespace Protoss.Models
 {
@@ -48,7 +50,7 @@ namespace Protoss.Models
 		/// <summary>
         /// 拥有的值
         /// </summary>
-		public IList<PropertyValueEntity> Value {get;set;}
+        public IList<PropertyValueModel> Value { get; set; }
 
 
 

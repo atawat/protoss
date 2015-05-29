@@ -33,20 +33,19 @@ namespace <#=_projectName#>.Controllers
 			var model = new <#=_tableName#>Model
 			{
 <# foreach(var filed in _entityModels){ if(filed.IsVirtual) continue;#>
-				<#=filed.FieldName#> = entity.<#=filed.FieldName#>
-<#}#>
-			}
+				<#=filed.FieldName#> = entity.<#=filed.FieldName#>,<#}#>
+			};
 			return model;
 		}
 
-		public List<<#=_tableName#>Model> Get(<#=_tableName#>SearchCondtion condition)
+		public List<<#=_tableName#>Model> Get(<#=_tableName#>SearchCondition condition)
 		{
-			var model = _<#=_tableName#>Service.Get_<#=_tableName#>sByConditon(condition).Select(c=>new _<#=_tableName#>Model
+			var model = _<#=_tableName#>Service.Get<#=_tableName#>sByCondition(condition).Select(c=>new <#=_tableName#>Model
 			{
 <# foreach(var filed in _entityModels){ if(filed.IsVirtual) continue;#>
-				<#=filed.FieldName#> = entity.<#=filed.FieldName#>
+				<#=filed.FieldName#> = c.<#=filed.FieldName#>,
 <#}#>
-			});
+			}).ToList();
 			return model;
 		}
 
@@ -55,9 +54,9 @@ namespace <#=_projectName#>.Controllers
 			var entity = new <#=_tableName#>Entity
 			{
 <# foreach(var filed in _entityModels){ if(filed.FieldName =="Id" || filed.IsVirtual) continue;#>
-				<#=filed.FieldName#> = model.<#=filed.FieldName#>
+				<#=filed.FieldName#> = model.<#=filed.FieldName#>,
 <#}#>
-			}
+			};
 			if(_<#=_tableName#>Service.Create(entity).Id > 0)
 			{
 				return true;
@@ -71,7 +70,7 @@ namespace <#=_projectName#>.Controllers
 			if(entity == null)
 				return false;
 <# foreach(var filed in _entityModels){ if(filed.FieldName =="Id" || filed.IsVirtual) continue;#>
-			entity.<#=filed.FieldName#> = model.<#=filed.FieldName#>
+			entity.<#=filed.FieldName#> = model.<#=filed.FieldName#>;
 <#}#>
 			if(_<#=_tableName#>Service.Update(entity) != null)
 				return true;
@@ -85,7 +84,7 @@ namespace <#=_projectName#>.Controllers
 				return false;
 			if(_<#=_tableName#>Service.Delete(entity))
 				return true;
-			return false
+			return false;
 		}
 	}
 }

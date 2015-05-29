@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Protoss.Entity.Model;
+using YooPoon.WebFramework.User.Entity;
+
 
 namespace Protoss.Models
 {
@@ -66,13 +68,13 @@ namespace Protoss.Models
 		/// <summary>
         /// 明细
         /// </summary>
-		public ProductDetail Detail {get;set;}
+        public ProductDetailModel Detail { get; set; }
 
 
 		/// <summary>
         /// 分类
         /// </summary>
-		public Category Category {get;set;}
+        public CategoryModel Category { get; set; }
 
 
 		/// <summary>
@@ -85,6 +87,7 @@ namespace Protoss.Models
 			get
 			{
 				switch(Status)
+				{
 
 					case EnumProductStatus.OnSale:
 						return "上架";
@@ -96,7 +99,8 @@ namespace Protoss.Models
 						return "已删除";
 
 					default:
-						return:"";
+						return "";
+				}
 			}
 		}
 
@@ -104,7 +108,7 @@ namespace Protoss.Models
 		/// <summary>
         /// 属性值
         /// </summary>
-		public IList<PrductPropertyValueEntity> PropertyValues {get;set;}
+        public IList<ProductPropertyValueModel> PropertyValues { get; set; }
 
 
 

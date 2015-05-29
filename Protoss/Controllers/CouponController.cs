@@ -25,67 +25,67 @@ namespace Protoss.Controllers
 		public CouponModel Get(int id)
 		{
 			var entity =_CouponService.GetCouponById(id);
-			var model = new CouponModel
-			{
+		    var model = new CouponModel
+		    {
 
-				Id = entity.Id
+		        Id = entity.Id,
 
-				Guid = entity.Guid
+		        Guid = entity.Guid,
 
-				Type = entity.Type
+		        Type = entity.Type,
 
-				DisCount = entity.DisCount
+		        DisCount = entity.DisCount,
 
-				Product = entity.Product
+//		        Product = entity.Product,
 
-				ExpireTime = entity.ExpireTime
+		        ExpireTime = entity.ExpireTime,
 
-				Status = entity.Status
+		        Status = entity.Status,
 
-				Adduser = entity.Adduser
+		        Adduser = entity.Adduser,
 
-				Addtime = entity.Addtime
+		        Addtime = entity.Addtime,
 
-				Upduser = entity.Upduser
+		        Upduser = entity.Upduser,
 
-				Updtime = entity.Updtime
+		        Updtime = entity.Updtime,
 
-				Owner = entity.Owner
+		        Owner = entity.Owner,
 
-			}
+		    };
 			return model;
 		}
 
-		public List<CouponModel> Get(CouponSearchCondtion condition)
+		public List<CouponModel> Get(CouponSearchCondition condition)
 		{
-			var model = _CouponService.Get_CouponsByConditon(condition).Select(c=>new _CouponModel
+			var model = _CouponService.GetCouponsByCondition(condition).Select(c=>new CouponModel
 			{
 
-				Id = entity.Id
+				Id = c.Id,
 
-				Guid = entity.Guid
+				Guid = c.Guid,
 
-				Type = entity.Type
+				Type = c.Type,
 
-				DisCount = entity.DisCount
+				DisCount = c.DisCount,
 
-				Product = entity.Product
+//				Product = c.Product,
 
-				ExpireTime = entity.ExpireTime
+				ExpireTime = c.ExpireTime,
 
-				Status = entity.Status
+				Status = c.Status,
 
-				Adduser = entity.Adduser
+				Adduser = c.Adduser,
 
-				Addtime = entity.Addtime
+				Addtime = c.Addtime,
 
-				Upduser = entity.Upduser
+				Upduser = c.Upduser,
 
-				Updtime = entity.Updtime
+				Updtime = c.Updtime,
 
-				Owner = entity.Owner
+				Owner = c.Owner,
 
-			});
+			}).ToList();
 			return model;
 		}
 
@@ -94,29 +94,29 @@ namespace Protoss.Controllers
 			var entity = new CouponEntity
 			{
 
-				Guid = model.Guid
+				Guid = model.Guid,
 
-				Type = model.Type
+				Type = model.Type,
 
-				DisCount = model.DisCount
+				DisCount = model.DisCount,
 
-				Product = model.Product
+//				Product = model.Product,
 
-				ExpireTime = model.ExpireTime
+				ExpireTime = model.ExpireTime,
 
-				Status = model.Status
+				Status = model.Status,
 
-				Adduser = model.Adduser
+				Adduser = model.Adduser,
 
-				Addtime = model.Addtime
+				Addtime = model.Addtime,
 
-				Upduser = model.Upduser
+				Upduser = model.Upduser,
 
-				Updtime = model.Updtime
+				Updtime = model.Updtime,
 
-				Owner = model.Owner
+				Owner = model.Owner,
 
-			}
+			};
 			if(_CouponService.Create(entity).Id > 0)
 			{
 				return true;
@@ -130,27 +130,27 @@ namespace Protoss.Controllers
 			if(entity == null)
 				return false;
 
-			entity.Guid = model.Guid
+			entity.Guid = model.Guid;
 
-			entity.Type = model.Type
+			entity.Type = model.Type;
 
-			entity.DisCount = model.DisCount
+			entity.DisCount = model.DisCount;
 
-			entity.Product = model.Product
+//			entity.Product = model.Product;
 
-			entity.ExpireTime = model.ExpireTime
+			entity.ExpireTime = model.ExpireTime;
 
-			entity.Status = model.Status
+			entity.Status = model.Status;
 
-			entity.Adduser = model.Adduser
+			entity.Adduser = model.Adduser;
 
-			entity.Addtime = model.Addtime
+			entity.Addtime = model.Addtime;
 
-			entity.Upduser = model.Upduser
+			entity.Upduser = model.Upduser;
 
-			entity.Updtime = model.Updtime
+			entity.Updtime = model.Updtime;
 
-			entity.Owner = model.Owner
+			entity.Owner = model.Owner;
 
 			if(_CouponService.Update(entity) != null)
 				return true;
@@ -164,7 +164,7 @@ namespace Protoss.Controllers
 				return false;
 			if(_CouponService.Delete(entity))
 				return true;
-			return false
+			return false;
 		}
 	}
 }

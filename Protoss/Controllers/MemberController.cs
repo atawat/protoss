@@ -25,39 +25,39 @@ namespace Protoss.Controllers
 		public MemberModel Get(int id)
 		{
 			var entity =_MemberService.GetMemberById(id);
-			var model = new MemberModel
-			{
+		    var model = new MemberModel
+		    {
 
-				Id = entity.Id
+		        Id = entity.Id,
 
-				User = entity.User
+		        User = entity.User,
 
-				OpenId = entity.OpenId
+		        OpenId = entity.OpenId,
 
-				Orders = entity.Orders
+//		        Orders = entity.Orders,
 
-				ContactName = entity.ContactName
+		        ContactName = entity.ContactName,
 
-			}
+		    };
 			return model;
 		}
 
-		public List<MemberModel> Get(MemberSearchCondtion condition)
+		public List<MemberModel> Get(MemberSearchCondition condition)
 		{
-			var model = _MemberService.Get_MembersByConditon(condition).Select(c=>new _MemberModel
+			var model = _MemberService.GetMembersByCondition(condition).Select(c=>new MemberModel
 			{
 
-				Id = entity.Id
+				Id = c.Id,
 
-				User = entity.User
+				User = c.User,
 
-				OpenId = entity.OpenId
+				OpenId = c.OpenId,
 
-				Orders = entity.Orders
+//				Orders = c.Orders,
 
-				ContactName = entity.ContactName
+				ContactName = c.ContactName,
 
-			});
+			}).ToList();
 			return model;
 		}
 
@@ -66,15 +66,15 @@ namespace Protoss.Controllers
 			var entity = new MemberEntity
 			{
 
-				User = model.User
+				User = model.User,
 
-				OpenId = model.OpenId
+				OpenId = model.OpenId,
 
-				Orders = model.Orders
+//				Orders = model.Orders,
 
-				ContactName = model.ContactName
+				ContactName = model.ContactName,
 
-			}
+			};
 			if(_MemberService.Create(entity).Id > 0)
 			{
 				return true;
@@ -88,13 +88,13 @@ namespace Protoss.Controllers
 			if(entity == null)
 				return false;
 
-			entity.User = model.User
+			entity.User = model.User;
 
-			entity.OpenId = model.OpenId
+			entity.OpenId = model.OpenId;
 
-			entity.Orders = model.Orders
+//			entity.Orders = model.Orders;
 
-			entity.ContactName = model.ContactName
+			entity.ContactName = model.ContactName;
 
 			if(_MemberService.Update(entity) != null)
 				return true;
@@ -108,7 +108,7 @@ namespace Protoss.Controllers
 				return false;
 			if(_MemberService.Delete(entity))
 				return true;
-			return false
+			return false;
 		}
 	}
 }

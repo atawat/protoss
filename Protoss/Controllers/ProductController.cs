@@ -25,71 +25,71 @@ namespace Protoss.Controllers
 		public ProductModel Get(int id)
 		{
 			var entity =_ProductService.GetProductById(id);
-			var model = new ProductModel
-			{
+		    var model = new ProductModel
+		    {
 
-				Id = entity.Id
+		        Id = entity.Id,
 
-				Name = entity.Name
+		        Name = entity.Name,
 
-				Spec = entity.Spec
+		        Spec = entity.Spec,
 
-				Price = entity.Price
+		        Price = entity.Price,
 
-				Adduser = entity.Adduser
+		        Adduser = entity.Adduser,
 
-				Addtime = entity.Addtime
+		        Addtime = entity.Addtime,
 
-				Upduser = entity.Upduser
+		        Upduser = entity.Upduser,
 
-				Updtime = entity.Updtime
+		        Updtime = entity.Updtime,
 
-				Unit = entity.Unit
+		        Unit = entity.Unit,
 
-				Detail = entity.Detail
+//		        Detail = entity.Detail,
 
-				Category = entity.Category
+//		        Category = entity.Category,
 
-				Status = entity.Status
+		        Status = entity.Status,
 
-				PropertyValues = entity.PropertyValues
+//		        PropertyValues = entity.PropertyValues,
 
-			}
+		    };
 			return model;
 		}
 
-		public List<ProductModel> Get(ProductSearchCondtion condition)
+		public List<ProductModel> Get(ProductSearchCondition condition)
 		{
-			var model = _ProductService.Get_ProductsByConditon(condition).Select(c=>new _ProductModel
+			var model = _ProductService.GetProductsByCondition(condition).Select(c=>new ProductModel
 			{
 
-				Id = entity.Id
+				Id = c.Id,
 
-				Name = entity.Name
+				Name = c.Name,
 
-				Spec = entity.Spec
+				Spec = c.Spec,
 
-				Price = entity.Price
+				Price = c.Price,
 
-				Adduser = entity.Adduser
+				Adduser = c.Adduser,
 
-				Addtime = entity.Addtime
+				Addtime = c.Addtime,
 
-				Upduser = entity.Upduser
+				Upduser = c.Upduser,
 
-				Updtime = entity.Updtime
+				Updtime = c.Updtime,
 
-				Unit = entity.Unit
+				Unit = c.Unit,
 
-				Detail = entity.Detail
+//				Detail = c.Detail,
 
-				Category = entity.Category
+//				Category = c.Category,
 
-				Status = entity.Status
+				Status = c.Status,
 
-				PropertyValues = entity.PropertyValues
+//				PropertyValues = c.PropertyValues,
 
-			});
+			}).ToList();
 			return model;
 		}
 
@@ -98,31 +98,31 @@ namespace Protoss.Controllers
 			var entity = new ProductEntity
 			{
 
-				Name = model.Name
+				Name = model.Name,
 
-				Spec = model.Spec
+				Spec = model.Spec,
 
-				Price = model.Price
+				Price = model.Price,
 
-				Adduser = model.Adduser
+				Adduser = model.Adduser,
 
-				Addtime = model.Addtime
+				Addtime = model.Addtime,
 
-				Upduser = model.Upduser
+				Upduser = model.Upduser,
 
-				Updtime = model.Updtime
+				Updtime = model.Updtime,
 
-				Unit = model.Unit
+				Unit = model.Unit,
 
-				Detail = model.Detail
+//				Detail = model.Detail,
 
-				Category = model.Category
+//				Category = model.Category,
 
-				Status = model.Status
+				Status = model.Status,
 
-				PropertyValues = model.PropertyValues
+//				PropertyValues = model.PropertyValues,
 
-			}
+			};
 			if(_ProductService.Create(entity).Id > 0)
 			{
 				return true;
@@ -136,29 +136,29 @@ namespace Protoss.Controllers
 			if(entity == null)
 				return false;
 
-			entity.Name = model.Name
+			entity.Name = model.Name;
 
-			entity.Spec = model.Spec
+			entity.Spec = model.Spec;
 
-			entity.Price = model.Price
+			entity.Price = model.Price;
 
-			entity.Adduser = model.Adduser
+			entity.Adduser = model.Adduser;
 
-			entity.Addtime = model.Addtime
+			entity.Addtime = model.Addtime;
 
-			entity.Upduser = model.Upduser
+			entity.Upduser = model.Upduser;
 
-			entity.Updtime = model.Updtime
+			entity.Updtime = model.Updtime;
 
-			entity.Unit = model.Unit
+			entity.Unit = model.Unit;
 
-			entity.Detail = model.Detail
+//			entity.Detail = model.Detail;
 
-			entity.Category = model.Category
+//			entity.Category = model.Category;
 
-			entity.Status = model.Status
+			entity.Status = model.Status;
 
-			entity.PropertyValues = model.PropertyValues
+//			entity.PropertyValues = model.PropertyValues;
 
 			if(_ProductService.Update(entity) != null)
 				return true;
@@ -172,7 +172,7 @@ namespace Protoss.Controllers
 				return false;
 			if(_ProductService.Delete(entity))
 				return true;
-			return false
+			return false;
 		}
 	}
 }

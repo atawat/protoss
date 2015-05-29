@@ -165,7 +165,7 @@
     </None>
     <None Include="Templates\ControllerTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>ControllerTemplate.cs</LastGenOutput>
+      <LastGenOutput>ControllerTemplate1.cs</LastGenOutput>
     </None>
     <None Include="Templates\EnumTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

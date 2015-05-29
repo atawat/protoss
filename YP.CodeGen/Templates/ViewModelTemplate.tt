@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using <#=_projectName#>.Entity.Model;
+using YooPoon.WebFramework.User.Entity;
+
 
 namespace <#=_projectName#>.Models
 {
@@ -17,19 +19,21 @@ namespace <#=_projectName#>.Models
 		/// <summary>
         /// <#=filed.Description#>
         /// </summary>
-		public <#=filed.Type#> <#=filed.FieldName#> {get;set;}
+		public <#=filed.Type#><#if(filed.IsVirtual){#>Entity<#}#> <#=filed.FieldName#> {get;set;}
 <# if(filed.Type.StartsWith("Enum")){#>
 		public string <#=filed.FieldName#>String
 		{
 			get
 			{
 				switch(<#=filed.FieldName#>)
+				{
 <# foreach(var value in _enumModels.FirstOrDefault(c=>c.EnumName == filed.Type).Values){#>
 					case <#=filed.Type#>.<#=value.Attribute#>:
 						return "<#=value.Description#>";
 <#}#>
 					default:
-						return:"";
+						return "";
+				}
 			}
 		}
 <#}#>

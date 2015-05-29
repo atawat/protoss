@@ -170,7 +170,7 @@ namespace YP.CodeGen.Templates
             
             #line default
             #line hidden
-            this.Write("\n");
+            this.Write(",\n");
             
             #line 6 "D:\Project_Protoss\YP.CodeGen\Templates\ControllerTemplate.tt"
 }
@@ -191,21 +191,21 @@ namespace YP.CodeGen.Templates
             
             #line default
             #line hidden
-            this.Write("SearchCondtion condition)\n\t\t{\n\t\t\tvar model = _");
+            this.Write("SearchCondition condition)\n\t\t{\n\t\t\tvar model = _");
             
             #line 6 "D:\Project_Protoss\YP.CodeGen\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_tableName));
             
             #line default
             #line hidden
-            this.Write("Service.Get_");
+            this.Write("Service.Get");
             
             #line 6 "D:\Project_Protoss\YP.CodeGen\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_tableName));
             
             #line default
             #line hidden
-            this.Write("sByConditon(condition).Select(c=>new _");
+            this.Write("sByCondition(condition).Select(c=>new ");
             
             #line 6 "D:\Project_Protoss\YP.CodeGen\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_tableName));
@@ -226,21 +226,21 @@ namespace YP.CodeGen.Templates
             
             #line default
             #line hidden
-            this.Write(" = entity.");
+            this.Write(" = c.");
             
             #line 6 "D:\Project_Protoss\YP.CodeGen\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(filed.FieldName));
             
             #line default
             #line hidden
-            this.Write("\n");
+            this.Write(",\n");
             
             #line 6 "D:\Project_Protoss\YP.CodeGen\Templates\ControllerTemplate.tt"
 }
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t});\n\t\t\treturn model;\n\t\t}\n\n\t\tpublic bool Post(");
+            this.Write("\n\t\t\t}).ToList();\n\t\t\treturn model;\n\t\t}\n\n\t\tpublic bool Post(");
             
             #line 6 "D:\Project_Protoss\YP.CodeGen\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_tableName));
@@ -275,14 +275,14 @@ namespace YP.CodeGen.Templates
             
             #line default
             #line hidden
-            this.Write("\n");
+            this.Write(",\n");
             
             #line 6 "D:\Project_Protoss\YP.CodeGen\Templates\ControllerTemplate.tt"
 }
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t}\n\t\t\tif(_");
+            this.Write("\n\t\t\t};\n\t\t\tif(_");
             
             #line 6 "D:\Project_Protoss\YP.CodeGen\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_tableName));
@@ -332,7 +332,7 @@ namespace YP.CodeGen.Templates
             
             #line default
             #line hidden
-            this.Write("\n");
+            this.Write(";\n");
             
             #line 6 "D:\Project_Protoss\YP.CodeGen\Templates\ControllerTemplate.tt"
 }
@@ -368,7 +368,7 @@ namespace YP.CodeGen.Templates
             
             #line default
             #line hidden
-            this.Write("Service.Delete(entity))\n\t\t\t\treturn true;\n\t\t\treturn false\n\t\t}\n\t}\n}");
+            this.Write("Service.Delete(entity))\n\t\t\t\treturn true;\n\t\t\treturn false;\n\t\t}\n\t}\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

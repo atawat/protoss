@@ -25,51 +25,51 @@ namespace Protoss.Controllers
 		public ProductPropertyValueModel Get(int id)
 		{
 			var entity =_ProductPropertyValueService.GetProductPropertyValueById(id);
-			var model = new ProductPropertyValueModel
-			{
+		    var model = new ProductPropertyValueModel
+		    {
 
-				Id = entity.Id
+		        Id = entity.Id,
 
-				Property = entity.Property
+		        Property = entity.Property,
 
-				PropertyValue = entity.PropertyValue
+		        PropertyValue = entity.PropertyValue,
 
-				Product = entity.Product
+		        Product = entity.Product,
 
-				Adduser = entity.Adduser
+		        Adduser = entity.Adduser,
 
-				Addtime = entity.Addtime
+		        Addtime = entity.Addtime,
 
-				UpdUser = entity.UpdUser
+		        UpdUser = entity.UpdUser,
 
-				UpdTime = entity.UpdTime
+		        UpdTime = entity.UpdTime,
 
-			}
+		    };
 			return model;
 		}
 
-		public List<ProductPropertyValueModel> Get(ProductPropertyValueSearchCondtion condition)
+		public List<ProductPropertyValueModel> Get(ProductPropertyValueSearchCondition condition)
 		{
-			var model = _ProductPropertyValueService.Get_ProductPropertyValuesByConditon(condition).Select(c=>new _ProductPropertyValueModel
+			var model = _ProductPropertyValueService.GetProductPropertyValuesByCondition(condition).Select(c=>new ProductPropertyValueModel
 			{
 
-				Id = entity.Id
+				Id = c.Id,
 
-				Property = entity.Property
+				Property = c.Property,
 
-				PropertyValue = entity.PropertyValue
+				PropertyValue = c.PropertyValue,
 
-				Product = entity.Product
+				Product = c.Product,
 
-				Adduser = entity.Adduser
+				Adduser = c.Adduser,
 
-				Addtime = entity.Addtime
+				Addtime = c.Addtime,
 
-				UpdUser = entity.UpdUser
+				UpdUser = c.UpdUser,
 
-				UpdTime = entity.UpdTime
+				UpdTime = c.UpdTime,
 
-			});
+			}).ToList();
 			return model;
 		}
 
@@ -78,21 +78,21 @@ namespace Protoss.Controllers
 			var entity = new ProductPropertyValueEntity
 			{
 
-				Property = model.Property
+				Property = model.Property,
 
-				PropertyValue = model.PropertyValue
+				PropertyValue = model.PropertyValue,
 
-				Product = model.Product
+				Product = model.Product,
 
-				Adduser = model.Adduser
+				Adduser = model.Adduser,
 
-				Addtime = model.Addtime
+				Addtime = model.Addtime,
 
-				UpdUser = model.UpdUser
+				UpdUser = model.UpdUser,
 
-				UpdTime = model.UpdTime
+				UpdTime = model.UpdTime,
 
-			}
+			};
 			if(_ProductPropertyValueService.Create(entity).Id > 0)
 			{
 				return true;
@@ -106,19 +106,19 @@ namespace Protoss.Controllers
 			if(entity == null)
 				return false;
 
-			entity.Property = model.Property
+			entity.Property = model.Property;
 
-			entity.PropertyValue = model.PropertyValue
+			entity.PropertyValue = model.PropertyValue;
 
-			entity.Product = model.Product
+			entity.Product = model.Product;
 
-			entity.Adduser = model.Adduser
+			entity.Adduser = model.Adduser;
 
-			entity.Addtime = model.Addtime
+			entity.Addtime = model.Addtime;
 
-			entity.UpdUser = model.UpdUser
+			entity.UpdUser = model.UpdUser;
 
-			entity.UpdTime = model.UpdTime
+			entity.UpdTime = model.UpdTime;
 
 			if(_ProductPropertyValueService.Update(entity) != null)
 				return true;
@@ -132,7 +132,7 @@ namespace Protoss.Controllers
 				return false;
 			if(_ProductPropertyValueService.Delete(entity))
 				return true;
-			return false
+			return false;
 		}
 	}
 }

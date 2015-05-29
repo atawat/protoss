@@ -25,71 +25,71 @@ namespace Protoss.Controllers
 		public ContentModel Get(int id)
 		{
 			var entity =_ContentService.GetContentById(id);
-			var model = new ContentModel
-			{
+		    var model = new ContentModel
+		    {
 
-				Id = entity.Id
+		        Id = entity.Id,
 
-				Content = entity.Content
+		        Content = entity.Content,
 
-				Title = entity.Title
+		        Title = entity.Title,
 
-				Adduser = entity.Adduser
+		        Adduser = entity.Adduser,
 
-				Addtime = entity.Addtime
+		        Addtime = entity.Addtime,
 
-				Upduser = entity.Upduser
+		        Upduser = entity.Upduser,
 
-				Updtime = entity.Updtime
+		        Updtime = entity.Updtime,
 
-				Status = entity.Status
+		        Status = entity.Status,
 
-				Praise = entity.Praise
+		        Praise = entity.Praise,
 
-				Unpraise = entity.Unpraise
+		        Unpraise = entity.Unpraise,
 
-				Viewcount = entity.Viewcount
+		        Viewcount = entity.Viewcount,
 
-				Tags = entity.Tags
+//		        Tags = entity.Tags,
 
-				Channels = entity.Channels
+//		        Channels = entity.Channels,
 
-			}
+		    };
 			return model;
 		}
 
-		public List<ContentModel> Get(ContentSearchCondtion condition)
+		public List<ContentModel> Get(ContentSearchCondition condition)
 		{
-			var model = _ContentService.Get_ContentsByConditon(condition).Select(c=>new _ContentModel
+			var model = _ContentService.GetContentsByCondition(condition).Select(c=>new ContentModel
 			{
 
-				Id = entity.Id
+				Id = c.Id,
 
-				Content = entity.Content
+				Content = c.Content,
 
-				Title = entity.Title
+				Title = c.Title,
 
-				Adduser = entity.Adduser
+				Adduser = c.Adduser,
 
-				Addtime = entity.Addtime
+				Addtime = c.Addtime,
 
-				Upduser = entity.Upduser
+				Upduser = c.Upduser,
 
-				Updtime = entity.Updtime
+				Updtime = c.Updtime,
 
-				Status = entity.Status
+				Status = c.Status,
 
-				Praise = entity.Praise
+				Praise = c.Praise,
 
-				Unpraise = entity.Unpraise
+				Unpraise = c.Unpraise,
 
-				Viewcount = entity.Viewcount
+				Viewcount = c.Viewcount,
 
-				Tags = entity.Tags
+//				Tags = c.Tags,
 
-				Channels = entity.Channels
+//				Channels = c.Channels,
 
-			});
+			}).ToList();
 			return model;
 		}
 
@@ -98,31 +98,31 @@ namespace Protoss.Controllers
 			var entity = new ContentEntity
 			{
 
-				Content = model.Content
+				Content = model.Content,
 
-				Title = model.Title
+				Title = model.Title,
 
-				Adduser = model.Adduser
+				Adduser = model.Adduser,
 
-				Addtime = model.Addtime
+				Addtime = model.Addtime,
 
-				Upduser = model.Upduser
+				Upduser = model.Upduser,
 
-				Updtime = model.Updtime
+				Updtime = model.Updtime,
 
-				Status = model.Status
+				Status = model.Status,
 
-				Praise = model.Praise
+				Praise = model.Praise,
 
-				Unpraise = model.Unpraise
+				Unpraise = model.Unpraise,
 
-				Viewcount = model.Viewcount
+				Viewcount = model.Viewcount,
 
-				Tags = model.Tags
+//				Tags = model.Tags,
 
-				Channels = model.Channels
+//				Channels = model.Channels,
 
-			}
+			};
 			if(_ContentService.Create(entity).Id > 0)
 			{
 				return true;
@@ -136,29 +136,29 @@ namespace Protoss.Controllers
 			if(entity == null)
 				return false;
 
-			entity.Content = model.Content
+			entity.Content = model.Content;
 
-			entity.Title = model.Title
+			entity.Title = model.Title;
 
-			entity.Adduser = model.Adduser
+			entity.Adduser = model.Adduser;
 
-			entity.Addtime = model.Addtime
+			entity.Addtime = model.Addtime;
 
-			entity.Upduser = model.Upduser
+			entity.Upduser = model.Upduser;
 
-			entity.Updtime = model.Updtime
+			entity.Updtime = model.Updtime;
 
-			entity.Status = model.Status
+			entity.Status = model.Status;
 
-			entity.Praise = model.Praise
+			entity.Praise = model.Praise;
 
-			entity.Unpraise = model.Unpraise
+			entity.Unpraise = model.Unpraise;
 
-			entity.Viewcount = model.Viewcount
+			entity.Viewcount = model.Viewcount;
 
-			entity.Tags = model.Tags
+//			entity.Tags = model.Tags;
 
-			entity.Channels = model.Channels
+//			entity.Channels = model.Channels;
 
 			if(_ContentService.Update(entity) != null)
 				return true;
@@ -172,7 +172,7 @@ namespace Protoss.Controllers
 				return false;
 			if(_ContentService.Delete(entity))
 				return true;
-			return false
+			return false;
 		}
 	}
 }

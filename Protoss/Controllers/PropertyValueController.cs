@@ -25,47 +25,47 @@ namespace Protoss.Controllers
 		public PropertyValueModel Get(int id)
 		{
 			var entity =_PropertyValueService.GetPropertyValueById(id);
-			var model = new PropertyValueModel
-			{
+		    var model = new PropertyValueModel
+		    {
 
-				Id = entity.Id
+		        Id = entity.Id,
 
-				Property = entity.Property
+//		        Property = entity.Property,
 
-				Value = entity.Value
+		        Value = entity.Value,
 
-				Adduser = entity.Adduser
+		        Adduser = entity.Adduser,
 
-				Addtime = entity.Addtime
+		        Addtime = entity.Addtime,
 
-				UpdUser = entity.UpdUser
+		        UpdUser = entity.UpdUser,
 
-				UpdTime = entity.UpdTime
+		        UpdTime = entity.UpdTime,
 
-			}
+		    };
 			return model;
 		}
 
-		public List<PropertyValueModel> Get(PropertyValueSearchCondtion condition)
+		public List<PropertyValueModel> Get(PropertyValueSearchCondition condition)
 		{
-			var model = _PropertyValueService.Get_PropertyValuesByConditon(condition).Select(c=>new _PropertyValueModel
+			var model = _PropertyValueService.GetPropertyValuesByCondition(condition).Select(c=>new PropertyValueModel
 			{
 
-				Id = entity.Id
+				Id = c.Id,
 
-				Property = entity.Property
+//				Property = c.Property,
 
-				Value = entity.Value
+				Value = c.Value,
 
-				Adduser = entity.Adduser
+				Adduser = c.Adduser,
 
-				Addtime = entity.Addtime
+				Addtime = c.Addtime,
 
-				UpdUser = entity.UpdUser
+				UpdUser = c.UpdUser,
 
-				UpdTime = entity.UpdTime
+				UpdTime = c.UpdTime,
 
-			});
+			}).ToList();
 			return model;
 		}
 
@@ -74,19 +74,19 @@ namespace Protoss.Controllers
 			var entity = new PropertyValueEntity
 			{
 
-				Property = model.Property
+//				Property = model.Property,
 
-				Value = model.Value
+				Value = model.Value,
 
-				Adduser = model.Adduser
+				Adduser = model.Adduser,
 
-				Addtime = model.Addtime
+				Addtime = model.Addtime,
 
-				UpdUser = model.UpdUser
+				UpdUser = model.UpdUser,
 
-				UpdTime = model.UpdTime
+				UpdTime = model.UpdTime,
 
-			}
+			};
 			if(_PropertyValueService.Create(entity).Id > 0)
 			{
 				return true;
@@ -100,17 +100,17 @@ namespace Protoss.Controllers
 			if(entity == null)
 				return false;
 
-			entity.Property = model.Property
+//			entity.Property = model.Property;
 
-			entity.Value = model.Value
+			entity.Value = model.Value;
 
-			entity.Adduser = model.Adduser
+			entity.Adduser = model.Adduser;
 
-			entity.Addtime = model.Addtime
+			entity.Addtime = model.Addtime;
 
-			entity.UpdUser = model.UpdUser
+			entity.UpdUser = model.UpdUser;
 
-			entity.UpdTime = model.UpdTime
+			entity.UpdTime = model.UpdTime;
 
 			if(_PropertyValueService.Update(entity) != null)
 				return true;
@@ -124,7 +124,7 @@ namespace Protoss.Controllers
 				return false;
 			if(_PropertyValueService.Delete(entity))
 				return true;
-			return false
+			return false;
 		}
 	}
 }

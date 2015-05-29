@@ -25,51 +25,51 @@ namespace Protoss.Controllers
 		public ProductDetailModel Get(int id)
 		{
 			var entity =_ProductDetailService.GetProductDetailById(id);
-			var model = new ProductDetailModel
-			{
+		    var model = new ProductDetailModel
+		    {
 
-				Id = entity.Id
+		        Id = entity.Id,
 
-				Detail = entity.Detail
+		        Detail = entity.Detail,
 
-				ImgUrl1 = entity.ImgUrl1
+		        ImgUrl1 = entity.ImgUrl1,
 
-				ImgUrl2 = entity.ImgUrl2
+		        ImgUrl2 = entity.ImgUrl2,
 
-				ImgUrl3 = entity.ImgUrl3
+		        ImgUrl3 = entity.ImgUrl3,
 
-				ImgUrl4 = entity.ImgUrl4
+		        ImgUrl4 = entity.ImgUrl4,
 
-				ImgUrl5 = entity.ImgUrl5
+		        ImgUrl5 = entity.ImgUrl5,
 
-				Product = entity.Product
+//		        Product = entity.Product,
 
-			}
+		    };
 			return model;
 		}
 
-		public List<ProductDetailModel> Get(ProductDetailSearchCondtion condition)
+		public List<ProductDetailModel> Get(ProductDetailSearchCondition condition)
 		{
-			var model = _ProductDetailService.Get_ProductDetailsByConditon(condition).Select(c=>new _ProductDetailModel
+			var model = _ProductDetailService.GetProductDetailsByCondition(condition).Select(c=>new ProductDetailModel
 			{
 
-				Id = entity.Id
+				Id = c.Id,
 
-				Detail = entity.Detail
+				Detail = c.Detail,
 
-				ImgUrl1 = entity.ImgUrl1
+				ImgUrl1 = c.ImgUrl1,
 
-				ImgUrl2 = entity.ImgUrl2
+				ImgUrl2 = c.ImgUrl2,
 
-				ImgUrl3 = entity.ImgUrl3
+				ImgUrl3 = c.ImgUrl3,
 
-				ImgUrl4 = entity.ImgUrl4
+				ImgUrl4 = c.ImgUrl4,
 
-				ImgUrl5 = entity.ImgUrl5
+				ImgUrl5 = c.ImgUrl5,
 
-				Product = entity.Product
+//				Product = c.Product,
 
-			});
+			}).ToList();
 			return model;
 		}
 
@@ -78,21 +78,21 @@ namespace Protoss.Controllers
 			var entity = new ProductDetailEntity
 			{
 
-				Detail = model.Detail
+				Detail = model.Detail,
 
-				ImgUrl1 = model.ImgUrl1
+				ImgUrl1 = model.ImgUrl1,
 
-				ImgUrl2 = model.ImgUrl2
+				ImgUrl2 = model.ImgUrl2,
 
-				ImgUrl3 = model.ImgUrl3
+				ImgUrl3 = model.ImgUrl3,
 
-				ImgUrl4 = model.ImgUrl4
+				ImgUrl4 = model.ImgUrl4,
 
-				ImgUrl5 = model.ImgUrl5
+				ImgUrl5 = model.ImgUrl5,
 
-				Product = model.Product
+//				Product = model.Product,
 
-			}
+			};
 			if(_ProductDetailService.Create(entity).Id > 0)
 			{
 				return true;
@@ -106,19 +106,19 @@ namespace Protoss.Controllers
 			if(entity == null)
 				return false;
 
-			entity.Detail = model.Detail
+			entity.Detail = model.Detail;
 
-			entity.ImgUrl1 = model.ImgUrl1
+			entity.ImgUrl1 = model.ImgUrl1;
 
-			entity.ImgUrl2 = model.ImgUrl2
+			entity.ImgUrl2 = model.ImgUrl2;
 
-			entity.ImgUrl3 = model.ImgUrl3
+			entity.ImgUrl3 = model.ImgUrl3;
 
-			entity.ImgUrl4 = model.ImgUrl4
+			entity.ImgUrl4 = model.ImgUrl4;
 
-			entity.ImgUrl5 = model.ImgUrl5
+			entity.ImgUrl5 = model.ImgUrl5;
 
-			entity.Product = model.Product
+//			entity.Product = model.Product;
 
 			if(_ProductDetailService.Update(entity) != null)
 				return true;
@@ -132,7 +132,7 @@ namespace Protoss.Controllers
 				return false;
 			if(_ProductDetailService.Delete(entity))
 				return true;
-			return false
+			return false;
 		}
 	}
 }

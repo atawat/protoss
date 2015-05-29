@@ -25,47 +25,47 @@ namespace Protoss.Controllers
 		public TagModel Get(int id)
 		{
 			var entity =_TagService.GetTagById(id);
-			var model = new TagModel
-			{
+		    var model = new TagModel
+		    {
 
-				Id = entity.Id
+		        Id = entity.Id,
 
-				Tag = entity.Tag
+		        Tag = entity.Tag,
 
-				Adduser = entity.Adduser
+		        Adduser = entity.Adduser,
 
-				Addtime = entity.Addtime
+		        Addtime = entity.Addtime,
 
-				UpdUser = entity.UpdUser
+		        UpdUser = entity.UpdUser,
 
-				UpdTime = entity.UpdTime
+		        UpdTime = entity.UpdTime,
 
-				Content = entity.Content
+//		        Content = entity.Content,
 
-			}
+		    };
 			return model;
 		}
 
-		public List<TagModel> Get(TagSearchCondtion condition)
+		public List<TagModel> Get(TagSearchCondition condition)
 		{
-			var model = _TagService.Get_TagsByConditon(condition).Select(c=>new _TagModel
+			var model = _TagService.GetTagsByCondition(condition).Select(c=>new TagModel
 			{
 
-				Id = entity.Id
+				Id = c.Id,
 
-				Tag = entity.Tag
+				Tag = c.Tag,
 
-				Adduser = entity.Adduser
+				Adduser = c.Adduser,
 
-				Addtime = entity.Addtime
+				Addtime = c.Addtime,
 
-				UpdUser = entity.UpdUser
+				UpdUser = c.UpdUser,
 
-				UpdTime = entity.UpdTime
+				UpdTime = c.UpdTime,
 
-				Content = entity.Content
+//				Content = c.Content,
 
-			});
+			}).ToList();
 			return model;
 		}
 
@@ -74,19 +74,19 @@ namespace Protoss.Controllers
 			var entity = new TagEntity
 			{
 
-				Tag = model.Tag
+				Tag = model.Tag,
 
-				Adduser = model.Adduser
+				Adduser = model.Adduser,
 
-				Addtime = model.Addtime
+				Addtime = model.Addtime,
 
-				UpdUser = model.UpdUser
+				UpdUser = model.UpdUser,
 
-				UpdTime = model.UpdTime
+				UpdTime = model.UpdTime,
 
-				Content = model.Content
+//				Content = model.Content,
 
-			}
+			};
 			if(_TagService.Create(entity).Id > 0)
 			{
 				return true;
@@ -100,17 +100,17 @@ namespace Protoss.Controllers
 			if(entity == null)
 				return false;
 
-			entity.Tag = model.Tag
+			entity.Tag = model.Tag;
 
-			entity.Adduser = model.Adduser
+			entity.Adduser = model.Adduser;
 
-			entity.Addtime = model.Addtime
+			entity.Addtime = model.Addtime;
 
-			entity.UpdUser = model.UpdUser
+			entity.UpdUser = model.UpdUser;
 
-			entity.UpdTime = model.UpdTime
+			entity.UpdTime = model.UpdTime;
 
-			entity.Content = model.Content
+//			entity.Content = model.Content;
 
 			if(_TagService.Update(entity) != null)
 				return true;
@@ -124,7 +124,7 @@ namespace Protoss.Controllers
 				return false;
 			if(_TagService.Delete(entity))
 				return true;
-			return false
+			return false;
 		}
 	}
 }

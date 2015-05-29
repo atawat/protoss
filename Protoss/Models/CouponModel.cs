@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Protoss.Entity.Model;
+using YooPoon.WebFramework.User.Entity;
+
 
 namespace Protoss.Models
 {
@@ -31,6 +33,7 @@ namespace Protoss.Models
 			get
 			{
 				switch(Type)
+				{
 
 					case EnumCouponType.Discount:
 						return "折扣卷";
@@ -42,7 +45,8 @@ namespace Protoss.Models
 						return "免额卷 ";
 
 					default:
-						return:"";
+						return "";
+				}
 			}
 		}
 
@@ -56,7 +60,7 @@ namespace Protoss.Models
 		/// <summary>
         /// 指定产品
         /// </summary>
-		public Product Product {get;set;}
+        public ProductModel Product { get; set; }
 
 
 		/// <summary>
@@ -75,6 +79,7 @@ namespace Protoss.Models
 			get
 			{
 				switch(Status)
+				{
 
 					case EnumCouponStatus.Created:
 						return "新建";
@@ -89,7 +94,8 @@ namespace Protoss.Models
 						return "过期的";
 
 					default:
-						return:"";
+						return "";
+				}
 			}
 		}
 

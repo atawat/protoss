@@ -25,99 +25,99 @@ namespace Protoss.Controllers
 		public OrderModel Get(int id)
 		{
 			var entity =_OrderService.GetOrderById(id);
-			var model = new OrderModel
-			{
+		    var model = new OrderModel
+		    {
 
-				Id = entity.Id
+		        Id = entity.Id,
 
-				OrderNum = entity.OrderNum
+		        OrderNum = entity.OrderNum,
 
-				TotalPrice = entity.TotalPrice
+		        TotalPrice = entity.TotalPrice,
 
-				TransCost = entity.TransCost
+		        TransCost = entity.TransCost,
 
-				ProductCost = entity.ProductCost
+		        ProductCost = entity.ProductCost,
 
-				Discount  = entity.Discount 
+		        Discount = entity.Discount,
 
-				Status = entity.Status
+		        Status = entity.Status,
 
-				DeliveryAddress = entity.DeliveryAddress
+		        DeliveryAddress = entity.DeliveryAddress,
 
-				IsPrint = entity.IsPrint
+		        IsPrint = entity.IsPrint,
 
-				PhoneNumber = entity.PhoneNumber
+		        PhoneNumber = entity.PhoneNumber,
 
-				Adduser = entity.Adduser
+		        Adduser = entity.Adduser,
 
-				Addtime = entity.Addtime
+		        Addtime = entity.Addtime,
 
-				Upduser = entity.Upduser
+		        Upduser = entity.Upduser,
 
-				Updtime = entity.Updtime
+		        Updtime = entity.Updtime,
 
-				Details = entity.Details
+//		        Details = entity.Details,
 
-				Coupon = entity.Coupon
+//		        Coupon = entity.Coupon,
 
-				Type = entity.Type
+		        Type = entity.Type,
 
-				PayType = entity.PayType
+		        PayType = entity.PayType,
 
-				LocationX = entity.LocationX
+		        LocationX = entity.LocationX,
 
-				LocationY = entity.LocationY
+		        LocationY = entity.LocationY,
 
-			}
+		    };
 			return model;
 		}
 
-		public List<OrderModel> Get(OrderSearchCondtion condition)
+		public List<OrderModel> Get(OrderSearchCondition condition)
 		{
-			var model = _OrderService.Get_OrdersByConditon(condition).Select(c=>new _OrderModel
+			var model = _OrderService.GetOrdersByCondition(condition).Select(c=>new OrderModel
 			{
 
-				Id = entity.Id
+				Id = c.Id,
 
-				OrderNum = entity.OrderNum
+				OrderNum = c.OrderNum,
 
-				TotalPrice = entity.TotalPrice
+				TotalPrice = c.TotalPrice,
 
-				TransCost = entity.TransCost
+				TransCost = c.TransCost,
 
-				ProductCost = entity.ProductCost
+				ProductCost = c.ProductCost,
 
-				Discount  = entity.Discount 
+				Discount  = c.Discount ,
 
-				Status = entity.Status
+				Status = c.Status,
 
-				DeliveryAddress = entity.DeliveryAddress
+				DeliveryAddress = c.DeliveryAddress,
 
-				IsPrint = entity.IsPrint
+				IsPrint = c.IsPrint,
 
-				PhoneNumber = entity.PhoneNumber
+				PhoneNumber = c.PhoneNumber,
 
-				Adduser = entity.Adduser
+				Adduser = c.Adduser,
 
-				Addtime = entity.Addtime
+				Addtime = c.Addtime,
 
-				Upduser = entity.Upduser
+				Upduser = c.Upduser,
 
-				Updtime = entity.Updtime
+				Updtime = c.Updtime,
 
-				Details = entity.Details
+//				Details = c.Details,
 
-				Coupon = entity.Coupon
+//				Coupon = c.Coupon,
 
-				Type = entity.Type
+				Type = c.Type,
 
-				PayType = entity.PayType
+				PayType = c.PayType,
 
-				LocationX = entity.LocationX
+				LocationX = c.LocationX,
 
-				LocationY = entity.LocationY
+				LocationY = c.LocationY,
 
-			});
+			}).ToList();
 			return model;
 		}
 
@@ -126,45 +126,45 @@ namespace Protoss.Controllers
 			var entity = new OrderEntity
 			{
 
-				OrderNum = model.OrderNum
+				OrderNum = model.OrderNum,
 
-				TotalPrice = model.TotalPrice
+				TotalPrice = model.TotalPrice,
 
-				TransCost = model.TransCost
+				TransCost = model.TransCost,
 
-				ProductCost = model.ProductCost
+				ProductCost = model.ProductCost,
 
-				Discount  = model.Discount 
+				Discount  = model.Discount ,
 
-				Status = model.Status
+				Status = model.Status,
 
-				DeliveryAddress = model.DeliveryAddress
+				DeliveryAddress = model.DeliveryAddress,
 
-				IsPrint = model.IsPrint
+				IsPrint = model.IsPrint,
 
-				PhoneNumber = model.PhoneNumber
+				PhoneNumber = model.PhoneNumber,
 
-				Adduser = model.Adduser
+				Adduser = model.Adduser,
 
-				Addtime = model.Addtime
+				Addtime = model.Addtime,
 
-				Upduser = model.Upduser
+				Upduser = model.Upduser,
 
-				Updtime = model.Updtime
+				Updtime = model.Updtime,
 
-				Details = model.Details
+//				Details = model.Details,
 
-				Coupon = model.Coupon
+//				Coupon = model.Coupon,
 
-				Type = model.Type
+				Type = model.Type,
 
-				PayType = model.PayType
+				PayType = model.PayType,
 
-				LocationX = model.LocationX
+				LocationX = model.LocationX,
 
-				LocationY = model.LocationY
+				LocationY = model.LocationY,
 
-			}
+			};
 			if(_OrderService.Create(entity).Id > 0)
 			{
 				return true;
@@ -178,43 +178,43 @@ namespace Protoss.Controllers
 			if(entity == null)
 				return false;
 
-			entity.OrderNum = model.OrderNum
+			entity.OrderNum = model.OrderNum;
 
-			entity.TotalPrice = model.TotalPrice
+			entity.TotalPrice = model.TotalPrice;
 
-			entity.TransCost = model.TransCost
+			entity.TransCost = model.TransCost;
 
-			entity.ProductCost = model.ProductCost
+			entity.ProductCost = model.ProductCost;
 
-			entity.Discount  = model.Discount 
+			entity.Discount  = model.Discount ;
 
-			entity.Status = model.Status
+			entity.Status = model.Status;
 
-			entity.DeliveryAddress = model.DeliveryAddress
+			entity.DeliveryAddress = model.DeliveryAddress;
 
-			entity.IsPrint = model.IsPrint
+			entity.IsPrint = model.IsPrint;
 
-			entity.PhoneNumber = model.PhoneNumber
+			entity.PhoneNumber = model.PhoneNumber;
 
-			entity.Adduser = model.Adduser
+			entity.Adduser = model.Adduser;
 
-			entity.Addtime = model.Addtime
+			entity.Addtime = model.Addtime;
 
-			entity.Upduser = model.Upduser
+			entity.Upduser = model.Upduser;
 
-			entity.Updtime = model.Updtime
+			entity.Updtime = model.Updtime;
 
-			entity.Details = model.Details
+//			entity.Details = model.Details;
 
-			entity.Coupon = model.Coupon
+//			entity.Coupon = model.Coupon;
 
-			entity.Type = model.Type
+			entity.Type = model.Type;
 
-			entity.PayType = model.PayType
+			entity.PayType = model.PayType;
 
-			entity.LocationX = model.LocationX
+			entity.LocationX = model.LocationX;
 
-			entity.LocationY = model.LocationY
+			entity.LocationY = model.LocationY;
 
 			if(_OrderService.Update(entity) != null)
 				return true;
@@ -228,7 +228,7 @@ namespace Protoss.Controllers
 				return false;
 			if(_OrderService.Delete(entity))
 				return true;
-			return false
+			return false;
 		}
 	}
 }
