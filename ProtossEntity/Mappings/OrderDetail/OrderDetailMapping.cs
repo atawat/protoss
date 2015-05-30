@@ -10,11 +10,11 @@ namespace Protoss.Entity.Mappings.OrderDetail
 		{
 			ToTable("OrderDetail");
 			HasKey(c => c.Id);
-			Property(c => c.Id).HasColumnType("int");
+			//Property(c => c.Id).HasColumnType("int");
 			HasOptional(c =>c.Product);
-			Property(c => c.Count).HasColumnType("float");
-			Property(c => c.TotalPrice).HasColumnType("float");
-			HasOptional(c =>c.Order);
+			Property(c => c.Count).HasColumnType("decimal");
+			Property(c => c.TotalPrice).HasColumnType("decimal");
+			HasRequired(c =>c.Order);
 		}
 	}
 }

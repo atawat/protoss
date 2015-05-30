@@ -10,7 +10,7 @@ namespace Protoss.Entity.Mappings.PropertyValue
 		{
 			ToTable("PropertyValue");
 			HasKey(c => c.Id);
-			Property(c => c.Id).HasColumnType("int");
+			//Property(c => c.Id).HasColumnType("int");
 			HasOptional(c =>c.Property);
 			Property(c => c.Value).HasColumnType("varchar").HasMaxLength(20);
 		    HasRequired(c => c.Adduser);

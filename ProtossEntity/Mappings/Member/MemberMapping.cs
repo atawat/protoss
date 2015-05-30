@@ -10,7 +10,7 @@ namespace Protoss.Entity.Mappings.Member
 		{
 			ToTable("Member");
 			HasKey(c => c.Id);
-			Property(c => c.Id).HasColumnType("int");
+			//Property(c => c.Id).HasColumnType("int");
 			HasOptional(c =>c.User);
 			Property(c => c.OpenId).HasColumnType("varchar").HasMaxLength(50).IsOptional();
 			HasMany(c => c.Orders);

@@ -10,7 +10,7 @@ namespace Protoss.Entity.Mappings.ProductDetail
 		{
 			ToTable("ProductDetail");
 			HasKey(c => c.Id);
-			Property(c => c.Id).HasColumnType("int");
+			//Property(c => c.Id).HasColumnType("int");
 			Property(c => c.Detail).HasColumnType("varchar").IsOptional();
 			Property(c => c.ImgUrl1).HasColumnType("varchar").HasMaxLength(300).IsOptional();
 			Property(c => c.ImgUrl2).HasColumnType("varchar").HasMaxLength(300).IsOptional();

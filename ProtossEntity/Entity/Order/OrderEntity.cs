@@ -86,6 +86,6 @@ namespace Protoss.Entity.Model
 		/// <summary>
 		/// 收获地址坐标Y
 		/// </summary>
-		public virtual float LocationY { get; set; }
+        public virtual decimal LocationY { get; set; }
 	}
 }

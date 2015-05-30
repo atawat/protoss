@@ -10,7 +10,7 @@ namespace Protoss.Entity.Mappings.ProductPropertyValue
 		{
 			ToTable("ProductPropertyValue");
 			HasKey(c => c.Id);
-			Property(c => c.Id).HasColumnType("int");
+			//Property(c => c.Id).HasColumnType("int");
 			HasOptional(c =>c.Property);
 			HasOptional(c =>c.PropertyValue);
 			HasOptional(c =>c.Product);

@@ -10,7 +10,7 @@ namespace Protoss.Entity.Mappings.Category
 		{
 			ToTable("Category");
 			HasKey(c => c.Id);
-			Property(c => c.Id).HasColumnType("int");
+			//Property(c => c.Id).HasColumnType("int");
 			Property(c => c.CategoryName).HasColumnType("varchar").HasMaxLength(40);
 			HasOptional(c =>c.Father);
 			HasRequired(c => c.Adduser);

@@ -10,7 +10,7 @@ namespace Protoss.Entity.Mappings.Order
 		{
 			ToTable("Order");
 			HasKey(c => c.Id);
-			Property(c => c.Id).HasColumnType("int");
+//			//Property(c => c.Id).HasColumnType("int");
 			Property(c => c.OrderNum).HasColumnType("varchar").HasMaxLength(20);
 			Property(c => c.TotalPrice).HasColumnType("decimal");
 			Property(c => c.TransCost).HasColumnType("decimal");
@@ -24,7 +24,7 @@ namespace Protoss.Entity.Mappings.Order
 			Property(c => c.Addtime).HasColumnType("datetime");
 			HasOptional(c => c.Upduser);
 			Property(c => c.Updtime).HasColumnType("datetime").IsOptional();
-			HasMany(c => c.Details);
+			HasMany(c => c.Details).WithRequired(d=>d.Order).WillCascadeOnDelete();
 			HasMany(c => c.Coupon);
 			Property(c => c.Type).HasColumnType("int");
 			Property(c => c.PayType).HasColumnType("int");

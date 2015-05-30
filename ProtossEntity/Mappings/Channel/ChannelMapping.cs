@@ -10,13 +10,13 @@ namespace Protoss.Entity.Mappings.Channel
 		{
 			ToTable("Channel ");
 			HasKey(c => c.Id);
-			Property(c => c.Id).HasColumnType("int");
+			//Property(c => c.Id).HasColumnType("int");
 			Property(c => c.Name).HasColumnType("varchar").HasMaxLength(30);
 			Property(c => c.Status).HasColumnType("int");
 			HasOptional(c =>c.Parent);
 			HasRequired(c => c.Adduser);
 			Property(c => c.Addtime).HasColumnType("datetime");
-		    HasRequired(c => c.Upduser);
+		    HasOptional(c => c.Upduser);
 			Property(c => c.Updtime).HasColumnType("datetime").IsOptional();
 		}
 	}

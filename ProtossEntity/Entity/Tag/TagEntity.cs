@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Protoss.Entity.Entity.ContentTag;
 using YooPoon.Core.Data;
 using YooPoon.WebFramework.User.Entity;
 
@@ -34,6 +35,6 @@ namespace Protoss.Entity.Model
 		/// <summary>
 		/// 关联内容
 		/// </summary>
-		public virtual IList<ContentEntity> Content { get; set; }
+		public virtual IList<ContentTag> ContentTags { get; set; }
 	}
 }

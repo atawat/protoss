@@ -57,6 +57,7 @@
     <Compile Include="Entity\Channel\Channel Entity.cs" />
     <Compile Include="Entity\Channel\Channel SearchConditon.cs" />
     <Compile Include="Entity\Channel\EnumChannel .cs" />
+    <Compile Include="Entity\ContentTag\ContentTag.cs" />
     <Compile Include="Entity\Content\ContentEntity.cs" />
     <Compile Include="Entity\Content\ContentSearchConditon.cs" />
     <Compile Include="Entity\Content\EnumContent.cs" />
@@ -92,7 +93,8 @@
     <Compile Include="Entity\Tag\TagSearchConditon.cs" />
     <Compile Include="Mappings\Banner\BannerMapping.cs" />
     <Compile Include="Mappings\Category\CategoryMapping.cs" />
-    <Compile Include="Mappings\Channel\Channel Mapping.cs" />
+    <Compile Include="Mappings\Channel\ChannelMapping.cs" />
+    <Compile Include="Mappings\ContentTag\ContengTagMapping.cs" />
     <Compile Include="Mappings\Content\ContentMapping.cs" />
     <Compile Include="Mappings\Coupon\CouponMapping.cs" />
     <Compile Include="Mappings\Member\MemberMapping.cs" />

@@ -129,10 +129,10 @@ namespace Protoss.Service.Content
                 {
                     query = query.Where(q => condition.Viewcounts.Contains(q.Viewcount));
                 }
-				if (condition.Tagss != null && condition.Tagss.Any())
-                {
-                    query = query.Where(q => condition.Tagss.Contains(q.Tags));
-                }
+//				if (condition.Tagss != null && condition.Tagss.Any())
+//                {
+//                    query = query.Where(q => condition.Tagss.Contains(q.Tags));
+//                }
 				if (condition.Channelss != null && condition.Channelss.Any())
                 {
                     query = query.Where(q => condition.Channelss.Contains(q.Channels));
@@ -240,10 +240,10 @@ namespace Protoss.Service.Content
                 {
                     query = query.Where(q => condition.Viewcounts.Contains(q.Viewcount));
                 }
-				if (condition.Tagss != null && condition.Tagss.Any())
-                {
-                    query = query.Where(q => condition.Tagss.Contains(q.Tags));
-                }
+//				if (condition.Tagss != null && condition.Tagss.Any())
+//                {
+//                    query = query.Where(q => condition.Tagss.Contains(q.Tags));
+//                }
 				if (condition.Channelss != null && condition.Channelss.Any())
                 {
                     query = query.Where(q => condition.Channelss.Contains(q.Channels));

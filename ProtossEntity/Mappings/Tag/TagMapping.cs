@@ -10,13 +10,13 @@ namespace Protoss.Entity.Mappings.Tag
 		{
 			ToTable("Tag");
 			HasKey(c => c.Id);
-			Property(c => c.Id).HasColumnType("int");
+			//Property(c => c.Id).HasColumnType("int");
 			Property(c => c.Tag).HasColumnType("varchar").HasMaxLength(20);
-			HasRequired(c => c.Adduser);
+			HasOptional(c => c.Adduser);
 			Property(c => c.Addtime).HasColumnType("datetime");
 			HasOptional(c => c.UpdUser);
 			Property(c => c.UpdTime).HasColumnType("datetime").IsOptional();
-			HasMany(c => c.Content);
+//			HasMany(c => c.Content).WithMany(c=>c.Tags);
 		}
 	}
 }

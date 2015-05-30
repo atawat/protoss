@@ -82,7 +82,7 @@ namespace Protoss.Entity.Model
 
 
 
-		public float? LocationY { get; set; }
+		public decimal? LocationY { get; set; }
 
 
 

@@ -10,7 +10,7 @@ namespace Protoss.Entity.Mappings.Coupon
 		{
 			ToTable("Coupon");
 			HasKey(c => c.Id);
-			Property(c => c.Id).HasColumnType("int");
+			//Property(c => c.Id).HasColumnType("int");
 			Property(c => c.Guid).HasColumnType("uniqueidentifier");
 			Property(c => c.Type).HasColumnType("int");
 			Property(c => c.DisCount).HasColumnType("decimal").IsOptional();

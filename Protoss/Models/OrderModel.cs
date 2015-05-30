@@ -203,7 +203,7 @@ namespace Protoss.Models
 		/// <summary>
         /// 收获地址坐标Y
         /// </summary>
-		public float LocationY {get;set;}
+		public decimal LocationY {get;set;}
 
 
 
