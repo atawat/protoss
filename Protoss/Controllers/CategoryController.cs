@@ -48,9 +48,9 @@ namespace Protoss.Controllers
 			return model;
 		}
 
-		public List<CategoryModel> Get(CategorySearchCondition condition)
+		public List<CategoryModel> Get()
 		{
-			var model = _CategoryService.GetCategorysByCondition(condition).Select(c=>new CategoryModel
+			var model = _CategoryService.GetCategorysByCondition(new CategorySearchCondition()).Select(c=>new CategoryModel
 			{
 
 				Id = c.Id,

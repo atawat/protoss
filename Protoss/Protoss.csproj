@@ -130,6 +130,7 @@
     <Compile Include="Models\ChannelModel.cs" />
     <Compile Include="Models\ContentModel.cs" />
     <Compile Include="Models\CouponModel.cs" />
+    <Compile Include="Models\CreateOrderModel.cs" />
     <Compile Include="Models\MemberModel.cs" />
     <Compile Include="Models\OrderDetailModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
@@ -144,6 +145,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="log.config" />
+    <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

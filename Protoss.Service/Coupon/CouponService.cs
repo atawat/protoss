@@ -59,11 +59,11 @@ namespace Protoss.Service.Coupon
             }
 		}
 
-		public CouponEntity GetCouponById (int id)
+		public CouponEntity GetCouponById (Guid id)
 		{
 			try
             {
-                return _couponRepository.GetById(id);
+                return _couponRepository.Table.FirstOrDefault(c => c.Guid ==id);
             }
             catch (Exception e)
             {
@@ -71,6 +71,19 @@ namespace Protoss.Service.Coupon
                 return null;
             }
 		}
+
+        public CouponEntity GetCouponById(int id)
+        {
+            try
+            {
+                return _couponRepository.GetById(id);
+            }
+            catch (Exception e)
+            {
+                _log.Error(e, "数据库操作出错");
+                return null;
+            }
+        }
 
 		public IQueryable<CouponEntity> GetCouponsByCondition(CouponSearchCondition condition)
 		{

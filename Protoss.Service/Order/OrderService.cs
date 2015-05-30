@@ -117,6 +117,14 @@ namespace Protoss.Service.Order
                 {
                     query = query.Where(q => condition.Ids.Contains(q.Id));
                 }
+			    if (condition.AddTimeBegin.HasValue)
+			    {
+			        query = query.Where(q => q.Addtime >= condition.AddTimeBegin);
+			    }
+			    if (condition.AddTimeEnd.HasValue)
+			    {
+			        query = query.Where(q => q.Addtime < condition.AddTimeEnd);
+			    }
 				if(condition.OrderBy.HasValue)
 				{
 					switch (condition.OrderBy.Value)
@@ -213,6 +221,14 @@ namespace Protoss.Service.Order
 				if (condition.Ids != null && condition.Ids.Any())
                 {
                     query = query.Where(q => condition.Ids.Contains(q.Id));
+                }
+                if (condition.AddTimeBegin.HasValue)
+                {
+                    query = query.Where(q => q.Addtime >= condition.AddTimeBegin);
+                }
+                if (condition.AddTimeEnd.HasValue)
+                {
+                    query = query.Where(q => q.Addtime < condition.AddTimeEnd);
                 }
 				return query.Count();
 			}

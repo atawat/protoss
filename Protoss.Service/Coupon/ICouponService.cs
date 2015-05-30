@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Protoss.Entity.Model;
 using YooPoon.Core.Autofac;
@@ -12,7 +13,9 @@ namespace Protoss.Service.Coupon
 
 		CouponEntity Update (CouponEntity entity);
 
-		CouponEntity GetCouponById (int id);
+		CouponEntity GetCouponById (Guid id);
+
+        CouponEntity GetCouponById(int id);
 
 		IQueryable<CouponEntity> GetCouponsByCondition(CouponSearchCondition condition);
 

@@ -1,15 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text.RegularExpressions;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using Protoss.Entity.Model;
-using Protoss.Service.Product;
-using YooPoon.Core.Site;
-using YooPoon.WebFramework.API;
 using Protoss.Models;
+using Protoss.Service.Product;
 
 namespace Protoss.Controllers
 {

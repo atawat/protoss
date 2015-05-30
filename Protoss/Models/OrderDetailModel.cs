@@ -20,7 +20,12 @@ namespace Protoss.Models
 		/// <summary>
         /// 对应商品
         /// </summary>
-        public ProductModel Product { get; set; }
+        public string ProductName { get; set; }
+
+        /// <summary>
+        /// 对应商品Id
+        /// </summary>
+        public int ProductId { get; set; }
 
 
 		/// <summary>
@@ -34,13 +39,9 @@ namespace Protoss.Models
         /// </summary>
 		public decimal TotalPrice {get;set;}
 
-
-		/// <summary>
-        /// 对应订单主表
+        /// <summary>
+        /// 单价
         /// </summary>
-        public OrderModel Order { get; set; }
-
-
-
+        public decimal UnitPrice { get; set; }
 	}
 }

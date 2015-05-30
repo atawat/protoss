@@ -84,6 +84,10 @@ namespace Protoss.Entity.Model
 
 		public decimal? LocationY { get; set; }
 
+        public DateTime? AddTimeBegin { get; set; }
+
+        public DateTime? AddTimeEnd { get; set; }
+
 
 
 

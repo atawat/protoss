@@ -10,16 +10,23 @@ using Protoss.Service.Order;
 using YooPoon.Core.Site;
 using YooPoon.WebFramework.API;
 using Protoss.Models;
+using Protoss.Service.Product;
+using YooPoon.Core.Autofac;
+using YooPoon.WebFramework.User.Entity;
 
 namespace Protoss.Controllers
 {
 	public class OrderController : ApiController
 	{
 		private readonly IOrderService _OrderService;
+	    private readonly IWorkContext _workContext;
+	    private readonly IProductService _productService;
 
-		public OrderController(IOrderService OrderService)
+	    public OrderController(IOrderService orderService,IWorkContext workContext,IProductService productService)
 		{
-			_OrderService = OrderService;
+			_OrderService = orderService;
+		    _workContext = workContext;
+	        _productService = productService;
 		}
 
 		public OrderModel Get(int id)
@@ -67,6 +74,16 @@ namespace Protoss.Controllers
 		        LocationX = entity.LocationX,
 
 		        LocationY = entity.LocationY,
+
+                Details = entity.Details.Select(d=>new OrderDetailModel()
+                {
+                    Count   = d.Count,
+                    Id = d.Id,
+                    ProductId = d.Product.Id,
+                    ProductName = d.Product.Name,
+                    TotalPrice = d.TotalPrice,
+                    UnitPrice = d.Product.Price
+                }).ToList()
 
 		    };
 			return model;
@@ -121,36 +138,34 @@ namespace Protoss.Controllers
 			return model;
 		}
 
-		public bool Post(OrderModel model)
+		public bool Post(CreateOrderModel model)
 		{
 			var entity = new OrderEntity
 			{
 
-				OrderNum = model.OrderNum,
+				OrderNum = GetNewOrderNum(),
 
-				TotalPrice = model.TotalPrice,
 
-				TransCost = model.TransCost,
+                TransCost = GetTransCost(model.LocationX,model.LocationY),           //Todo:use db data
 
-				ProductCost = model.ProductCost,
 
-				Discount  = model.Discount ,
+				Discount  = model.Discount ,          //Todo:use db data
 
-				Status = model.Status,
+				Status = EnumOrderStatus.Created,
 
 				DeliveryAddress = model.DeliveryAddress,
 
-				IsPrint = model.IsPrint,
+				IsPrint = false,
 
 				PhoneNumber = model.PhoneNumber,
 
-				Adduser = model.Adduser,
+				Adduser = (UserBase)_workContext.CurrentUser,
 
-				Addtime = model.Addtime,
+				Addtime = DateTime.Now,
 
-				Upduser = model.Upduser,
+                Upduser = (UserBase)_workContext.CurrentUser,
 
-				Updtime = model.Updtime,
+                Updtime = DateTime.Now,
 
 //				Details = model.Details,
 
@@ -165,12 +180,45 @@ namespace Protoss.Controllers
 				LocationY = model.LocationY,
 
 			};
-			if(_OrderService.Create(entity).Id > 0)
+            #region Ã÷Ï¸
+            var details = (from detail in model.Details
+                let product = _productService.GetProductById(detail.ProductId)
+                where product != null
+                select new OrderDetailEntity
+                {
+                    Count = detail.Count,
+                    Product = _productService.GetProductById(detail.ProductId), 
+                    TotalPrice = detail.Count*product.Price, Order = entity
+                }).ToList();
+
+            entity.ProductCost = details.Sum(d => d.TotalPrice);
+            entity.TotalPrice = entity.ProductCost - entity.Discount + entity.TransCost;
+		    entity.Details = details;
+            
+            #endregion
+            if (_OrderService.Create(entity).Id > 0)
 			{
 				return true;
 			}
 			return false;
 		}
+
+        public decimal GetTransCost(decimal locationX,decimal locationY)
+        {
+            return 0;
+        }
+
+	    private string GetNewOrderNum()
+	    {
+	        var now = DateTime.Today;
+	        var condition = new OrderSearchCondition
+	        {
+	            AddTimeBegin = now,
+                AddTimeEnd = now.AddDays(1)
+	        };
+	        var count = _OrderService.GetOrderCount(condition);
+	        return DateTime.Now.ToString("yyyyMMddHHmmss") + count.ToString("000000");
+	    }
 
 		public bool Put(OrderModel model)
 		{

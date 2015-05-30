@@ -159,3 +159,4 @@ $RECYCLE.BIN/
 *.idea
 /*.suo
 /Protoss/App_Data/Logs
+/Publish
