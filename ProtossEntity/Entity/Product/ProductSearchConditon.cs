@@ -28,7 +28,7 @@ namespace Protoss.Entity.Model
 		public bool IsDescending { get; set; }
 
 
-		public int[] Ids { get; set; }
+        public int[] Ids { get; set; }
 
 
 
@@ -50,7 +50,7 @@ namespace Protoss.Entity.Model
 
 
 
-		public CategoryEntity Category { get; set; }
+		public int? CategoryId { get; set; }
 
 
 

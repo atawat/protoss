@@ -1,83 +1,79 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text.RegularExpressions;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using Protoss.Entity.Model;
-using Protoss.Service.Order;
-using YooPoon.Core.Site;
-using YooPoon.WebFramework.API;
 using Protoss.Models;
+using Protoss.Service.Order;
 using Protoss.Service.Product;
-using YooPoon.Core.Autofac;
+using YooPoon.Core.Site;
 using YooPoon.WebFramework.User.Entity;
 
 namespace Protoss.Controllers
 {
-	public class OrderController : ApiController
-	{
-		private readonly IOrderService _OrderService;
-	    private readonly IWorkContext _workContext;
-	    private readonly IProductService _productService;
+    [AllowAnonymous]
+    public class OrderController : ApiController
+    {
+        private readonly IOrderService _OrderService;
+        private readonly IWorkContext _workContext;
+        private readonly IProductService _productService;
 
-	    public OrderController(IOrderService orderService,IWorkContext workContext,IProductService productService)
-		{
-			_OrderService = orderService;
-		    _workContext = workContext;
-	        _productService = productService;
-		}
+        public OrderController(IOrderService orderService, IWorkContext workContext, IProductService productService)
+        {
+            _OrderService = orderService;
+            _workContext = workContext;
+            _productService = productService;
+        }
 
-		public OrderModel Get(int id)
-		{
-			var entity =_OrderService.GetOrderById(id);
-		    var model = new OrderModel
-		    {
+        public OrderModel Get(int id)
+        {
+            var entity = _OrderService.GetOrderById(id);
+            var model = new OrderModel
+            {
 
-		        Id = entity.Id,
+                Id = entity.Id,
 
-		        OrderNum = entity.OrderNum,
+                OrderNum = entity.OrderNum,
 
-		        TotalPrice = entity.TotalPrice,
+                TotalPrice = entity.TotalPrice,
 
-		        TransCost = entity.TransCost,
+                TransCost = entity.TransCost,
 
-		        ProductCost = entity.ProductCost,
+                ProductCost = entity.ProductCost,
 
-		        Discount = entity.Discount,
+                Discount = entity.Discount,
 
-		        Status = entity.Status,
+                Status = entity.Status,
 
-		        DeliveryAddress = entity.DeliveryAddress,
+                DeliveryAddress = entity.DeliveryAddress,
 
-		        IsPrint = entity.IsPrint,
+                IsPrint = entity.IsPrint,
 
-		        PhoneNumber = entity.PhoneNumber,
+                PhoneNumber = entity.PhoneNumber,
 
-		        Adduser = entity.Adduser,
+                Adduser = entity.Adduser,
 
-		        Addtime = entity.Addtime,
+                Addtime = entity.Addtime,
 
-		        Upduser = entity.Upduser,
+                Upduser = entity.Upduser,
 
-		        Updtime = entity.Updtime,
+                Updtime = entity.Updtime,
 
-//		        Details = entity.Details,
+                //		        Details = entity.Details,
 
-//		        Coupon = entity.Coupon,
+                //		        Coupon = entity.Coupon,
 
-		        Type = entity.Type,
+                Type = entity.Type,
 
-		        PayType = entity.PayType,
+                PayType = entity.PayType,
 
-		        LocationX = entity.LocationX,
+                LocationX = entity.LocationX,
 
-		        LocationY = entity.LocationY,
+                LocationY = entity.LocationY,
 
-                Details = entity.Details.Select(d=>new OrderDetailModel()
+                Details = entity.Details.Select(d => new OrderDetailModel()
                 {
-                    Count   = d.Count,
+                    Count = d.Count,
                     Id = d.Id,
                     ProductId = d.Product.Id,
                     ProductName = d.Product.Name,
@@ -85,198 +81,231 @@ namespace Protoss.Controllers
                     UnitPrice = d.Product.Price
                 }).ToList()
 
-		    };
-			return model;
-		}
+            };
+            return model;
+        }
 
-		public List<OrderModel> Get(OrderSearchCondition condition)
-		{
-			var model = _OrderService.GetOrdersByCondition(condition).Select(c=>new OrderModel
-			{
+        public List<OrderModel> GetByCondition(int? page = 1,
+                                                    int? pageCount = 10,
+                                                    string ids ="",
+                                                    bool isDescending = false,
+                                                    string orderNum = "",
+                                                    EnumOrderStatus? status = null,
+                                                    string deliveryAddress = "",
+                                                    bool? isPrint = null,
+                                                    string phoneNumber = "",
+                                                    EnumOrderType? type = null,
+                                                    EnumPayType? payType = null,
+                                                    decimal? locationX = null,
+                                                    decimal? locationY = null,
+                                                    DateTime? addTimeBegin = null,
+                                                    DateTime? addTimeEnd = null,
+                                                    EnumOrderSearchOrderBy orderBy = EnumOrderSearchOrderBy.OrderById)
+        {
+            var condition = new OrderSearchCondition
+            {
+                AddTimeBegin = addTimeBegin,
+                AddTimeEnd = addTimeEnd,
+                DeliveryAddress = deliveryAddress,
+                Ids = string.IsNullOrEmpty(ids)?null:ids.Split(',').Select(int.Parse).ToArray(),
+                IsDescending = isDescending,
+                IsPrint = isPrint,
+                LocationX = locationX,
+                LocationY = locationY,
+                OrderBy = orderBy,
+                OrderNum = orderNum,
+                Page = page,
+                PageCount = page,
+                PayType = payType,
+                PhoneNumber = phoneNumber
+            };
+            var model = _OrderService.GetOrdersByCondition(condition).Select(c => new OrderModel
+            {
 
-				Id = c.Id,
+                Id = c.Id,
 
-				OrderNum = c.OrderNum,
+                OrderNum = c.OrderNum,
 
-				TotalPrice = c.TotalPrice,
+                TotalPrice = c.TotalPrice,
 
-				TransCost = c.TransCost,
+                TransCost = c.TransCost,
 
-				ProductCost = c.ProductCost,
+                ProductCost = c.ProductCost,
 
-				Discount  = c.Discount ,
+                Discount = c.Discount,
 
-				Status = c.Status,
+                Status = c.Status,
 
-				DeliveryAddress = c.DeliveryAddress,
+                DeliveryAddress = c.DeliveryAddress,
 
-				IsPrint = c.IsPrint,
+                IsPrint = c.IsPrint,
 
-				PhoneNumber = c.PhoneNumber,
+                PhoneNumber = c.PhoneNumber,
 
-				Adduser = c.Adduser,
+                Adduser = c.Adduser,
 
-				Addtime = c.Addtime,
+                Addtime = c.Addtime,
 
-				Upduser = c.Upduser,
+                Upduser = c.Upduser,
 
-				Updtime = c.Updtime,
+                Updtime = c.Updtime,
 
-//				Details = c.Details,
+                //				Details = c.Details,
 
-//				Coupon = c.Coupon,
+                //				Coupon = c.Coupon,
 
-				Type = c.Type,
+                Type = c.Type,
 
-				PayType = c.PayType,
+                PayType = c.PayType,
 
-				LocationX = c.LocationX,
+                LocationX = c.LocationX,
 
-				LocationY = c.LocationY,
+                LocationY = c.LocationY,
 
-			}).ToList();
-			return model;
-		}
+            }).ToList();
+            return model;
+        }
 
-		public bool Post(CreateOrderModel model)
-		{
-			var entity = new OrderEntity
-			{
+        public bool Post(CreateOrderModel model)
+        {
+            var entity = new OrderEntity
+            {
 
-				OrderNum = GetNewOrderNum(),
-
-
-                TransCost = GetTransCost(model.LocationX,model.LocationY),           //Todo:use db data
+                OrderNum = GetNewOrderNum(),
 
 
-				Discount  = model.Discount ,          //Todo:use db data
+                TransCost = GetTransCost(model.LocationX, model.LocationY),           //Todo:use db data
 
-				Status = EnumOrderStatus.Created,
 
-				DeliveryAddress = model.DeliveryAddress,
+                Discount = model.Discount,          //Todo:use db data
 
-				IsPrint = false,
+                Status = EnumOrderStatus.Created,
 
-				PhoneNumber = model.PhoneNumber,
+                DeliveryAddress = model.DeliveryAddress,
 
-				Adduser = (UserBase)_workContext.CurrentUser,
+                IsPrint = false,
 
-				Addtime = DateTime.Now,
+                PhoneNumber = model.PhoneNumber,
+
+                Adduser = (UserBase)_workContext.CurrentUser,
+
+                Addtime = DateTime.Now,
 
                 Upduser = (UserBase)_workContext.CurrentUser,
 
                 Updtime = DateTime.Now,
 
-//				Details = model.Details,
+                //				Details = model.Details,
 
-//				Coupon = model.Coupon,
+                //				Coupon = model.Coupon,
 
-				Type = model.Type,
+                Type = model.Type,
 
-				PayType = model.PayType,
+                PayType = model.PayType,
 
-				LocationX = model.LocationX,
+                LocationX = model.LocationX,
 
-				LocationY = model.LocationY,
+                LocationY = model.LocationY,
 
-			};
+            };
             #region Ã÷Ï¸
             var details = (from detail in model.Details
-                let product = _productService.GetProductById(detail.ProductId)
-                where product != null
-                select new OrderDetailEntity
-                {
-                    Count = detail.Count,
-                    Product = _productService.GetProductById(detail.ProductId), 
-                    TotalPrice = detail.Count*product.Price, Order = entity
-                }).ToList();
+                           let product = _productService.GetProductById(detail.ProductId)
+                           where product != null
+                           select new OrderDetailEntity
+                           {
+                               Count = detail.Count,
+                               Product = _productService.GetProductById(detail.ProductId),
+                               TotalPrice = detail.Count * product.Price,
+                               Order = entity
+                           }).ToList();
 
             entity.ProductCost = details.Sum(d => d.TotalPrice);
             entity.TotalPrice = entity.ProductCost - entity.Discount + entity.TransCost;
-		    entity.Details = details;
-            
+            entity.Details = details;
+
             #endregion
             if (_OrderService.Create(entity).Id > 0)
-			{
-				return true;
-			}
-			return false;
-		}
+            {
+                return true;
+            }
+            return false;
+        }
 
-        public decimal GetTransCost(decimal locationX,decimal locationY)
+        public decimal GetTransCost(decimal locationX, decimal locationY)
         {
             return 0;
         }
 
-	    private string GetNewOrderNum()
-	    {
-	        var now = DateTime.Today;
-	        var condition = new OrderSearchCondition
-	        {
-	            AddTimeBegin = now,
+        private string GetNewOrderNum()
+        {
+            var now = DateTime.Today;
+            var condition = new OrderSearchCondition
+            {
+                AddTimeBegin = now,
                 AddTimeEnd = now.AddDays(1)
-	        };
-	        var count = _OrderService.GetOrderCount(condition);
-	        return DateTime.Now.ToString("yyyyMMddHHmmss") + count.ToString("000000");
-	    }
+            };
+            var count = _OrderService.GetOrderCount(condition);
+            return DateTime.Now.ToString("yyyyMMddHHmmss") + count.ToString("000000");
+        }
 
-		public bool Put(OrderModel model)
-		{
-			var entity = _OrderService.GetOrderById(model.Id);
-			if(entity == null)
-				return false;
+        public bool Put(OrderModel model)
+        {
+            var entity = _OrderService.GetOrderById(model.Id);
+            if (entity == null)
+                return false;
 
-			entity.OrderNum = model.OrderNum;
+            entity.OrderNum = model.OrderNum;
 
-			entity.TotalPrice = model.TotalPrice;
+            entity.TotalPrice = model.TotalPrice;
 
-			entity.TransCost = model.TransCost;
+            entity.TransCost = model.TransCost;
 
-			entity.ProductCost = model.ProductCost;
+            entity.ProductCost = model.ProductCost;
 
-			entity.Discount  = model.Discount ;
+            entity.Discount = model.Discount;
 
-			entity.Status = model.Status;
+            entity.Status = model.Status;
 
-			entity.DeliveryAddress = model.DeliveryAddress;
+            entity.DeliveryAddress = model.DeliveryAddress;
 
-			entity.IsPrint = model.IsPrint;
+            entity.IsPrint = model.IsPrint;
 
-			entity.PhoneNumber = model.PhoneNumber;
+            entity.PhoneNumber = model.PhoneNumber;
 
-			entity.Adduser = model.Adduser;
+            entity.Adduser = model.Adduser;
 
-			entity.Addtime = model.Addtime;
+            entity.Addtime = model.Addtime;
 
-			entity.Upduser = model.Upduser;
+            entity.Upduser = model.Upduser;
 
-			entity.Updtime = model.Updtime;
+            entity.Updtime = model.Updtime;
 
-//			entity.Details = model.Details;
+            //			entity.Details = model.Details;
 
-//			entity.Coupon = model.Coupon;
+            //			entity.Coupon = model.Coupon;
 
-			entity.Type = model.Type;
+            entity.Type = model.Type;
 
-			entity.PayType = model.PayType;
+            entity.PayType = model.PayType;
 
-			entity.LocationX = model.LocationX;
+            entity.LocationX = model.LocationX;
 
-			entity.LocationY = model.LocationY;
+            entity.LocationY = model.LocationY;
 
-			if(_OrderService.Update(entity) != null)
-				return true;
-			return false;
-		}
+            if (_OrderService.Update(entity) != null)
+                return true;
+            return false;
+        }
 
-		public bool Delete(int id)
-		{
-			var entity = _OrderService.GetOrderById(id);
-			if(entity == null)
-				return false;
-			if(_OrderService.Delete(entity))
-				return true;
-			return false;
-		}
-	}
+        public bool Delete(int id)
+        {
+            var entity = _OrderService.GetOrderById(id);
+            if (entity == null)
+                return false;
+            if (_OrderService.Delete(entity))
+                return true;
+            return false;
+        }
+    }
 }

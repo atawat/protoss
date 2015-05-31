@@ -54,8 +54,8 @@
     <Compile Include="Entity\Category\CategoryEntity.cs" />
     <Compile Include="Entity\Category\CategorySearchConditon.cs" />
     <Compile Include="Entity\Category\EnumCategory.cs" />
-    <Compile Include="Entity\Channel\Channel Entity.cs" />
-    <Compile Include="Entity\Channel\Channel SearchConditon.cs" />
+    <Compile Include="Entity\Channel\ChannelEntity.cs" />
+    <Compile Include="Entity\Channel\ChannelSearchConditon.cs" />
     <Compile Include="Entity\Channel\EnumChannel .cs" />
     <Compile Include="Entity\ContentTag\ContentTag.cs" />
     <Compile Include="Entity\Content\ContentEntity.cs" />

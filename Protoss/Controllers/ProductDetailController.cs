@@ -13,6 +13,7 @@ using Protoss.Models;
 
 namespace Protoss.Controllers
 {
+    [AllowAnonymous]
 	public class ProductDetailController : ApiController
 	{
 		private readonly IProductDetailService _ProductDetailService;

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Protoss.Entity.Entity.ContentTag;
 using YooPoon.Core.Data;
 using YooPoon.WebFramework.User.Entity;
 

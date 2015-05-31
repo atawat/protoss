@@ -1,9 +1,10 @@
 ﻿using System.Data.Entity.ModelConfiguration;
+using Protoss.Entity.Model;
 using YooPoon.Core.Data;
 
-namespace Protoss.Entity.Mappings.ContentTag
+namespace Protoss.Entity.Mappings
 {
-    public class ContengTagMapping : EntityTypeConfiguration<Entity.ContentTag.ContentTag>,IMapping
+    public class ContengTagMapping : EntityTypeConfiguration<ContentTag>, IMapping
     {
         public ContengTagMapping()
         {

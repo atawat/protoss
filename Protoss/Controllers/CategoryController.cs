@@ -13,6 +13,7 @@ using Protoss.Models;
 
 namespace Protoss.Controllers
 {
+    [AllowAnonymous]
 	public class CategoryController : ApiController
 	{
 		private readonly ICategoryService _CategoryService;

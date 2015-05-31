@@ -4,22 +4,27 @@ using System.Web.Http;
 using Protoss.Entity.Model;
 using Protoss.Models;
 using Protoss.Service.Product;
+using YooPoon.Core.Site;
+using YooPoon.WebFramework.User.Entity;
 
 namespace Protoss.Controllers
 {
+    [AllowAnonymous]
 	public class ProductController : ApiController
 	{
-		private readonly IProductService _ProductService;
+		private readonly IProductService _productService;
+        private readonly IWorkContext _workContext;
 
-		public ProductController(IProductService ProductService)
+        public ProductController(IProductService productService,IWorkContext workContext)
 		{
-			_ProductService = ProductService;
+			_productService = productService;
+		    _workContext = workContext;
 		}
 
 		public ProductModel Get(int id)
 		{
-			var entity =_ProductService.GetProductById(id);
-		    var model = new ProductModel
+			var entity =_productService.GetProductById(id);
+		    var model = entity==null?new ProductModel() : new ProductModel
 		    {
 
 		        Id = entity.Id,
@@ -30,11 +35,11 @@ namespace Protoss.Controllers
 
 		        Price = entity.Price,
 
-		        Adduser = entity.Adduser,
+		        Adduser = new UserModel{Id = entity.Adduser.Id,UserName = entity.Adduser.UserName},
 
 		        Addtime = entity.Addtime,
 
-		        Upduser = entity.Upduser,
+                Upduser = new UserModel { Id = entity.Upduser.Id, UserName = entity.Upduser.UserName },
 
 		        Updtime = entity.Updtime,
 
@@ -52,9 +57,33 @@ namespace Protoss.Controllers
 			return model;
 		}
 
-		public List<ProductModel> Get(ProductSearchCondition condition)
+        [HttpGet]
+        public List<ProductModel> GetByCondition(
+            int? categoryId = null, 
+            decimal? priceBegin = null, 
+            decimal? priceEnd = null,
+            bool isDescending =false,
+            string name ="",
+            string spec ="", 
+            int pageCount = 10, 
+            int page = 1, 
+            string ids = "",
+            EnumProductSearchOrderBy orderBy = EnumProductSearchOrderBy.OrderById)
 		{
-			var model = _ProductService.GetProductsByCondition(condition).Select(c=>new ProductModel
+            var condition = new ProductSearchCondition
+            {
+                CategoryId = categoryId,
+                IsDescending = isDescending,
+                Name = name,
+                OrderBy = orderBy,
+                Page = page,
+                PageCount = pageCount,
+                PriceBegin = priceBegin,
+                PriceEnd = priceEnd,
+                Spec = spec,
+                Ids = string.IsNullOrEmpty(ids)?null:ids.Split(',').Select(int.Parse).ToArray()
+            };
+			var model = _productService.GetProductsByCondition(condition).Select(c=>new ProductModel
 			{
 
 				Id = c.Id,
@@ -65,11 +94,11 @@ namespace Protoss.Controllers
 
 				Price = c.Price,
 
-				Adduser = c.Adduser,
+                Adduser = new UserModel { Id = c.Adduser.Id, UserName = c.Adduser.UserName },
 
-				Addtime = c.Addtime,
+                Addtime = c.Addtime,
 
-				Upduser = c.Upduser,
+                Upduser = new UserModel { Id = c.Upduser.Id, UserName = c.Upduser.UserName },
 
 				Updtime = c.Updtime,
 
@@ -89,6 +118,7 @@ namespace Protoss.Controllers
 
 		public bool Post(ProductModel model)
 		{
+		    var user = (UserBase)_workContext.CurrentUser;
 			var entity = new ProductEntity
 			{
 
@@ -98,11 +128,11 @@ namespace Protoss.Controllers
 
 				Price = model.Price,
 
-				Adduser = model.Adduser,
+                Adduser = user,
 
-				Addtime = model.Addtime,
+                Addtime = model.Addtime,
 
-				Upduser = model.Upduser,
+                Upduser = user,
 
 				Updtime = model.Updtime,
 
@@ -117,7 +147,7 @@ namespace Protoss.Controllers
 //				PropertyValues = model.PropertyValues,
 
 			};
-			if(_ProductService.Create(entity).Id > 0)
+			if(_productService.Create(entity).Id > 0)
 			{
 				return true;
 			}
@@ -126,9 +156,11 @@ namespace Protoss.Controllers
 
 		public bool Put(ProductModel model)
 		{
-			var entity = _ProductService.GetProductById(model.Id);
+			var entity = _productService.GetProductById(model.Id);
 			if(entity == null)
 				return false;
+
+		    var user = (UserBase) _workContext.CurrentUser;
 
 			entity.Name = model.Name;
 
@@ -136,11 +168,7 @@ namespace Protoss.Controllers
 
 			entity.Price = model.Price;
 
-			entity.Adduser = model.Adduser;
-
-			entity.Addtime = model.Addtime;
-
-			entity.Upduser = model.Upduser;
+			entity.Upduser = user;
 
 			entity.Updtime = model.Updtime;
 
@@ -154,17 +182,17 @@ namespace Protoss.Controllers
 
 //			entity.PropertyValues = model.PropertyValues;
 
-			if(_ProductService.Update(entity) != null)
+			if(_productService.Update(entity) != null)
 				return true;
 			return false;
 		}
 
 		public bool Delete(int id)
 		{
-			var entity = _ProductService.GetProductById(id);
+			var entity = _productService.GetProductById(id);
 			if(entity == null)
 				return false;
-			if(_ProductService.Delete(entity))
+			if(_productService.Delete(entity))
 				return true;
 			return false;
 		}

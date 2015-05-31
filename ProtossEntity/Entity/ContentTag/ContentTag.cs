@@ -1,7 +1,7 @@
 ﻿using Protoss.Entity.Model;
 using YooPoon.Core.Data;
 
-namespace Protoss.Entity.Entity.ContentTag
+namespace Protoss.Entity.Model
 {
     public class ContentTag:IBaseEntity
     {

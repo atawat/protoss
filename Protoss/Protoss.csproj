@@ -108,6 +108,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\PageHelper.cs" />
+    <Compile Include="Common\ResultModel.cs" />
     <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ChannelController.cs" />
@@ -121,10 +123,13 @@
     <Compile Include="Controllers\ProductPropertyValueController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\PropertyValueController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActionModel.cs" />
     <Compile Include="Models\BannerModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\ChannelModel.cs" />
@@ -139,7 +144,9 @@
     <Compile Include="Models\ProductPropertyValueModel.cs" />
     <Compile Include="Models\PropertyModel.cs" />
     <Compile Include="Models\PropertyValueModel.cs" />
+    <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\TagModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

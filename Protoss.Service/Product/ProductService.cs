@@ -89,9 +89,9 @@ namespace Protoss.Service.Product
                 {
                     query = query.Where(q => q.Spec == condition.Spec);
                 }
-				if (condition.Category != null)
+				if (condition.CategoryId != null)
                 {
-                    query = query.Where(q => q.Category == condition.Category);
+                    query = query.Where(q => q.Category.Id == condition.CategoryId);
                 }
 				if (condition.Status.HasValue)
                 {
@@ -101,7 +101,7 @@ namespace Protoss.Service.Product
                 {
                     query = query.Where(q => q.Name.Contains(condition.Name));
                 }
-				if (condition.Ids != null && condition.Ids.Any())
+                if (condition.Ids != null && condition.Ids.Any())
                 {
                     query = query.Where(q => condition.Ids.Contains(q.Id));
                 }
@@ -156,9 +156,9 @@ namespace Protoss.Service.Product
                 {
                     query = query.Where(q => q.Spec == condition.Spec);
                 }
-				if (condition.Category != null)
+				if (condition.CategoryId != null)
                 {
-                    query = query.Where(q => q.Category == condition.Category);
+                    query = query.Where(q => q.Category.Id == condition.CategoryId);
                 }
 				if (condition.Status.HasValue)
                 {
@@ -168,7 +168,7 @@ namespace Protoss.Service.Product
                 {
                     query = query.Where(q => q.Name.Contains(condition.Name));
                 }
-				if (condition.Ids != null && condition.Ids.Any())
+                if (condition.Ids != null && condition.Ids.Any())
                 {
                     query = query.Where(q => condition.Ids.Contains(q.Id));
                 }
