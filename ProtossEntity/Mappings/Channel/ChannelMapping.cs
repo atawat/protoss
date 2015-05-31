@@ -18,6 +18,7 @@ namespace Protoss.Entity.Mappings.Channel
 			Property(c => c.Addtime).HasColumnType("datetime");
 		    HasOptional(c => c.Upduser);
 			Property(c => c.Updtime).HasColumnType("datetime").IsOptional();
+		    HasMany(c => c.Contents).WithOptional(c=>c.Channel).WillCascadeOnDelete(false);
 		}
 	}
 }

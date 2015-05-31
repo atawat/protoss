@@ -133,9 +133,9 @@ namespace Protoss.Service.Content
 //                {
 //                    query = query.Where(q => condition.Tagss.Contains(q.Tags));
 //                }
-				if (condition.Channelss != null && condition.Channelss.Any())
+				if (condition.ChannelId != null)
                 {
-                    query = query.Where(q => condition.Channelss.Contains(q.Channels));
+                    query = query.Where(q => q.Channel.Id == condition.ChannelId);
                 }
 				if(condition.OrderBy.HasValue)
 				{
@@ -244,9 +244,9 @@ namespace Protoss.Service.Content
 //                {
 //                    query = query.Where(q => condition.Tagss.Contains(q.Tags));
 //                }
-				if (condition.Channelss != null && condition.Channelss.Any())
+				if (condition.ChannelId != null)
                 {
-                    query = query.Where(q => condition.Channelss.Contains(q.Channels));
+                    query = query.Where(q => q.Channel.Id == condition.ChannelId);
                 }
 				return query.Count();
 			}

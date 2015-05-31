@@ -58,6 +58,6 @@ namespace Protoss.Entity.Model
 		/// <summary>
 		/// 所属频道
 		/// </summary>
-		public virtual IList<ChannelEntity> Channels { get; set; }
+		public virtual ChannelEntity Channel { get; set; }
 	}
 }

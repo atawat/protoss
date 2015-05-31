@@ -39,5 +39,7 @@ namespace Protoss.Entity.Model
 		/// 更新时间
 		/// </summary>
 		public virtual DateTime Updtime { get; set; }
+
+        public virtual List<ContentEntity> Contents { get; set; } 
 	}
 }

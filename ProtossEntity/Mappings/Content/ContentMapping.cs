@@ -21,7 +21,7 @@ namespace Protoss.Entity.Mappings.Content
             Property(c => c.Praise).HasColumnType("int");
             Property(c => c.Unpraise).HasColumnType("int");
             Property(c => c.Viewcount).HasColumnType("int");
-            HasMany(c => c.Channels);
+            HasOptional(c => c.Channel);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Protoss.Entity.Mappings.Product
 			HasOptional(c => c.Upduser);
 			Property(c => c.Updtime).HasColumnType("datetime").IsOptional();
 			Property(c => c.Unit).HasColumnType("varchar").HasMaxLength(10).IsOptional();
-			HasRequired(c =>c.Detail).WithRequiredDependent(c=>c.Product);
+			HasRequired(c =>c.Detail).WithRequiredPrincipal(c=>c.Product);
 			HasOptional(c =>c.Category);
 			Property(c => c.Status).HasColumnType("int");
 			HasMany(c => c.PropertyValues);

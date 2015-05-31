@@ -92,11 +92,11 @@ namespace Protoss.Entity.Model
 
 
 
-		public IList<TagEntity>[] Tagss { get; set; }
+		public IList<string>[] Tagss { get; set; }
 
 
 
-		public IList<ChannelEntity>[] Channelss { get; set; }
+		public int? ChannelId { get; set; }
 
 
 
