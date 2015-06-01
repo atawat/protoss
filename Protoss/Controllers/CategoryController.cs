@@ -15,6 +15,7 @@ using YooPoon.WebFramework.User.Entity;
 namespace Protoss.Controllers
 {
     [AllowAnonymous]
+    [EnableCors("*", "*", "*", SupportsCredentials = true)]
 	public class CategoryController : ApiController
 	{
 		private readonly ICategoryService _CategoryService;
