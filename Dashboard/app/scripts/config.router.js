@@ -219,6 +219,28 @@ angular.module('app')
                 url:'/create',
                 templateUrl:'views/pages/coupon/create.html'
             })
+            .state('app.category',{
+                url:'/category',
+                abstract: true,
+                template:'<div ui-view></div>',
+                resolve:load('scripts/controllers/category.js')
+            })
+            .state('app.category.index',{
+                url:'/index',
+                templateUrl:'views/pages/category/index.html'
+            })
+            .state('app.category.detail',{
+                url:'/detail?id',
+                templateUrl:'views/pages/category/detail.html'
+            })
+            .state('app.category.edit',{
+                url:'/edit?id',
+                templateUrl:'views/pages/category/edit.html'
+            })
+            .state('app.category.create',{
+                url:'/create',
+                templateUrl:'views/pages/category/create.html'
+            })
 
             .state('access', {
                 url: '/access',
