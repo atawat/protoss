@@ -30,11 +30,11 @@ namespace Protoss.Controllers
 
 		        Id = entity.Id,
 
-		        Property = entity.Property,
+		        PropertyName = entity.Property.PropertyName,
 
-		        PropertyValue = entity.PropertyValue,
+		        PropertyValue = entity.PropertyValue.Value,
 
-		        Product = entity.Product,
+		        ProductId = entity.Product.Id,
 
 		        Adduser = entity.Adduser,
 
@@ -55,11 +55,11 @@ namespace Protoss.Controllers
 
 				Id = c.Id,
 
-				Property = c.Property,
+				PropertyName = c.Property.PropertyName,
 
-				PropertyValue = c.PropertyValue,
+				PropertyValue = c.PropertyValue.Value,
 
-				Product = c.Product,
+				ProductId = c.Product.Id,
 
 				Adduser = c.Adduser,
 
@@ -73,66 +73,66 @@ namespace Protoss.Controllers
 			return model;
 		}
 
-		public bool Post(ProductPropertyValueModel model)
-		{
-			var entity = new ProductPropertyValueEntity
-			{
+//		public bool Post(ProductPropertyValueModel model)
+//		{
+//			var entity = new ProductPropertyValueEntity
+//			{
+//
+//				Property = model.PropertyName,
+//
+//				PropertyValue = model.PropertyValue,
+//
+//				Product = model.ProductId,
+//
+//				Adduser = model.Adduser,
+//
+//				Addtime = model.Addtime,
+//
+//				UpdUser = model.UpdUser,
+//
+//				UpdTime = model.UpdTime,
+//
+//			};
+//			if(_ProductPropertyValueService.Create(entity).Id > 0)
+//			{
+//				return true;
+//			}
+//			return false;
+//		}
 
-				Property = model.Property,
+//		public bool Put(ProductPropertyValueModel model)
+//		{
+//			var entity = _ProductPropertyValueService.GetProductPropertyValueById(model.Id);
+//			if(entity == null)
+//				return false;
+//
+//			entity.Property = model.PropertyName;
+//
+//			entity.PropertyValue = model.PropertyValue;
+//
+//			entity.Product = model.ProductId;
+//
+//			entity.Adduser = model.Adduser;
+//
+//			entity.Addtime = model.Addtime;
+//
+//			entity.UpdUser = model.UpdUser;
+//
+//			entity.UpdTime = model.UpdTime;
+//
+//			if(_ProductPropertyValueService.Update(entity) != null)
+//				return true;
+//			return false;
+//		}
 
-				PropertyValue = model.PropertyValue,
-
-				Product = model.Product,
-
-				Adduser = model.Adduser,
-
-				Addtime = model.Addtime,
-
-				UpdUser = model.UpdUser,
-
-				UpdTime = model.UpdTime,
-
-			};
-			if(_ProductPropertyValueService.Create(entity).Id > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-
-		public bool Put(ProductPropertyValueModel model)
-		{
-			var entity = _ProductPropertyValueService.GetProductPropertyValueById(model.Id);
-			if(entity == null)
-				return false;
-
-			entity.Property = model.Property;
-
-			entity.PropertyValue = model.PropertyValue;
-
-			entity.Product = model.Product;
-
-			entity.Adduser = model.Adduser;
-
-			entity.Addtime = model.Addtime;
-
-			entity.UpdUser = model.UpdUser;
-
-			entity.UpdTime = model.UpdTime;
-
-			if(_ProductPropertyValueService.Update(entity) != null)
-				return true;
-			return false;
-		}
-
-		public bool Delete(int id)
-		{
-			var entity = _ProductPropertyValueService.GetProductPropertyValueById(id);
-			if(entity == null)
-				return false;
-			if(_ProductPropertyValueService.Delete(entity))
-				return true;
-			return false;
-		}
+//		public bool Delete(int id)
+//		{
+//			var entity = _ProductPropertyValueService.GetProductPropertyValueById(id);
+//			if(entity == null)
+//				return false;
+//			if(_ProductPropertyValueService.Delete(entity))
+//				return true;
+//			return false;
+//		}
 	}
 }

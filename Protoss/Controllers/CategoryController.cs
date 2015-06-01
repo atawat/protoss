@@ -10,6 +10,7 @@ using Protoss.Service.Category;
 using YooPoon.Core.Site;
 using YooPoon.WebFramework.API;
 using Protoss.Models;
+using YooPoon.WebFramework.User.Entity;
 
 namespace Protoss.Controllers
 {
@@ -17,10 +18,12 @@ namespace Protoss.Controllers
 	public class CategoryController : ApiController
 	{
 		private readonly ICategoryService _CategoryService;
+        private readonly IWorkContext _workContext;
 
-		public CategoryController(ICategoryService CategoryService)
+        public CategoryController(ICategoryService CategoryService,IWorkContext workContext)
 		{
 			_CategoryService = CategoryService;
+		    _workContext = workContext;
 		}
 
 		public CategoryModel Get(int id)
@@ -35,11 +38,11 @@ namespace Protoss.Controllers
 
 //		        Father = entity.Father,
 
-		        Adduser = entity.Adduser,
+		        Adduser = new UserModel{Id = entity.Adduser.Id,UserName = entity.Adduser.UserName},
 
 		        Addtime = entity.Addtime,
 
-		        Upduser = entity.Upduser,
+                Upduser = new UserModel { Id = entity.Upduser.Id, UserName = entity.Upduser.UserName },
 
 		        Updtime = entity.Updtime,
 
@@ -60,11 +63,11 @@ namespace Protoss.Controllers
 
 //				Father = c.Father,
 
-				Adduser = c.Adduser,
+                Adduser = new UserModel { Id = c.Adduser.Id, UserName = c.Adduser.UserName },
 
 				Addtime = c.Addtime,
 
-				Upduser = c.Upduser,
+                Upduser = new UserModel { Id = c.Upduser.Id, UserName = c.Upduser.UserName },
 
 				Updtime = c.Updtime,
 
@@ -83,13 +86,13 @@ namespace Protoss.Controllers
 
 //				Father = model.Father,
 
-				Adduser = model.Adduser,
+				Adduser = (UserBase)_workContext.CurrentUser,
 
-				Addtime = model.Addtime,
+				Addtime = DateTime.Now,
 
-				Upduser = model.Upduser,
+				Upduser = (UserBase)_workContext.CurrentUser,
 
-				Updtime = model.Updtime,
+                Updtime = DateTime.Now,
 
 //				Products = model.Products,
 
@@ -101,6 +104,7 @@ namespace Protoss.Controllers
 			return false;
 		}
 
+        [HttpPost]
 		public bool Put(CategoryModel model)
 		{
 			var entity = _CategoryService.GetCategoryById(model.Id);
@@ -110,14 +114,14 @@ namespace Protoss.Controllers
 			entity.CategoryName = model.CategoryName;
 
 //			entity.Father = model.Father;
+//
+//			entity.Adduser = model.Adduser;
+//
+//			entity.Addtime = model.Addtime;
 
-			entity.Adduser = model.Adduser;
+            entity.Upduser = (UserBase)_workContext.CurrentUser;
 
-			entity.Addtime = model.Addtime;
-
-			entity.Upduser = model.Upduser;
-
-			entity.Updtime = model.Updtime;
+			entity.Updtime = DateTime.Now;
 
 //			entity.Products = model.Products;
 
@@ -126,6 +130,7 @@ namespace Protoss.Controllers
 			return false;
 		}
 
+        [HttpGet]
 		public bool Delete(int id)
 		{
 			var entity = _CategoryService.GetCategoryById(id);

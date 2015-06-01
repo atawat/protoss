@@ -1,0 +1,48 @@
+<div class="panel panel-default" ng-controller="channelIndexController">
+
+    <div class="panel-body  b-b b-light">
+        <button class="md-btn md-raised m-b btn-fw green" ng-click="gotoNew()"><i class="glyphicon glyphicon-plus m-r-sm"></i>新增频道<div class="md-ripple-container"></div></button>
+    </div>
+    <div class="panel-body  b-b b-light">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="md-form-group float-label">
+                    <input class="md-input ng-pristine ng-invalid ng-invalid-required ng-touched" ng-model="searchCondition.Name">
+                    <label>关键字</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button class="md-btn md-raised m-b btn-fw blue pull-right" ng-click="getList()"><i class="glyphicon glyphicon-search m-r-sm"></i>搜索<div class="md-ripple-container"></div></button>
+            </div>
+        </div>
+
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>名称</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="item in list">
+            <td>{{item.Name}}</td>
+            <td>{{item.StatusString}}</td>
+            <td>
+                <span class="label bg-success"><a ui-sref="app.channel.edit({id: item.Id})">编辑</a></span>
+                <span class="label yellow"><a ng-click="del(item.Id)">删除</a></span>
+            </td>
+        </tr>
+        <tfoot class="hide-if-no-paging">
+            <tr>
+                <td colspan="3" class="text-center">
+                    <pagination boundary-links="true" total-items="totalCount" items-per-page="searchCondition.pageSize" ng-model="searchCondition.page" ng-change="getList()" class="m-t-none m-b" previous-text="‹" next-text="›" first-text="«" last-text="»"></pagination>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <script type="text/ng-template" id="myModalContent.html">
+        <div ng-include="'views/partials/modal.html'"></div>
+    </script>
+</div>

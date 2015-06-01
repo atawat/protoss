@@ -48,14 +48,16 @@ angular.module('app')
               },
               'aside': {
                 templateUrl: 'views/aside.html'
-              }
+              },
+                'content': {
+                    templateUrl: 'views/content.html'
+                }
             }
           })
             .state('app.dashboard',{
                 url:'/dashboard',
                 templateUrl:'views/pages/dashboard.html',
-                resolve: load(['scripts/controllers/chart.js','scripts/controllers/vectormap.js']),
-                access:["admin"]
+                resolve: load(['scripts/controllers/chart.js','scripts/controllers/vectormap.js'])
             })
             .state('app.product',{
                 url:'/product',

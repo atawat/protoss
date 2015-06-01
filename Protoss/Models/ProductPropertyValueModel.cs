@@ -20,19 +20,19 @@ namespace Protoss.Models
 		/// <summary>
         /// 属性
         /// </summary>
-		public PropertyEntity Property {get;set;}
+		public string PropertyName {get;set;}
 
 
 		/// <summary>
         /// 属性值
         /// </summary>
-		public PropertyValueEntity PropertyValue {get;set;}
+		public string PropertyValue {get;set;}
 
 
 		/// <summary>
         /// 商品
         /// </summary>
-		public ProductEntity Product {get;set;}
+		public int ProductId {get;set;}
 
 
 		/// <summary>

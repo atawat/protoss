@@ -51,7 +51,7 @@ namespace Protoss.Controllers
 
 		        Status = entity.Status,
 
-//		        PropertyValues = entity.PropertyValues,
+		        PropertyValues = entity.PropertyValues.Select(c=>new ProductPropertyValueModel{Id = c.Id,PropertyName = c.Property.PropertyName,PropertyValue = c.PropertyValue.Value,ProductId = c.Product.Id}).ToList(),
 
 		    };
 			return model;
