@@ -4,7 +4,7 @@
 app.controller('categoryIndexController',['$http','$state','$scope','$modal',function($http,$state,$scope,$modal){
 
     var getTagList = function() {
-        $http.get(SETTING.ApiUrl+'/category/GetByCondition',{
+        $http.get(SETTING.ApiUrl+'/category/get',{
             'withCredentials':true
         }).success(function(data){
             $scope.list = data;
@@ -20,7 +20,7 @@ app.controller('categoryIndexController',['$http','$state','$scope','$modal',fun
             templateUrl: 'myModalContent.html',
             controller:'ModalInstanceCtrl',
             resolve: {
-                msg:function(){return "你确定要删除吗？";}
+                msg:function(){return "浣犵‘瀹氳鍒犻櫎鍚楋紵";}
             }
         });
         modalInstance.result.then(function(){
@@ -59,10 +59,10 @@ app.controller('categoryCreateController',['$http','$state','$scope',function($h
             }
             else{
                 //$scope.Message=data.Msg;
-                $scope.alerts=[{type:'danger',msg:'新建出错'}];
+                $scope.alerts=[{type:'danger',msg:'鏂板缓鍑洪敊'}];
             }
         }).error(function(data){
-            $scope.alerts=[{type:'danger',msg:'出错啦请检查网络或再次尝试'}];
+            $scope.alerts=[{type:'danger',msg:'鍑洪敊鍟﹁妫�鏌ョ綉缁滄垨鍐嶆灏濊瘯'}];
         });
     }
 }])
@@ -82,10 +82,10 @@ app.controller('categoryEditController',['$http','$state','$scope','$stateParams
                 $state.go("app.category.index");
             }
             else{
-                $scope.alerts=[{type:'danger',msg:"保存出错"}];
+                $scope.alerts=[{type:'danger',msg:"淇濆瓨鍑洪敊"}];
             }
         }).error(function(data){
-            $scope.alerts=[{type:'danger',msg:'出错啦请检查网络或再次尝试'}];
+            $scope.alerts=[{type:'danger',msg:'鍑洪敊鍟﹁妫�鏌ョ綉缁滄垨鍐嶆灏濊瘯'}];
         });
     }
 }])

@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="panel panel-default" ng-controller="categoryEditController">
+    <div class="panel-body">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        <form class="form-horizontal" ng-submit="Save()">
+            <div class="form-group">
+                <label for="name" class="col-md-4 control-label">频道名：</label>
+                <div class="col-md-8">
+                    <input name="name" id="name" type="text" class="form-control" required ng-model="Model.CategoryName"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 text-center">
+                    <button type="submit" class="md-btn md-raised m-b btn-fw green"><i class="glyphicon glyphicon-ok m-r-sm"></i>提交<div class="md-ripple-container"></div></button>
+                    <a ui-sref="app.category.index"><button class="md-btn md-raised m-b btn-fw pink"><i class="fa fa-reply  m-r-sm"></i>返回<div class="md-ripple-container"></div></button></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
