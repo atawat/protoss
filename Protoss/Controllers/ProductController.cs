@@ -45,7 +45,7 @@ namespace Protoss.Controllers
 
 		        Unit = entity.Unit,
 
-                imge=entity.imge,
+                Image=entity.Image,
 
 //		        Detail = entity.Detail,
 
@@ -107,7 +107,7 @@ namespace Protoss.Controllers
 				Unit = c.Unit,
 
 
-                imge = c.imge,
+                Image = c.Image,
 
 //				Detail = c.Detail,
 
@@ -143,7 +143,7 @@ namespace Protoss.Controllers
 
 				Unit = model.Unit,
 
-                imge = model.imge,
+                Image = model.Image,
 
 //				Detail = model.Detail,
 
@@ -181,7 +181,7 @@ namespace Protoss.Controllers
 
 			entity.Unit = model.Unit;
 
-            entity.imge = model.imge;
+            entity.Image = model.Image;
 
 //			entity.Detail = model.Detail;
 

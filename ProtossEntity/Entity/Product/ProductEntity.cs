@@ -27,7 +27,7 @@ namespace Protoss.Entity.Model
         /// <summary>
         /// 主图
         /// </summary>
-        public virtual string imge { get; set; }
+        public virtual string Image { get; set; }
 		/// <summary>
 		/// 添加人
 		/// </summary>

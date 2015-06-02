@@ -85,7 +85,7 @@ namespace Protoss.Models
         /// <summary>
         /// 主图
         /// </summary>
-        public virtual string imge { get; set; }
+        public virtual string Image { get; set; }
 
 
 		public string StatusString
