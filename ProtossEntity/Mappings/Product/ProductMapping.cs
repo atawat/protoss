@@ -13,6 +13,7 @@ namespace Protoss.Entity.Mappings.Product
 			//Property(c => c.Id).HasColumnType("int");
 			Property(c => c.Name).HasColumnType("varchar").HasMaxLength(50);
 			Property(c => c.Spec).HasColumnType("varchar").HasMaxLength(100);
+            Property(c => c.imge).HasColumnType("varchar").HasMaxLength(300);
 			Property(c => c.Price).HasColumnType("decimal");
 			HasRequired(c => c.Adduser);
 			Property(c => c.Addtime).HasColumnType("datetime");

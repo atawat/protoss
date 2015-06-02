@@ -82,6 +82,12 @@ namespace Protoss.Models
         /// </summary>
 		public EnumProductStatus Status {get;set;}
 
+        /// <summary>
+        /// 主图
+        /// </summary>
+        public virtual string imge { get; set; }
+
+
 		public string StatusString
 		{
 			get

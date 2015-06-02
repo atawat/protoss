@@ -26,5 +26,9 @@ namespace Protoss.Entity.Model
 		/// 对应订单主表
 		/// </summary>
 		public virtual OrderEntity Order { get; set; }
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public virtual string Remark { get; set; }
 	}
 }

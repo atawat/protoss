@@ -43,5 +43,10 @@ namespace Protoss.Models
         /// 单价
         /// </summary>
         public decimal UnitPrice { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public virtual string Remark { get; set; }
 	}
 }

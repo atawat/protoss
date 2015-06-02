@@ -14,6 +14,7 @@ namespace Protoss.Entity.Mappings.OrderDetail
 			HasOptional(c =>c.Product);
 			Property(c => c.Count).HasColumnType("decimal");
 			Property(c => c.TotalPrice).HasColumnType("decimal");
+            Property(c => c.Remark).HasColumnType("varchar").HasMaxLength(400);
 			HasRequired(c =>c.Order);
 		}
 	}

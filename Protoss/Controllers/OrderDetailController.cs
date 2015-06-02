@@ -35,6 +35,8 @@ namespace Protoss.Controllers
 
 		        Count = entity.Count,
 
+                Remark=entity.Remark,
+
 		        TotalPrice = entity.TotalPrice,
 
 //		        Order = entity.Order,
@@ -56,6 +58,8 @@ namespace Protoss.Controllers
 
 				TotalPrice = c.TotalPrice,
 
+                Remark = c.Remark
+
 //				Order = c.Order,
 
 			}).ToList();
@@ -72,6 +76,8 @@ namespace Protoss.Controllers
 				Count = model.Count,
 
 				TotalPrice = model.TotalPrice,
+
+                Remark = model.Remark,
 
 //				Order = model.Order,
 
@@ -95,6 +101,7 @@ namespace Protoss.Controllers
 
 			entity.TotalPrice = model.TotalPrice;
 
+            entity.Remark = model.Remark;
 //			entity.Order = model.Order;
 
 			if(_OrderDetailService.Update(entity) != null)

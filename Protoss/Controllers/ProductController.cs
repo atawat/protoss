@@ -45,6 +45,8 @@ namespace Protoss.Controllers
 
 		        Unit = entity.Unit,
 
+                imge=entity.imge,
+
 //		        Detail = entity.Detail,
 
 //		        Category = entity.Category,
@@ -104,6 +106,9 @@ namespace Protoss.Controllers
 
 				Unit = c.Unit,
 
+
+                imge = c.imge,
+
 //				Detail = c.Detail,
 
 //				Category = c.Category,
@@ -137,6 +142,8 @@ namespace Protoss.Controllers
 				Updtime = model.Updtime,
 
 				Unit = model.Unit,
+
+                imge = model.imge,
 
 //				Detail = model.Detail,
 
@@ -173,6 +180,8 @@ namespace Protoss.Controllers
 			entity.Updtime = model.Updtime;
 
 			entity.Unit = model.Unit;
+
+            entity.imge = model.imge;
 
 //			entity.Detail = model.Detail;
 

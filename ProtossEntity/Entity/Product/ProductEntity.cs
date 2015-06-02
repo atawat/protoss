@@ -23,6 +23,11 @@ namespace Protoss.Entity.Model
 		/// 价格
 		/// </summary>
 		public virtual decimal Price { get; set; }
+
+        /// <summary>
+        /// 主图
+        /// </summary>
+        public virtual string imge { get; set; }
 		/// <summary>
 		/// 添加人
 		/// </summary>
