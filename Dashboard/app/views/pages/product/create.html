@@ -82,11 +82,11 @@
             <div class="form-group">
                 <label for="detail" class="col-md-2 control-label">所属分类：</label>
                 <div class="col-md-10">
-                    <select name="Channel" id="Channel" ng-change="getProperty()" ng-model="Model.Category.Id" ng-options="list.Id as list.CategoryName for list in CategoryList"></select>
+                    <select class="form-control" name="Channel" id="Channel" ng-change="getProperty()" ng-model="Model.Category.Id" ng-options="list.Id as list.CategoryName for list in CategoryList"></select>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">所属分类：</label>
+                <label class="col-md-2 control-label">属性值：</label>
                 <div class="col-md-10">
                     <table class="table bg-white b-a">
                         <tr>
@@ -94,7 +94,7 @@
                             <th>属性值</th>
                         </tr>
                         <tr ng-repeat="item in Model.PropertyValues">
-                            <td>item.PropertyName</td>
+                            <td>{{item.PropertyName}}</td>
                             <td><input type="text" class="form-control" ng-model="item.PropertyValue"></td>
                         </tr>
                     </table>

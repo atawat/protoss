@@ -95,7 +95,7 @@ namespace Protoss.Service.Property
                 }
 				if (!string.IsNullOrEmpty(condition.PropertyName))
                 {
-                    query = query.Where(q => q.PropertyName == condition.PropertyName);
+                    query = query.Where(q => q.PropertyName.Contains(condition.PropertyName));
                 }
 				if (condition.Ids != null && condition.Ids.Any())
                 {
@@ -160,7 +160,7 @@ namespace Protoss.Service.Property
                 }
 				if (!string.IsNullOrEmpty(condition.PropertyName))
                 {
-                    query = query.Where(q => q.PropertyName == condition.PropertyName);
+                    query = query.Where(q => q.PropertyName.Contains(condition.PropertyName));
                 }
 				if (condition.Ids != null && condition.Ids.Any())
                 {

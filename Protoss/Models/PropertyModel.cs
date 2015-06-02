@@ -53,6 +53,6 @@ namespace Protoss.Models
         public IList<PropertyValueModel> Value { get; set; }
 
 
-
+        public CategoryModel Category { get; set; }
 	}
 }

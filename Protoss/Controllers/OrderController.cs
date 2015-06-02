@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Protoss.Entity.Model;
 using Protoss.Models;
 using Protoss.Service.Order;
@@ -12,6 +13,7 @@ using YooPoon.WebFramework.User.Entity;
 namespace Protoss.Controllers
 {
     [AllowAnonymous]
+    [EnableCors("*", "*", "*", SupportsCredentials = true)]
     public class OrderController : ApiController
     {
         private readonly IOrderService _OrderService;
@@ -173,9 +175,7 @@ namespace Protoss.Controllers
 
                 OrderNum = GetNewOrderNum(),
 
-
                 TransCost = GetTransCost(model.LocationX, model.LocationY),           //Todo:use db data
-
 
                 Discount = model.Discount,          //Todo:use db data
 

@@ -32,5 +32,9 @@ namespace Protoss.Models
         public int ProductId { get; set; }
 
         public decimal Count { get; set; }
+
+        public string ProductName { get; set; }
+
+        public string Remark { get; set; }
     }
 }

@@ -1,24 +1,32 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
+using Protoss.Common;
 using Protoss.Entity.Model;
 using Protoss.Models;
+using Protoss.Service.Category;
 using Protoss.Service.Property;
 using YooPoon.Core.Site;
 using YooPoon.WebFramework.User.Entity;
 
 namespace Protoss.Controllers
 {
+    [AllowAnonymous]
+    [EnableCors("*", "*", "*", SupportsCredentials = true)]
 	public class PropertyController : ApiController
 	{
 		private readonly IPropertyService _propertyService;
 	    private readonly IWorkContext _workContext;
+        private readonly ICategoryService _categoryService;
 
-	    public PropertyController(IPropertyService propertyService,IWorkContext workContext)
+        public PropertyController(IPropertyService propertyService,IWorkContext workContext,ICategoryService categoryService)
 		{
 			_propertyService = propertyService;
 		    _workContext = workContext;
+	        _categoryService = categoryService;
 		}
 
 		public PropertyModel Get(int id)
@@ -41,12 +49,20 @@ namespace Protoss.Controllers
 
 //		        Value = entity.Value,
 
+                Category = new CategoryModel() { Id = entity.Category.Id}
+
 		    };
 			return model;
 		}
 
-		public List<PropertyModel> Get(PropertySearchCondition condition)
+		public List<PropertyModel> GetByCondition(string PropertyName="",int Page =1,int PageCount =10)
 		{
+            var condition = new PropertySearchCondition
+            {
+                Page = Page,
+                PageCount = PageCount,
+                PropertyName = PropertyName
+            };
 			var model = _propertyService.GetPropertysByCondition(condition).Select(c=>new PropertyModel
 			{
 
@@ -83,6 +99,19 @@ namespace Protoss.Controllers
             return properties;
         }
 
+        public HttpResponseMessage GetCount(string PropertyName = "", int Page = 1, int PageCount = 10)
+        {
+            var condition = new PropertySearchCondition
+            {
+                Page = Page,
+                PageCount = PageCount,
+                PropertyName = PropertyName
+            };
+            var count = _propertyService.GetPropertyCount(condition);
+            return PageHelper.toJson(new { TotalCount = count, Condition = condition });
+        }
+
+        
 		public bool Post(PropertyModel model)
 		{
 			var entity = new PropertyEntity
@@ -100,6 +129,8 @@ namespace Protoss.Controllers
 
 //				Value = model.Value,
 
+                Category = _categoryService.GetCategoryById(model.Category.Id)
+
 			};
 			if(_propertyService.Create(entity).Id > 0)
 			{
@@ -108,6 +139,7 @@ namespace Protoss.Controllers
 			return false;
 		}
 
+        [HttpPost]
 		public bool Put(PropertyModel model)
 		{
 			var entity = _propertyService.GetPropertyById(model.Id);
@@ -122,11 +154,14 @@ namespace Protoss.Controllers
 
 //			entity.Value = model.Value;
 
+		    entity.Category = _categoryService.GetCategoryById(model.Category.Id);
+
 			if(_propertyService.Update(entity) != null)
 				return true;
 			return false;
 		}
 
+        [HttpGet]
 		public bool Delete(int id)
 		{
 			var entity = _propertyService.GetPropertyById(id);

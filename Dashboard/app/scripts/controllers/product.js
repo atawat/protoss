@@ -20,7 +20,7 @@ app.controller('productIndexController',['$http','$state','$scope',function($htt
             params:$scope.searchCondition,
             'withCredentials':true
         }).success(function(data){
-            $scope.list = data.List;
+            $scope.list = data;
         });
 
         $http.get(SETTING.ApiUrl+'/product/GetCount',{
@@ -108,7 +108,9 @@ app.controller('productCreateController',['$http','$state','$scope','FileUploade
 
     $scope.getProperty = function(){
         $http.get(SETTING.ApiUrl +'/property/getByCategoryId?categoryId=' + $scope.Model.Category.Id,{'withCredentials':true}).success(function(data){
-            $scope.Model.PropertyValues.push({PropertyName:data.PropertyName,PropertyId:data.Id,PropertyValueId:0,PropertyValue:''})
+            for(var i= 0;i<data.length;i++){
+                $scope.Model.PropertyValues.push({PropertyName:data[i].PropertyName,PropertyId:data[i].Id,PropertyValueId:0,PropertyValue:''});
+            }
         });
     }
 }]);
