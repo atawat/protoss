@@ -17,5 +17,7 @@ namespace Protoss.Service.Property
 		IQueryable<PropertyEntity> GetPropertysByCondition(PropertySearchCondition condition);
 
 		int GetPropertyCount (PropertySearchCondition condition);
+
+	    IQueryable<PropertyEntity> GetPropertyByCategory(int categoryId);
 	}
 }

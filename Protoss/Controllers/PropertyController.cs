@@ -1,30 +1,29 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text.RegularExpressions;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using Protoss.Entity.Model;
+using Protoss.Models;
 using Protoss.Service.Property;
 using YooPoon.Core.Site;
-using YooPoon.WebFramework.API;
-using Protoss.Models;
+using YooPoon.WebFramework.User.Entity;
 
 namespace Protoss.Controllers
 {
 	public class PropertyController : ApiController
 	{
-		private readonly IPropertyService _PropertyService;
+		private readonly IPropertyService _propertyService;
+	    private readonly IWorkContext _workContext;
 
-		public PropertyController(IPropertyService PropertyService)
+	    public PropertyController(IPropertyService propertyService,IWorkContext workContext)
 		{
-			_PropertyService = PropertyService;
+			_propertyService = propertyService;
+		    _workContext = workContext;
 		}
 
 		public PropertyModel Get(int id)
 		{
-			var entity =_PropertyService.GetPropertyById(id);
+			var entity =_propertyService.GetPropertyById(id);
 		    var model = new PropertyModel
 		    {
 
@@ -32,11 +31,11 @@ namespace Protoss.Controllers
 
 		        PropertyName = entity.PropertyName,
 
-		        Adduser = entity.Adduser,
+                Adduser = new UserModel { Id = entity.Adduser.Id, UserName = entity.Adduser.UserName },
 
 		        Addtime = entity.Addtime,
 
-		        UpdUser = entity.UpdUser,
+                UpdUser = new UserModel { Id = entity.UpdUser.Id, UserName = entity.UpdUser.UserName },
 
 		        UpdTime = entity.UpdTime,
 
@@ -48,18 +47,18 @@ namespace Protoss.Controllers
 
 		public List<PropertyModel> Get(PropertySearchCondition condition)
 		{
-			var model = _PropertyService.GetPropertysByCondition(condition).Select(c=>new PropertyModel
+			var model = _propertyService.GetPropertysByCondition(condition).Select(c=>new PropertyModel
 			{
 
 				Id = c.Id,
 
 				PropertyName = c.PropertyName,
 
-				Adduser = c.Adduser,
+                Adduser = new UserModel { Id = c.Adduser.Id, UserName = c.Adduser.UserName },
 
 				Addtime = c.Addtime,
 
-				UpdUser = c.UpdUser,
+                UpdUser = new UserModel { Id = c.UpdUser.Id, UserName = c.UpdUser.UserName },
 
 				UpdTime = c.UpdTime,
 
@@ -69,6 +68,21 @@ namespace Protoss.Controllers
 			return model;
 		}
 
+        [HttpGet]
+	    public List<PropertyModel> GetByCategoryId(int categoryId)
+        {
+            var properties = _propertyService.GetPropertyByCategory(categoryId).Select(p=>new PropertyModel
+            {
+                Id = p.Id,
+                Adduser = new UserModel { Id = p.Adduser.Id, UserName = p.Adduser.UserName },
+                Addtime = p.Addtime,
+                UpdUser = new UserModel { Id = p.UpdUser.Id, UserName = p.UpdUser.UserName },
+                UpdTime = p.UpdTime,
+                PropertyName = p.PropertyName
+            }).ToList();
+            return properties;
+        }
+
 		public bool Post(PropertyModel model)
 		{
 			var entity = new PropertyEntity
@@ -76,18 +90,18 @@ namespace Protoss.Controllers
 
 				PropertyName = model.PropertyName,
 
-				Adduser = model.Adduser,
+				Adduser = (UserBase)_workContext.CurrentUser,
 
-				Addtime = model.Addtime,
+                Addtime = DateTime.Now,
 
-				UpdUser = model.UpdUser,
+                UpdUser = (UserBase)_workContext.CurrentUser,
 
-				UpdTime = model.UpdTime,
+                UpdTime = DateTime.Now,
 
 //				Value = model.Value,
 
 			};
-			if(_PropertyService.Create(entity).Id > 0)
+			if(_propertyService.Create(entity).Id > 0)
 			{
 				return true;
 			}
@@ -96,33 +110,29 @@ namespace Protoss.Controllers
 
 		public bool Put(PropertyModel model)
 		{
-			var entity = _PropertyService.GetPropertyById(model.Id);
+			var entity = _propertyService.GetPropertyById(model.Id);
 			if(entity == null)
 				return false;
 
 			entity.PropertyName = model.PropertyName;
 
-			entity.Adduser = model.Adduser;
+            entity.UpdUser = (UserBase)_workContext.CurrentUser;
 
-			entity.Addtime = model.Addtime;
-
-			entity.UpdUser = model.UpdUser;
-
-			entity.UpdTime = model.UpdTime;
+			entity.UpdTime = DateTime.Now;
 
 //			entity.Value = model.Value;
 
-			if(_PropertyService.Update(entity) != null)
+			if(_propertyService.Update(entity) != null)
 				return true;
 			return false;
 		}
 
 		public bool Delete(int id)
 		{
-			var entity = _PropertyService.GetPropertyById(id);
+			var entity = _propertyService.GetPropertyById(id);
 			if(entity == null)
 				return false;
-			if(_PropertyService.Delete(entity))
+			if(_propertyService.Delete(entity))
 				return true;
 			return false;
 		}

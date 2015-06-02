@@ -129,6 +129,14 @@
     <Compile Include="Controllers\PropertyValueController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Controllers\UEditor\Config.cs" />
+    <Compile Include="Controllers\UEditor\ConfigHandler.cs" />
+    <Compile Include="Controllers\UEditor\CrawlerHandler.cs" />
+    <Compile Include="Controllers\UEditor\Handler.cs" />
+    <Compile Include="Controllers\UEditor\ListFileHandler.cs" />
+    <Compile Include="Controllers\UEditor\NotSupportedHandler.cs" />
+    <Compile Include="Controllers\UEditor\PathFormater.cs" />
+    <Compile Include="Controllers\UEditor\UploadHandler.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -156,6 +164,8 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="log.config" />
+    <Content Include="Controllers\UEditor\config.json" />
+    <Content Include="Controllers\UEditor\controller.ashx" />
     <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

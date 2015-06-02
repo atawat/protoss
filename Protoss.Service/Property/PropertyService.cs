@@ -182,5 +182,19 @@ namespace Protoss.Service.Property
                 return -1;
 			}
 		}
+
+	    public IQueryable<PropertyEntity> GetPropertyByCategory(int categoryId)
+	    {
+	        try
+	        {
+	            var properties = _propertyRepository.Table.Where(p => p.Category.Id == categoryId);
+	            return properties;
+	        }
+	        catch (Exception e)
+	        {
+                _log.Error(e, "数据库操作出错");
+	            return null;
+	        }
+	    }
 	}
 }

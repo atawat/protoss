@@ -1,24 +1,39 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
+using Protoss.Common;
 using Protoss.Entity.Model;
 using Protoss.Models;
+using Protoss.Service.Category;
 using Protoss.Service.Product;
+using Protoss.Service.Property;
+using Protoss.Service.PropertyValue;
 using YooPoon.Core.Site;
 using YooPoon.WebFramework.User.Entity;
 
 namespace Protoss.Controllers
 {
     [AllowAnonymous]
+    [EnableCors("*", "*", "*", SupportsCredentials = true)]
 	public class ProductController : ApiController
 	{
 		private readonly IProductService _productService;
         private readonly IWorkContext _workContext;
+        private readonly ICategoryService _categoryService;
+        private readonly IPropertyService _propertyService;
+        private readonly IPropertyValueService _propertyValueService;
 
-        public ProductController(IProductService productService,IWorkContext workContext)
+        public ProductController(IProductService productService,IWorkContext workContext,
+            ICategoryService categoryService,IPropertyService propertyService,IPropertyValueService propertyValueService)
 		{
 			_productService = productService;
 		    _workContext = workContext;
+            _categoryService = categoryService;
+            _propertyService = propertyService;
+            _propertyValueService = propertyValueService;
 		}
 
 		public ProductModel Get(int id)
@@ -121,6 +136,36 @@ namespace Protoss.Controllers
 			return model;
 		}
 
+        [HttpGet]
+        public HttpResponseMessage GetCount(
+            int? categoryId = null,
+            decimal? priceBegin = null,
+            decimal? priceEnd = null,
+            bool isDescending = false,
+            string name = "",
+            string spec = "",
+            int pageCount = 10,
+            int page = 1,
+            string ids = "",
+            EnumProductSearchOrderBy orderBy = EnumProductSearchOrderBy.OrderById)
+        {
+            var condition = new ProductSearchCondition
+            {
+                CategoryId = categoryId,
+                IsDescending = isDescending,
+                Name = name,
+                OrderBy = orderBy,
+                Page = page,
+                PageCount = pageCount,
+                PriceBegin = priceBegin,
+                PriceEnd = priceEnd,
+                Spec = spec,
+                Ids = string.IsNullOrEmpty(ids) ? null : ids.Split(',').Select(int.Parse).ToArray()
+            };
+            var count = _productService.GetProductCount(condition);
+            return PageHelper.toJson(new {TotalCount = count, Condition = condition});
+        }
+
 		public bool Post(ProductModel model)
 		{
 		    var user = (UserBase)_workContext.CurrentUser;
@@ -135,23 +180,39 @@ namespace Protoss.Controllers
 
                 Adduser = user,
 
-                Addtime = model.Addtime,
+                Addtime = DateTime.Now,
 
                 Upduser = user,
 
-				Updtime = model.Updtime,
+				Updtime = DateTime.Now,
 
 				Unit = model.Unit,
 
                 Image = model.Image,
 
-//				Detail = model.Detail,
+				Detail = new ProductDetailEntity
+				{
+				    Detail = model.Detail.Detail,
+                    ImgUrl1 = model.Detail.ImgUrl1,
+                    ImgUrl2 = model.Detail.ImgUrl2,
+                    ImgUrl3 = model.Detail.ImgUrl3,
+                    ImgUrl4 = model.Detail.ImgUrl4,
+                    ImgUrl5 = model.Detail.ImgUrl5,
+				},
 
-//				Category = model.Category,
+				Category = _categoryService.GetCategoryById(model.Category.Id),
 
-				Status = model.Status,
+				Status = EnumProductStatus.OnSale,
 
-//				PropertyValues = model.PropertyValues,
+				PropertyValues = model.PropertyValues.Select(pv=>new ProductPropertyValueEntity
+				{
+				    Addtime = DateTime.Now,
+                    Adduser = (UserBase)_workContext.CurrentUser,
+                    UpdTime = DateTime.Now,
+                    UpdUser = (UserBase)_workContext.CurrentUser,
+                    Property = _propertyService.GetPropertyById(pv.PropertyId),
+                    PropertyValue = _propertyValueService.GetOrCreatEntityWithValue(pv.PropertyValue,pv.PropertyId)
+				}).ToList(),
 
 			};
 			if(_productService.Create(entity).Id > 0)
@@ -183,13 +244,23 @@ namespace Protoss.Controllers
 
             entity.Image = model.Image;
 
-//			entity.Detail = model.Detail;
 
-//			entity.Category = model.Category;
+		    entity.Detail.Detail = model.Detail.Detail;
+		    entity.Detail.ImgUrl1 = model.Detail.ImgUrl1;
+		    entity.Detail.ImgUrl2 = model.Detail.ImgUrl2;
+		    entity.Detail.ImgUrl3 = model.Detail.ImgUrl3;
+		    entity.Detail.ImgUrl4 = model.Detail.ImgUrl4;
+		    entity.Detail.ImgUrl5 = model.Detail.ImgUrl5;
+
+
+			entity.Category = _categoryService.GetCategoryById(model.Category.Id);
 
 			entity.Status = model.Status;
 
-//			entity.PropertyValues = model.PropertyValues;
+		    foreach (var pv in entity.PropertyValues)
+		    {
+		        pv.PropertyValue.Value = model.PropertyValues.First(c => c.PropertyId == pv.Property.Id).PropertyValue;
+		    }
 
 			if(_productService.Update(entity) != null)
 				return true;

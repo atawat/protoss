@@ -22,6 +22,10 @@ namespace Protoss.Models
         /// </summary>
 		public string PropertyName {get;set;}
 
+        public int PropertyId { get; set; }
+
+        public int PropertyValueId { get; set; }
+
 
 		/// <summary>
         /// 属性值

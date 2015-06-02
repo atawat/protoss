@@ -26,7 +26,7 @@ namespace Protoss.Models
 		/// <summary>
         /// 添加人
         /// </summary>
-		public UserBase Adduser {get;set;}
+		public UserModel Adduser {get;set;}
 
 
 		/// <summary>
@@ -38,7 +38,7 @@ namespace Protoss.Models
 		/// <summary>
         /// 更新人
         /// </summary>
-		public UserBase UpdUser {get;set;}
+		public UserModel UpdUser {get;set;}
 
 
 		/// <summary>

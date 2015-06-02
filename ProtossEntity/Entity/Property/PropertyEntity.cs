@@ -35,5 +35,10 @@ namespace Protoss.Entity.Model
 		/// 拥有的值
 		/// </summary>
 		public virtual IList<PropertyValueEntity> Value { get; set; }
+
+        /// <summary>
+        /// 所属分类
+        /// </summary>
+        public virtual CategoryEntity Category { get; set; }
 	}
 }

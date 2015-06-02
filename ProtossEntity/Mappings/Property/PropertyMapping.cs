@@ -16,6 +16,7 @@ namespace Protoss.Entity.Mappings.Property
 			Property(c => c.Addtime).HasColumnType("datetime");
 			HasOptional(c => c.UpdUser);
 			Property(c => c.UpdTime).HasColumnType("datetime").IsOptional();
+		    HasRequired(c => c.Category).WithMany().WillCascadeOnDelete(false);
 			HasMany(c => c.Value);
 		}
 	}

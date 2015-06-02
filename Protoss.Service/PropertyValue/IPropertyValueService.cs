@@ -17,5 +17,7 @@ namespace Protoss.Service.PropertyValue
 		IQueryable<PropertyValueEntity> GetPropertyValuesByCondition(PropertyValueSearchCondition condition);
 
 		int GetPropertyValueCount (PropertyValueSearchCondition condition);
+
+	    PropertyValueEntity GetOrCreatEntityWithValue(string value,int propertyId);
 	}
 }

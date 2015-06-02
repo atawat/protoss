@@ -3,6 +3,8 @@ using System.Linq;
 using YooPoon.Core.Data;
 using YooPoon.Core.Logging;
 using Protoss.Entity.Model;
+using YooPoon.Core.Site;
+using YooPoon.WebFramework.User.Entity;
 
 namespace Protoss.Service.PropertyValue
 {
@@ -10,11 +12,13 @@ namespace Protoss.Service.PropertyValue
 	{
 		private readonly IRepository<PropertyValueEntity> _propertyvalueRepository;
 		private readonly ILog _log;
+	    private readonly IWorkContext _workContext;
 
-		public PropertyValueService(IRepository<PropertyValueEntity> propertyvalueRepository,ILog log)
+	    public PropertyValueService(IRepository<PropertyValueEntity> propertyvalueRepository,ILog log,IWorkContext workContext)
 		{
 			_propertyvalueRepository = propertyvalueRepository;
 			_log = log;
+		    _workContext = workContext;
 		}
 		
 		public PropertyValueEntity Create (PropertyValueEntity entity)
@@ -190,5 +194,32 @@ namespace Protoss.Service.PropertyValue
                 return -1;
 			}
 		}
+
+	    public PropertyValueEntity GetOrCreatEntityWithValue(string value,int propertyId)
+	    {
+	        try
+	        {
+	            var valueEntity = _propertyvalueRepository.Table.FirstOrDefault(c => c.Value == value && c.Property.Id == propertyId);
+	            if (valueEntity == null)
+	            {
+	                valueEntity = new PropertyValueEntity
+	                {
+	                    Addtime = DateTime.Now,
+                        Adduser = (UserBase)_workContext.CurrentUser,
+                        Property = new PropertyEntity { Id = propertyId},
+                        UpdUser = (UserBase)_workContext.CurrentUser,
+                        UpdTime = DateTime.Now,
+                        Value = value
+	                };
+                    _propertyvalueRepository.Insert(valueEntity);
+	            }
+	            return valueEntity;
+	        }
+	        catch (Exception e)
+	        {
+                _log.Error(e, "数据库操作出错");
+                return null;
+	        }
+	    }
 	}
 }

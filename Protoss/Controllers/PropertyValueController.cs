@@ -10,21 +10,25 @@ using Protoss.Service.PropertyValue;
 using YooPoon.Core.Site;
 using YooPoon.WebFramework.API;
 using Protoss.Models;
+using YooPoon.WebFramework.User.Entity;
 
 namespace Protoss.Controllers
 {
+    [EnableCors("*", "*", "*", SupportsCredentials = true)]
 	public class PropertyValueController : ApiController
 	{
-		private readonly IPropertyValueService _PropertyValueService;
+		private readonly IPropertyValueService _propertyValueService;
+	    private readonly IWorkContext _workContext;
 
-		public PropertyValueController(IPropertyValueService PropertyValueService)
+	    public PropertyValueController(IPropertyValueService propertyValueService,IWorkContext workContext)
 		{
-			_PropertyValueService = PropertyValueService;
+			_propertyValueService = propertyValueService;
+		    _workContext = workContext;
 		}
 
 		public PropertyValueModel Get(int id)
 		{
-			var entity =_PropertyValueService.GetPropertyValueById(id);
+			var entity =_propertyValueService.GetPropertyValueById(id);
 		    var model = new PropertyValueModel
 		    {
 
@@ -34,11 +38,11 @@ namespace Protoss.Controllers
 
 		        Value = entity.Value,
 
-		        Adduser = entity.Adduser,
+                Adduser = new UserModel { Id = entity.Adduser.Id, UserName = entity.Adduser.UserName },
 
 		        Addtime = entity.Addtime,
 
-		        UpdUser = entity.UpdUser,
+                UpdUser = new UserModel { Id = entity.UpdUser.Id, UserName = entity.UpdUser.UserName },
 
 		        UpdTime = entity.UpdTime,
 
@@ -48,7 +52,7 @@ namespace Protoss.Controllers
 
 		public List<PropertyValueModel> Get(PropertyValueSearchCondition condition)
 		{
-			var model = _PropertyValueService.GetPropertyValuesByCondition(condition).Select(c=>new PropertyValueModel
+			var model = _propertyValueService.GetPropertyValuesByCondition(condition).Select(c=>new PropertyValueModel
 			{
 
 				Id = c.Id,
@@ -57,11 +61,11 @@ namespace Protoss.Controllers
 
 				Value = c.Value,
 
-				Adduser = c.Adduser,
+                Adduser = new UserModel { Id = c.Adduser.Id, UserName = c.Adduser.UserName },
 
 				Addtime = c.Addtime,
 
-				UpdUser = c.UpdUser,
+                UpdUser = new UserModel { Id = c.UpdUser.Id, UserName = c.UpdUser.UserName },
 
 				UpdTime = c.UpdTime,
 
@@ -78,16 +82,16 @@ namespace Protoss.Controllers
 
 				Value = model.Value,
 
-				Adduser = model.Adduser,
+				Adduser = (UserBase)_workContext.CurrentUser,
 
-				Addtime = model.Addtime,
+                Addtime = DateTime.Now,
 
-				UpdUser = model.UpdUser,
+                UpdUser = (UserBase)_workContext.CurrentUser,
 
-				UpdTime = model.UpdTime,
+                UpdTime = DateTime.Now,
 
 			};
-			if(_PropertyValueService.Create(entity).Id > 0)
+			if(_propertyValueService.Create(entity).Id > 0)
 			{
 				return true;
 			}
@@ -96,7 +100,7 @@ namespace Protoss.Controllers
 
 		public bool Put(PropertyValueModel model)
 		{
-			var entity = _PropertyValueService.GetPropertyValueById(model.Id);
+			var entity = _propertyValueService.GetPropertyValueById(model.Id);
 			if(entity == null)
 				return false;
 
@@ -104,25 +108,21 @@ namespace Protoss.Controllers
 
 			entity.Value = model.Value;
 
-			entity.Adduser = model.Adduser;
+            entity.UpdUser = (UserBase)_workContext.CurrentUser;
 
-			entity.Addtime = model.Addtime;
+			entity.UpdTime = DateTime.Now;
 
-			entity.UpdUser = model.UpdUser;
-
-			entity.UpdTime = model.UpdTime;
-
-			if(_PropertyValueService.Update(entity) != null)
+			if(_propertyValueService.Update(entity) != null)
 				return true;
 			return false;
 		}
 
 		public bool Delete(int id)
 		{
-			var entity = _PropertyValueService.GetPropertyValueById(id);
+			var entity = _propertyValueService.GetPropertyValueById(id);
 			if(entity == null)
 				return false;
-			if(_PropertyValueService.Delete(entity))
+			if(_propertyValueService.Delete(entity))
 				return true;
 			return false;
 		}

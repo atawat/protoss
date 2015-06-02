@@ -3,32 +3,37 @@
  */
 app.controller('productIndexController',['$http','$state','$scope',function($http,$state,$scope){
     $scope.searchCondition = {
-        Page:'', //int
-        PageCount:'', //int
-        IsDescending:'', //bool
-        Ids:'', //int
-        Name:'', //string
-        Spec:'', //string
-        PriceBegin:'', //decimal
-        PriceEnd:'', //decimal
-        CategoryId:'', //int
-        Status:'', //EnumProductStatus
-        OrderBy:'' //EnumProductSearchOrderBy
+        Page:'1', //int
+        PageCount:'10', //int
+        IsDescending:false, //bool
+        Name:''//string
+        //Spec:'', //string
+        //PriceBegin:'', //decimal
+        //PriceEnd:'', //decimal
+        //CategoryId:'', //int
+        //Status:'', //EnumProductStatus
+        //OrderBy:'' //EnumProductSearchOrderBy
     };
 
-    var getTagList = function() {
+    var getProductList = function() {
         $http.get(SETTING.ApiUrl+'/product/GetByCondition',{
             params:$scope.searchCondition,
             'withCredentials':true
         }).success(function(data){
             $scope.list = data.List;
+        });
+
+        $http.get(SETTING.ApiUrl+'/product/GetCount',{
+            params:$scope.searchCondition,
+            'withCredentials':true
+        }).success(function(data){
             $scope.searchCondition.page = data.Condition.Page;
             $scope.searchCondition.pageSize = data.Condition.PageCount;
             $scope.totalCount = data.TotalCount;
         });
     };
-    $scope.getList = getTagList;
-    getTagList();
+    $scope.getList = getProductList;
+    getProductList();
 
     $scope.del = function (id) {
         $scope.selectedId = id;
@@ -36,7 +41,7 @@ app.controller('productIndexController',['$http','$state','$scope',function($htt
             templateUrl: 'myModalContent.html',
             controller:'ModalInstanceCtrl',
             resolve: {
-                msg:function(){return "��ȷ��Ҫɾ����";}
+                msg:function(){return "你确定要删除吗";}
             }
         });
         modalInstance.result.then(function(){
@@ -48,28 +53,30 @@ app.controller('productIndexController',['$http','$state','$scope',function($htt
                 }
             ).success(function(data) {
                     if (data.Status) {
-                        getTagList();
+                        getProductList();
                     }
                 });
         })
     }
+
+    $scope.gotoNew = function(){
+        $state.go('app.product.create')
+    }
 }])
-app.controller('productCreateController',['$http','$state','$scope',function($http,$state,$scope){
+app.controller('productCreateController',['$http','$state','$scope','FileUploader',function($http,$state,$scope,FileUploader){
     $scope.Model = {
-        Id:'', //int
         Name:'', //string
         Spec:'', //string
         Price:'', //decimal
-        Adduser:'', //UserBase
-        Addtime:'', //DateTime
-        Upduser:'', //UserBase
-        Updtime:'', //DateTime
         Unit:'', //string
-        Detail:'', //ProductDetailEntity
-        Category:'', //CategoryEntity
-        Status:'', //EnumProductStatus
-        PropertyValues:'' //IList<ProductPropertyValueEntity>
+        Category:{Id:'',CategoryName:''}, //CategoryEntity
+        PropertyValues:[], //IList<ProductPropertyValueEntity>
+        Detail:{Detail:'',ImgUrl1:'',ImgUrl2:'',ImgUrl3:'',ImgUrl4:'',ImgUrl5:''}
     };
+
+    $http.get(SETTING.ApiUrl+'/Category/Get',{'withCredentials':true}).success(function(data){
+        $scope.CategoryList = data;
+    })
 
     $scope.Create = function(){
         $http.post(SETTING.ApiUrl + '/product/Post',$scope.Model,{
@@ -82,9 +89,29 @@ app.controller('productCreateController',['$http','$state','$scope',function($ht
                 //$scope.Message=data.Msg;
                 $scope.alerts=[{type:'danger',msg:data.Msg}];
             }
+        }).error(function(data){
+            $scope.alerts=[{type:'danger',msg:'出错啦请检查网络或再次尝试'}];
+        });
+    };
+
+    var uploader = $scope.uploader = new FileUploader({
+        url: SETTING.ApiUrl+'/Resource/Upload',
+        'withCredentials':true
+    });
+
+    $scope.showThumbnail = false;
+    uploader.onSuccessItem = function(fileItem, response, status, headers) {
+        //console.info('onSuccessItem', fileItem, response, status, headers);
+        $scope.Thumbnail=response.Msg;
+        $scope.Model.Image = response.Msg;
+    };
+
+    $scope.getProperty = function(){
+        $http.get(SETTING.ApiUrl +'/property/getByCategoryId?categoryId=' + $scope.Model.Category.Id,{'withCredentials':true}).success(function(data){
+            $scope.Model.PropertyValues.push({PropertyName:data.PropertyName,PropertyId:data.Id,PropertyValueId:0,PropertyValue:''})
         });
     }
-}])
+}]);
 app.controller('productEditController',['$http','$state','$scope',function($http,$state,$scope){
     $http.get(SETTING.ApiUrl + '/product/get/' + $stateParams.id,{
         'withCredentials':true

@@ -79,7 +79,8 @@ angular.module('app')
             })
               .state('app.product.create',{
                 url:'/create',
-                templateUrl:'views/pages/product/create.html'
+                templateUrl:'views/pages/product/create.html',
+                resolve:load('angularFileUpload')
             })
 
             .state('app.order',{
