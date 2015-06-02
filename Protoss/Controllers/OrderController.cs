@@ -9,6 +9,7 @@ using Protoss.Service.Order;
 using Protoss.Service.Product;
 using YooPoon.Core.Site;
 using YooPoon.WebFramework.User.Entity;
+using YooPoon.WebFramework.User.Services;
 
 namespace Protoss.Controllers
 {
@@ -19,12 +20,14 @@ namespace Protoss.Controllers
         private readonly IOrderService _OrderService;
         private readonly IWorkContext _workContext;
         private readonly IProductService _productService;
+        private readonly IUserService _userService;
 
-        public OrderController(IOrderService orderService, IWorkContext workContext, IProductService productService)
+        public OrderController(IOrderService orderService, IWorkContext workContext, IProductService productService,IUserService userService)
         {
             _OrderService = orderService;
             _workContext = workContext;
             _productService = productService;
+            _userService = userService;
         }
 
         public OrderModel Get(int id)
@@ -168,7 +171,7 @@ namespace Protoss.Controllers
             return model;
         }
 
-        public bool Post(CreateOrderModel model)
+        public bool Post([FromBody]CreateOrderModel model)
         {
             var entity = new OrderEntity
             {
@@ -187,11 +190,11 @@ namespace Protoss.Controllers
 
                 PhoneNumber = model.PhoneNumber,
 
-                Adduser = (UserBase)_workContext.CurrentUser,
+                Adduser = model.Type == EnumOrderType.OffLine?_userService.GetUserByName("admin"):(UserBase)_workContext.CurrentUser,
 
                 Addtime = DateTime.Now,
 
-                Upduser = (UserBase)_workContext.CurrentUser,
+                Upduser = model.Type == EnumOrderType.OffLine ? _userService.GetUserByName("admin") : (UserBase)_workContext.CurrentUser,
 
                 Updtime = DateTime.Now,
 
