@@ -1,0 +1,38 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:id="@+id/layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+       <!--  <Button
+            android:id="@+id/btn_open"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="onClick"
+            android:text="Open CashBox\n打开钱箱"
+            android:background="@color/green"
+            android:textSize="25sp" />
+		 -->
+		<Button android:id="@+id/test"
+		    	android:layout_width="200dp"
+		    	android:layout_height="wrap_content"
+		    	android:layout_marginTop="20dp"
+		    	android:onClick="onClick"
+		    	android:text="Open CashBox"
+		    	android:textSize="25sp"/>
+    </LinearLayout>
+
+</RelativeLayout>

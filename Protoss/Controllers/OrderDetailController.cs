@@ -66,6 +66,24 @@ namespace Protoss.Controllers
 			return model;
 		}
 
+        public List<OrderDetailModel> GetOrderDetailByOrder(int orderId)
+        {
+            var model = _OrderDetailService.GetOrderDetailByOrderId(orderId).Select(c => new OrderDetailModel
+            {
+
+                Id = c.Id,
+
+                ProductName = c.Product.Name,
+
+                Count = c.Count,
+
+                TotalPrice = c.TotalPrice,
+
+                Remark = c.Remark
+            }).ToList();
+            return model;
+        }
+
 		public bool Post(OrderDetailModel model)
 		{
 			var entity = new OrderDetailEntity

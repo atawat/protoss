@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center" >
+
+    <TextView
+        android:id="@+id/product_buy_cash_id"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="现金支付"
+        android:background="@color/coffice_product_lightgray"
+        android:textSize="16sp"  />
+
+    <TextView
+        android:id="@+id/product_buy_other_id"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="其他支付"
+        android:background="@color/coffice_product_lightgray"
+        android:textSize="16sp" />
+
+</LinearLayout>

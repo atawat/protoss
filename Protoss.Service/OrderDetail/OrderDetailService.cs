@@ -72,6 +72,21 @@ namespace Protoss.Service.OrderDetail
             }
 		}
 
+        public IQueryable<OrderDetailEntity> GetOrderDetailByOrderId(int orderId)
+        {
+            var query = _orderdetailRepository.Table;
+            try
+            {
+                query = query.Where(q => q.Order.Id==orderId);
+                return query.OrderBy(q=>q.Id);
+            }
+            catch (Exception e)
+            {
+                _log.Error(e, "数据库操作出错");
+                return null;
+            }
+        }
+
 		public IQueryable<OrderDetailEntity> GetOrderDetailsByCondition(OrderDetailSearchCondition condition)
 		{
 			var query = _orderdetailRepository.Table;

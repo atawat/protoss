@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="30"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/coffice_product_gray"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/classify_textView"
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:background="@color/coffice_product_dark"
+                android:gravity="center"
+                android:text="分类"
+                android:textColor="@color/coffice_font_color" />
+
+            <ListView
+                android:id="@+id/classify_listView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="0dp"
+                android:background="@color/coffice_product_gray"
+                android:cacheColorHint="#00000000"
+                android:divider="#00000000"
+                android:dividerHeight="1dip"
+                android:scrollbars="none" >
+            </ListView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:background="@color/coffice_product_pink"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/product_textView"
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:background="@color/coffice_product_dark"
+                android:gravity="center"
+                android:text="商品"
+                android:textColor="@color/coffice_font_color" />
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="0dp" >
+
+                <com.android.listview.SuperListView
+                    android:id="@+id/product_listView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/coffice_product_pink"
+                    android:divider="#0f000000"
+                    android:dividerHeight="1dip" >
+                </com.android.listview.SuperListView>
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="4"
+            android:background="@color/coffice_product_lightgray"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:background="@color/coffice_product_dark"
+                android:gravity="center" >
+
+                <com.android.custom.CustomEditText
+                    android:id="@+id/product_search_string_id"
+                    android:layout_width="90dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="搜 索"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="2dp"
+                    android:textSize="12sp" >
+                </com.android.custom.CustomEditText>
+
+                <ImageView
+                    android:id="@+id/product_seach_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/product_search_button" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="4" >
+
+                <ListView
+                    android:id="@+id/selected_listView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/coffice_product_lightgray"
+                    android:divider="#0f000000"
+                    android:dividerHeight="1dip" >
+                </ListView>
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/coffice_product_dark"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="已选："
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/coffice_font_color"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:id="@+id/product_count_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/grapefruit_0"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="总价："
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/coffice_font_color"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:id="@+id/product_amount_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/grapefruit_0"
+                    android:textSize="11sp" />
+
+                <ImageView
+                    android:id="@+id/product_buy_id"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="2.5"
+                    android:src="@drawable/product_buy_button" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/coffice_product_dark"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+</LinearLayout>

@@ -105,6 +105,8 @@
   <ItemGroup>
     <Content Include="App_Data\Settings.txt" />
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
+    <Content Include="js\jquery-1.7.1.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

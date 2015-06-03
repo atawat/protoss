@@ -12,6 +12,7 @@ namespace Protoss.Models
 
         public string PhoneNumber { get; set; }
 
+        public decimal TotalPrice{get;set;}
         public string CounponNum { get; set; }
 
         public EnumOrderType Type { get; set; }
