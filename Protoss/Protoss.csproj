@@ -127,6 +127,7 @@
     <Compile Include="Controllers\ProductPropertyValueController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\PropertyValueController.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\UEditor\Config.cs" />

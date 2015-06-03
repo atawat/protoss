@@ -1,7 +1,7 @@
 /**
  * Created by ATA-GAME on 2015/5/31.
  */
-app.controller('productIndexController',['$http','$state','$scope',function($http,$state,$scope){
+app.controller('productIndexController',['$http','$state','$scope','$modal',function($http,$state,$scope,$modal){
     $scope.searchCondition = {
         Page:'1', //int
         PageCount:'10', //int
@@ -47,7 +47,7 @@ app.controller('productIndexController',['$http','$state','$scope',function($htt
         modalInstance.result.then(function(){
             $http.get(SETTING.ApiUrl + '/product/Delete',{
                     params:{
-                        tagId:$scope.selectedId
+                        id:$scope.selectedId
                     },
                     'withCredentials':true
                 }
@@ -82,7 +82,7 @@ app.controller('productCreateController',['$http','$state','$scope','FileUploade
         $http.post(SETTING.ApiUrl + '/product/Post',$scope.Model,{
             'withCredentials':true
         }).success(function(data){
-            if(data.Status){
+            if(data){
                 $state.go("app.product.index");
             }
             else{
@@ -102,42 +102,79 @@ app.controller('productCreateController',['$http','$state','$scope','FileUploade
     $scope.showThumbnail = false;
     uploader.onSuccessItem = function(fileItem, response, status, headers) {
         //console.info('onSuccessItem', fileItem, response, status, headers);
-        $scope.Thumbnail=response.Msg;
+        $scope.Thumbnail=SETTING.UploadDirUrl + response.Msg;
         $scope.Model.Image = response.Msg;
     };
 
     $scope.getProperty = function(){
         $http.get(SETTING.ApiUrl +'/property/getByCategoryId?categoryId=' + $scope.Model.Category.Id,{'withCredentials':true}).success(function(data){
+            $scope.Model.PropertyValues = [];
             for(var i= 0;i<data.length;i++){
-                $scope.Model.PropertyValues.push({PropertyName:data[i].PropertyName,PropertyId:data[i].Id,PropertyValueId:0,PropertyValue:''});
+                $scope.Model.PropertyValues.push({PropertyName:data[i].PropertyName,PropertyId:data[i].Id,PropertyValues:[{Id:0,Value:''}]});
             }
         });
     }
+
+    $scope.addNewProperty = function(values){
+        values.push({Id:0,Value:''});
+    }
 }]);
-app.controller('productEditController',['$http','$state','$scope',function($http,$state,$scope){
+app.controller('productEditController',['$http','$scope','$state','$stateParams','FileUploader',function($http,$scope,$state,$stateParams,FileUploader){
     $http.get(SETTING.ApiUrl + '/product/get/' + $stateParams.id,{
         'withCredentials':true
     }).success(function(data){
         $scope.Model =data;
+        $scope.Thumbnail =SETTING.UploadDirUrl + $scope.Model.Image;
+    });
+
+    $http.get(SETTING.ApiUrl+'/Category/Get',{'withCredentials':true}).success(function(data){
+        $scope.CategoryList = data;
     });
 
     $scope.Save = function(){
         $http.post(SETTING.ApiUrl + '/product/put',$scope.Model,{
             'withCredentials':true
         }).success(function(data){
-            if(data.Status){
+            if(data){
                 $state.go("app.product.index");
             }
             else{
-                $scope.alerts=[{type:'danger',msg:data.Msg}];
+                $scope.alerts=[{type:'danger',msg:'更新出错，请联系管理员'}];
+            }
+        }).error(function(data){
+            $scope.alerts=[{type:'danger',msg:'出错啦请检查网络或再次尝试'}];
+        });
+    };
+
+    var uploader = $scope.uploader = new FileUploader({
+        url: SETTING.ApiUrl+'/Resource/Upload',
+        'withCredentials':true
+    });
+
+    $scope.showThumbnail = false;
+    uploader.onSuccessItem = function(fileItem, response, status, headers) {
+        //console.info('onSuccessItem', fileItem, response, status, headers);
+        $scope.Thumbnail=SETTING.UploadDirUrl + response.Msg;
+        $scope.Model.Image = response.Msg;
+    };
+
+    $scope.getProperty = function(){
+        $http.get(SETTING.ApiUrl +'/property/getByCategoryId?categoryId=' + $scope.Model.Category.Id,{'withCredentials':true}).success(function(data){
+            $scope.Model.PropertyValues = [];
+            for(var i= 0;i<data.length;i++){
+                $scope.Model.PropertyValues.push({PropertyName:data[i].PropertyName,PropertyId:data[i].Id,PropertyValues:[{Id:0,Value:''}]});
             }
         });
+    };
+
+    $scope.addNewProperty = function(values){
+        values.push({Id:0,Value:''});
     }
-}])
+}]);
 app.controller('productDetailController',['$http','$state','$scope',function($http,$state,$scope){
     $http.get(SETTING.ApiUrl + '/product/get/' + $stateParams.id,{
         'withCredentials':true
     }).success(function(data){
         $scope.Model =data;
     });
-}])
+}]);

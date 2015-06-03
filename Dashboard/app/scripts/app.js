@@ -33,7 +33,8 @@ angular
 
 var SETTING = {
   BaseUrl:'http://localhost:22572/',
-  ApiUrl:'http://localhost:22572/api'
+  ApiUrl:'http://localhost:22572/api',
+  UploadDirUrl:'http://localhost:22572/upload/'
 };
 
 //console.log("////////////////////////////////////////////////////////////////////\n"+

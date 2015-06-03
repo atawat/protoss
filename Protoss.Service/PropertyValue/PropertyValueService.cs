@@ -195,18 +195,18 @@ namespace Protoss.Service.PropertyValue
 			}
 		}
 
-	    public PropertyValueEntity GetOrCreatEntityWithValue(string value,int propertyId)
+	    public PropertyValueEntity GetOrCreatEntityWithValue(string value,PropertyEntity property)
 	    {
 	        try
 	        {
-	            var valueEntity = _propertyvalueRepository.Table.FirstOrDefault(c => c.Value == value && c.Property.Id == propertyId);
+	            var valueEntity = _propertyvalueRepository.Table.FirstOrDefault(c => c.Value == value && c.Property.Id == property.Id);
 	            if (valueEntity == null)
 	            {
 	                valueEntity = new PropertyValueEntity
 	                {
 	                    Addtime = DateTime.Now,
                         Adduser = (UserBase)_workContext.CurrentUser,
-                        Property = new PropertyEntity { Id = propertyId},
+                        Property = property,
                         UpdUser = (UserBase)_workContext.CurrentUser,
                         UpdTime = DateTime.Now,
                         Value = value

@@ -18,6 +18,6 @@ namespace Protoss.Service.PropertyValue
 
 		int GetPropertyValueCount (PropertyValueSearchCondition condition);
 
-	    PropertyValueEntity GetOrCreatEntityWithValue(string value,int propertyId);
+	    PropertyValueEntity GetOrCreatEntityWithValue(string value,PropertyEntity property);
 	}
 }

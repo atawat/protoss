@@ -75,7 +75,8 @@ angular.module('app')
             })
             .state('app.product.edit',{
                 url:'/edit?id',
-                templateUrl:'views/pages/product/edit.html'
+                templateUrl:'views/pages/product/edit.html',
+                resolve:load('angularFileUpload')
             })
               .state('app.product.create',{
                 url:'/create',
