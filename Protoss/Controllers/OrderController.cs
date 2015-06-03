@@ -168,10 +168,40 @@ namespace Protoss.Controllers
                 LocationX = c.LocationX,
 
                 LocationY = c.LocationY,
+                Details = c.Details.Select(d => new OrderDetailModel()
+                {
+                    Count = d.Count,
+                    Id = d.Id,
+                    ProductId = d.Product.Id,
+                    ProductName = d.Product.Name,
+                    TotalPrice = d.TotalPrice,
+                    UnitPrice = d.Product.Price,
+                    Remark=d.Remark
+                }).ToList()
 
             }).ToList();
             return model;
         }
+
+        public string GetTodayOrderNumber()
+        {
+            OrderSearchCondition OSC = new OrderSearchCondition()
+            {
+                OrderNum = DateTime.Now.ToString("yyyyMMdd") 
+            };
+            return "" + _OrderService.GetOrderCount(OSC);
+        }
+
+        public string GetTodayNoPrintNumber()
+        {
+            OrderSearchCondition OSC = new OrderSearchCondition()
+            {
+                OrderNum = DateTime.Now.ToString("yyyyMMdd"),
+                IsPrint=false
+            };
+            return ""+_OrderService.GetOrderCount(OSC);
+        }
+
 
         public bool Post([FromBody]CreateOrderModel model)
         {
@@ -242,6 +272,7 @@ namespace Protoss.Controllers
         {
             var OrderEntity = new OrderEntity
             {
+                TotalPrice=model.TotalPrice,
 
                 OrderNum = GetNewOrderNum(),
 
@@ -347,7 +378,8 @@ namespace Protoss.Controllers
                     ProductId = d.Product.Id,
                     ProductName = d.Product.Name,
                     TotalPrice = d.TotalPrice,
-                    UnitPrice = d.Product.Price
+                    UnitPrice = d.Product.Price,
+                    Remark = d.Remark
                 }).ToList()
 
             };
@@ -385,7 +417,7 @@ namespace Protoss.Controllers
         /// <param name="orderId"></param>
         /// <param name="OrderStatus"></param>
         /// <returns></returns>
-        public bool updataOrderIPrintStatusByOrderId(int orderId, bool isPrint)
+        public bool GetUpdataOrderIsPrintStatusByOrderId(int orderId, bool isPrint)
         {
             OrderEntity OE = _OrderService.GetOrderById(orderId);
             OE.IsPrint = isPrint;

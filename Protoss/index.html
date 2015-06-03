@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="js/jquery-1.7.1.min.js">    </script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+            <title></title>
+        </head>
+        <body>
+            <input type="button" id="addParameter" value="生成订单">
+
+        </body>
+
+        </html>
+        <script>
+            $(function () {
+                //添加分类参数；
+                $('#addParameter').click(function () {
+ 
+
+                    //var par = {
+                      
+                    //      DeliveryAddress :"tongguan",
+
+                    //      PhoneNumber :'1878848065465',
+
+                    //      CounponNum :'54665464',
+
+                    //      Type :1,
+
+                    //      PayType :1,
+
+                    //      LocationX :12.1,
+
+                    //      LocationY :163.2,
+
+                    //      Discount :0.1,
+
+                    //      Details :[
+                    //        { "ProductId":1 , "Count":1 ,"remark":"ceshi"},
+                    //            { "ProductId":1, "Count":2 ,"remark":"ceshi"},
+                    //             { "ProductId":1 , "Count":2 ,"remark":"ceshi"},
+                    //      ]
+            
+                    //};
+                    var par = {
+                        CounponNum:"12345678",
+                        DeliveryAddress:"tonggua",
+                        Details:[
+                            {
+                                "Remark":"测试0",
+                                "ProductId":1,
+                                "Count":10.1
+                            },
+                            {
+                                "Remark":"测试1",
+                                "ProductId":1,
+                                "Count":11.1
+                            },
+                            {
+                                "Remark":"测试2",
+                                "ProductId":1,
+                                "Count":12.1
+                            },
+                            {
+                                "Remark":"测试3",
+                                "ProductId":1,
+                                "Count":13.1
+                            },
+                            {
+                                "Remark":"测试4",
+                                "ProductId":1,
+                                "Count":14.1
+                            },
+                            {
+                                "Remark":"测试5",
+                                "ProductId":1,
+                                "Count":15.1
+                            },
+                            {
+                                "Remark":"测试6",
+                                "ProductId":1,
+                                "Count":16.1
+                            },
+                            {
+                                "Remark":"测试7",
+                                "ProductId":1,
+                                "Count":17.1
+                            },
+                            {
+                                "Remark":"测试8",
+                                "ProductId":1,
+                                "Count":18.1
+                            },
+                            {
+                                "Remark":"测试9",
+                                "ProductId":1,
+                                "Count":19.1
+                            }
+                        ],
+                        PhoneNumber:"18788480955",
+                        LocationX:12.3,
+                        LocationY:63.2,
+                        Discount:0.9,
+                        PayType:1,
+                        Type:1
+                    }
+                    var parJson = JSON.stringify(par);
+                    $.ajax({
+                        url: "http://localhost:22572/api/Order/CreateOrder",
+                        type:"post",
+                        data:parJson,
+                        contentType:"application/json",
+                        success:function (data) {
+                            console.log(data);
+                            alert(data);
+                        }
+                    })
+                });
+            });
+    </script>

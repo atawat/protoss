@@ -161,7 +161,7 @@ namespace Protoss.Service.Order
 				}
 				else
 				{
-					query = query.OrderBy(q=>q.Id);
+                    query = query.OrderByDescending(q => q.Id);
 				}
 
 				if (condition.Page.HasValue && condition.PageCount.HasValue)
@@ -177,6 +177,8 @@ namespace Protoss.Service.Order
 			}
 		}
 
+
+
 		public int GetOrderCount (OrderSearchCondition condition)
 		{
 			var query = _orderRepository.Table;
@@ -184,7 +186,7 @@ namespace Protoss.Service.Order
 			{
 				if (!string.IsNullOrEmpty(condition.OrderNum))
                 {
-                    query = query.Where(q => q.OrderNum == condition.OrderNum);
+                    query = query.Where(q => q.OrderNum.Contains(condition.OrderNum));
                 }
 				if (condition.Status.HasValue)
                 {
