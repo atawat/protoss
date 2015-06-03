@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="30"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.5"
+            android:background="@color/coffice_product_gray"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/order_classify_textView"
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:background="@color/coffice_product_dark"
+                android:gravity="center"
+                android:text="状 态"
+                android:textColor="@color/coffice_font_color" />
+
+            <ListView
+                android:id="@+id/order_classify_listView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="0dp"
+                android:background="@color/coffice_product_gray"
+                android:cacheColorHint="#00000000"
+                android:divider="#00000000"
+                android:dividerHeight="1dip"
+                android:scrollbars="none" >
+            </ListView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:background="@color/coffice_product_pink"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/order_textView"
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:background="@color/coffice_product_dark"
+                android:gravity="center"
+                android:text="订 单"
+                android:textColor="@color/coffice_font_color" />
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <com.android.listview.SuperListView
+                    android:id="@+id/order_listView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/coffice_product_pink"
+                    android:divider="#0f000000"
+                    android:dividerHeight="1dip" >
+                </com.android.listview.SuperListView>
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="4"
+            android:background="@color/coffice_product_lightgray"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:background="@color/coffice_product_dark"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/order_textView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/coffice_product_dark"
+                    android:gravity="center"
+                    android:text="订单详情"
+                    android:textColor="@color/coffice_font_color" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4" >
+
+                <ListView
+                    android:id="@+id/order_detail_listView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/coffice_product_lightgray"
+                    android:divider="#0f000000"
+                    android:dividerHeight="1dip" >
+                </ListView>
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/coffice_product_dark"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+</LinearLayout>

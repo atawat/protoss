@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/coffice_product_lightgray"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white" >
+
+            <com.android.coffice.index.page.ScrollLayout
+                android:id="@+id/scroll_bg_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/white" >
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/white" >
+
+                    <ImageView
+                        android:id="@+id/ad_image1_id"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:scaleType="fitXY" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/white" >
+
+                    <ImageView
+                        android:id="@+id/ad_image2_id"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:scaleType="fitXY" />
+                </FrameLayout>
+            </com.android.coffice.index.page.ScrollLayout>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="欢迎使用黑舞堂收银系统" 
+                android:textSize="20sp"/>
+
+            <ImageView
+                android:id="@+id/index_setting_id"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/index_setting" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+         android:background="@color/mediumgray_0" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="110dp"
+                        android:layout_height="30dp"
+                        android:background="@color/coffice_product_dark"
+                        android:gravity="center"
+                        android:text="今日订单"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/coffice_product_lightgray"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/index_order_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="今日订单  - 个"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="110dp"
+                        android:layout_height="30dp"
+                        android:background="@color/coffice_product_dark"
+                        android:gravity="center"
+                        android:text="未处理订单"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/coffice_product_lightgray"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/index_unprint_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="10sp"
+                         android:layout_marginTop="4dp"
+                        android:text="未处理订单  - 个"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

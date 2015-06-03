@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/coffice_product_gray"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center"
+        android:orientation="vertical" >
+        <TextView
+            android:id="@+id/product_trading_msg_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="选择操作类型"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+            android:layout_height="0dp"
+        android:layout_weight="10"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/product_trading_opencash_id"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="打开钱箱"
+             android:textColor="@color/white"
+              android:background="@color/darkgray_0"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/product_trading_print_id"
+                       android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:gravity="center"
+            android:text="出     票"
+            android:textColor="@color/white"
+             android:background="@color/darkgray_0"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+            android:id="@+id/product_trading_over_id"
+                       android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:gravity="center"
+            android:text="完   成"
+            android:textColor="@color/white"
+             android:background="@color/darkgray_0"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/coffice_product_dark"
+        android:orientation="vertical" >
+    </LinearLayout>
+</LinearLayout>
