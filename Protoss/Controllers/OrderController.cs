@@ -10,6 +10,8 @@ using Protoss.Service.Product;
 using YooPoon.Core.Site;
 using YooPoon.WebFramework.User.Entity;
 using YooPoon.WebFramework.User.Services;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace Protoss.Controllers
 {
@@ -120,7 +122,7 @@ namespace Protoss.Controllers
                 OrderBy = orderBy,
                 OrderNum = orderNum,
                 Page = page,
-                PageCount = page,
+                PageCount = pageCount,
                 PayType = payType,
                 PhoneNumber = phoneNumber
             };
@@ -220,7 +222,8 @@ namespace Protoss.Controllers
                                Count = detail.Count,
                                Product = _productService.GetProductById(detail.ProductId),
                                TotalPrice = detail.Count * product.Price,
-                               Order = entity
+                               Order = entity,
+                               Remark = detail.Remark
                            }).ToList();
 
             entity.ProductCost = details.Sum(d => d.TotalPrice);
@@ -233,6 +236,168 @@ namespace Protoss.Controllers
                 return true;
             }
             return false;
+        }
+
+        public OrderModel CreateOrder([FromBody]CreateOrderModel model)
+        {
+            var OrderEntity = new OrderEntity
+            {
+
+                OrderNum = GetNewOrderNum(),
+
+                TransCost = GetTransCost(model.LocationX, model.LocationY),           //Todo:use db data
+
+                Discount = model.Discount,          //Todo:use db data
+
+                Status = EnumOrderStatus.Created,
+
+                DeliveryAddress = model.DeliveryAddress,
+
+                IsPrint = false,
+
+                PhoneNumber = model.PhoneNumber,
+
+                Adduser = model.Type == EnumOrderType.OffLine ? _userService.GetUserByName("admin") : (UserBase)_workContext.CurrentUser,
+
+                Addtime = DateTime.Now,
+
+                Upduser = model.Type == EnumOrderType.OffLine ? _userService.GetUserByName("admin") : (UserBase)_workContext.CurrentUser,
+
+                Updtime = DateTime.Now,
+
+                //				Details = model.Details,
+
+                //				Coupon = model.Coupon,
+
+                Type = model.Type,
+
+                PayType = model.PayType,
+
+                LocationX = model.LocationX,
+
+                LocationY = model.LocationY,
+
+            };
+            #region 明细
+            var details = (from detail in model.Details
+                           let product = _productService.GetProductById(detail.ProductId)
+                           where product != null
+                           select new OrderDetailEntity
+                           {
+                               Count = detail.Count,
+                               Product = _productService.GetProductById(detail.ProductId),
+                               TotalPrice = detail.Count * product.Price,
+                               Order = OrderEntity,
+                               Remark = detail.Remark
+                           }).ToList();
+
+            OrderEntity.ProductCost = details.Sum(d => d.TotalPrice);
+            OrderEntity.TotalPrice = OrderEntity.ProductCost - OrderEntity.Discount + OrderEntity.TransCost;
+            OrderEntity.Details = details;
+            #endregion
+            var OETemp = _OrderService.Create(OrderEntity);
+            var entity = _OrderService.GetOrderById(OETemp.Id);
+            var oe = new OrderModel
+            {
+
+                Id = entity.Id,
+
+                OrderNum = entity.OrderNum,
+
+                TotalPrice = entity.TotalPrice,
+
+                TransCost = entity.TransCost,
+
+                ProductCost = entity.ProductCost,
+
+                Discount = entity.Discount,
+
+                Status = entity.Status,
+
+                DeliveryAddress = entity.DeliveryAddress,
+
+                IsPrint = entity.IsPrint,
+
+                PhoneNumber = entity.PhoneNumber,
+
+                Adduser = entity.Adduser,
+
+                Addtime = entity.Addtime,
+
+                Upduser = entity.Upduser,
+
+                Updtime = entity.Updtime,
+
+                //		        Details = entity.Details,
+
+                //		        Coupon = entity.Coupon,
+
+                Type = entity.Type,
+
+                PayType = entity.PayType,
+
+                LocationX = entity.LocationX,
+
+                LocationY = entity.LocationY,
+
+                Details = entity.Details.Select(d => new OrderDetailModel()
+                {
+                    Count = d.Count,
+                    Id = d.Id,
+                    ProductId = d.Product.Id,
+                    ProductName = d.Product.Name,
+                    TotalPrice = d.TotalPrice,
+                    UnitPrice = d.Product.Price
+                }).ToList()
+
+            };
+            return oe;
+        }
+        /// <summary>
+        /// 修改订单状态
+		/// 新建的
+		/// 已付款
+		/// 送货中
+		/// 已收货
+		/// 已取消
+		/// 已完成
+        /// <param name="orderId"></param>
+        /// <param name="OrderStatus"></param>
+        /// <returns></returns>
+        public bool updataOrderByOrderId(int orderId, EnumOrderStatus OrderStatus)
+        {
+            OrderEntity OE=_OrderService.GetOrderById(orderId);
+            OE.Status = OrderStatus;
+            try
+            {
+                _OrderService.Update(OE);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+           
+        }
+
+        /// <summary>
+        /// 修改订单打印状态
+        /// <param name="orderId"></param>
+        /// <param name="OrderStatus"></param>
+        /// <returns></returns>
+        public bool updataOrderIPrintStatusByOrderId(int orderId, bool isPrint)
+        {
+            OrderEntity OE = _OrderService.GetOrderById(orderId);
+            OE.IsPrint = isPrint;
+            try
+            {
+                _OrderService.Update(OE);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public decimal GetTransCost(decimal locationX, decimal locationY)

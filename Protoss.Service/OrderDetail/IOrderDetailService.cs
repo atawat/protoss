@@ -17,5 +17,7 @@ namespace Protoss.Service.OrderDetail
 		IQueryable<OrderDetailEntity> GetOrderDetailsByCondition(OrderDetailSearchCondition condition);
 
 		int GetOrderDetailCount (OrderDetailSearchCondition condition);
+
+        IQueryable<OrderDetailEntity> GetOrderDetailByOrderId(int orderId);
 	}
 }
