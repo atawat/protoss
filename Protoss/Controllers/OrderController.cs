@@ -12,6 +12,7 @@ using YooPoon.WebFramework.User.Entity;
 using YooPoon.WebFramework.User.Services;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Protoss.Common;
 
 namespace Protoss.Controllers
 {
@@ -58,11 +59,11 @@ namespace Protoss.Controllers
 
                 PhoneNumber = entity.PhoneNumber,
 
-                Adduser = entity.Adduser,
+                Adduser = new UserModel { Id = entity.Adduser.Id, UserName = entity.Adduser.UserName },
 
                 Addtime = entity.Addtime,
 
-                Upduser = entity.Upduser,
+                Upduser = new UserModel { Id = entity.Upduser.Id, UserName = entity.Upduser.UserName },
 
                 Updtime = entity.Updtime,
 
@@ -149,11 +150,11 @@ namespace Protoss.Controllers
 
                 PhoneNumber = c.PhoneNumber,
 
-                Adduser = c.Adduser,
+                Adduser = new UserModel{Id = c.Adduser.Id,UserName = c.Adduser.UserName},
 
                 Addtime = c.Addtime,
 
-                Upduser = c.Upduser,
+                Upduser = new UserModel { Id = c.Upduser.Id, UserName = c.Upduser.UserName },
 
                 Updtime = c.Updtime,
 
@@ -181,6 +182,44 @@ namespace Protoss.Controllers
 
             }).ToList();
             return model;
+        }
+
+        public HttpResponseMessage GetCount(int? page = 1,
+            int? pageCount = 10,
+            string ids = "",
+            bool isDescending = false,
+            string orderNum = "",
+            EnumOrderStatus? status = null,
+            string deliveryAddress = "",
+            bool? isPrint = null,
+            string phoneNumber = "",
+            EnumOrderType? type = null,
+            EnumPayType? payType = null,
+            decimal? locationX = null,
+            decimal? locationY = null,
+            DateTime? addTimeBegin = null,
+            DateTime? addTimeEnd = null,
+            EnumOrderSearchOrderBy orderBy = EnumOrderSearchOrderBy.OrderById)
+        {
+            var condition = new OrderSearchCondition
+            {
+                AddTimeBegin = addTimeBegin,
+                AddTimeEnd = addTimeEnd,
+                DeliveryAddress = deliveryAddress,
+                Ids = string.IsNullOrEmpty(ids) ? null : ids.Split(',').Select(int.Parse).ToArray(),
+                IsDescending = isDescending,
+                IsPrint = isPrint,
+                LocationX = locationX,
+                LocationY = locationY,
+                OrderBy = orderBy,
+                OrderNum = orderNum,
+                Page = page,
+                PageCount = pageCount,
+                PayType = payType,
+                PhoneNumber = phoneNumber
+            };
+            var count = _OrderService.GetOrderCount(condition);
+            return PageHelper.toJson(new { TotalCount = count, Condition = condition });
         }
 
         public string GetTodayOrderNumber()
@@ -351,11 +390,11 @@ namespace Protoss.Controllers
 
                 PhoneNumber = entity.PhoneNumber,
 
-                Adduser = entity.Adduser,
+                Adduser = new UserModel{Id = entity.Adduser.Id,UserName = entity.Adduser.UserName},
 
                 Addtime = entity.Addtime,
 
-                Upduser = entity.Upduser,
+                Upduser = new UserModel { Id = entity.Upduser.Id, UserName = entity.Upduser.UserName },
 
                 Updtime = entity.Updtime,
 
@@ -394,12 +433,12 @@ namespace Protoss.Controllers
 		/// 已取消
 		/// 已完成
         /// <param name="orderId"></param>
-        /// <param name="OrderStatus"></param>
+        /// <param name="orderStatus"></param>
         /// <returns></returns>
-        public bool updataOrderByOrderId(int orderId, EnumOrderStatus OrderStatus)
+        public bool UpdataOrderByOrderId(int orderId, EnumOrderStatus orderStatus)
         {
             OrderEntity OE=_OrderService.GetOrderById(orderId);
-            OE.Status = OrderStatus;
+            OE.Status = orderStatus;
             try
             {
                 _OrderService.Update(OE);
@@ -473,13 +512,9 @@ namespace Protoss.Controllers
 
             entity.PhoneNumber = model.PhoneNumber;
 
-            entity.Adduser = model.Adduser;
+            entity.Upduser = (UserBase)_workContext.CurrentUser;
 
-            entity.Addtime = model.Addtime;
-
-            entity.Upduser = model.Upduser;
-
-            entity.Updtime = model.Updtime;
+            entity.Updtime = DateTime.Now;
 
             //			entity.Details = model.Details;
 

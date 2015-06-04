@@ -3,37 +3,37 @@
  */
 app.controller('orderIndexController',['$http','$state','$scope',function($http,$state,$scope){
     $scope.searchCondition = {
-        Page:'', //int
-        PageCount:'', //int
-        IsDescending:'', //bool
-        Ids:'', //int
+        Page:1, //int
+        PageCount:10, //int
         OrderNum:'', //string
         Status:'', //EnumOrderStatus
-        DeliveryAddress:'', //string
         IsPrint:'', //bool
         PhoneNumber:'', //string
         Type:'', //EnumOrderType
         PayType:'', //EnumPayType
-        LocationX:'', //decimal
-        LocationY:'', //decimal
         AddTimeBegin:'', //DateTime
-        AddTimeEnd:'', //DateTime
-        OrderBy:'' //EnumOrderSearchOrderBy
+        AddTimeEnd:'' //DateTime
     };
 
-    var getTagList = function() {
+    var getOrderList = function() {
         $http.get(SETTING.ApiUrl+'/order/GetByCondition',{
             params:$scope.searchCondition,
             'withCredentials':true
         }).success(function(data){
-            $scope.list = data.List;
+            $scope.list = data;
+        });
+
+        $http.get(SETTING.ApiUrl+'/order/GetCount',{
+            params:$scope.searchCondition,
+            'withCredentials':true
+        }).success(function(data){
             $scope.searchCondition.page = data.Condition.Page;
             $scope.searchCondition.pageSize = data.Condition.PageCount;
             $scope.totalCount = data.TotalCount;
         });
     };
-    $scope.getList = getTagList;
-    getTagList();
+    $scope.getList = getOrderList;
+    getOrderList();
 
     $scope.del = function (id) {
         $scope.selectedId = id;
@@ -53,7 +53,7 @@ app.controller('orderIndexController',['$http','$state','$scope',function($http,
                 }
             ).success(function(data) {
                     if (data.Status) {
-                        getTagList();
+                        getOrderList();
                     }
                 });
         })
