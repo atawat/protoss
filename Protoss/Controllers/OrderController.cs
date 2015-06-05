@@ -125,7 +125,9 @@ namespace Protoss.Controllers
                 Page = page,
                 PageCount = pageCount,
                 PayType = payType,
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Type = type,
+                Status = status
             };
             var model = _OrderService.GetOrdersByCondition(condition).Select(c => new OrderModel
             {
@@ -216,7 +218,9 @@ namespace Protoss.Controllers
                 Page = page,
                 PageCount = pageCount,
                 PayType = payType,
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Type = type,
+                Status = status
             };
             var count = _OrderService.GetOrderCount(condition);
             return PageHelper.toJson(new { TotalCount = count, Condition = condition });

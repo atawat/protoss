@@ -35,7 +35,8 @@ namespace Protoss.Service.Order
 		{
 			try
             {
-                _orderRepository.Delete(entity);
+                entity.Status = EnumOrderStatus.Canceled;
+                _orderRepository.Update(entity);
                 return true;
             }
             catch (Exception e)

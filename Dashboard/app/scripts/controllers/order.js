@@ -41,7 +41,7 @@ app.controller('orderIndexController',['$http','$state','$scope',function($http,
             templateUrl: 'myModalContent.html',
             controller:'ModalInstanceCtrl',
             resolve: {
-                msg:function(){return "ÄãÈ·¶¨ÒªÉ¾³ıÂğ£¿";}
+                msg:function(){return "æ‚¨ç¡®å®šè¦åˆ é™¤è®¢å•å—";}
             }
         });
         modalInstance.result.then(function(){
@@ -97,7 +97,7 @@ app.controller('orderCreateController',['$http','$state','$scope',function($http
         });
     }
 }])
-app.controller('orderEditController',['$http','$state','$scope',function($http,$state,$scope){
+app.controller('orderEditController',['$http','$state','$scope','$stateParams',function($http,$state,$scope,$stateParams){
     $http.get(SETTING.ApiUrl + '/order/get/' + $stateParams.id,{
         'withCredentials':true
     }).success(function(data){

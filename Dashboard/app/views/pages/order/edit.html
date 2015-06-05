@@ -1,0 +1,103 @@
+<div class="panel panel-default" ng-controller="orderEditController">
+    <div class="panel-heading">
+        <h3>订单情况</h3>
+    </div>
+    <div class="panel-body  b-b b-light">
+        <div class="row m-b-lg">
+            <div class="col-md-2">订单号：</div>
+            <div class="col-md-4">{{Model.OrderNum}}</div>
+            <div class="col-md-2">总价：</div>
+            <div class="col-md-4">{{Model.TotalPrice|currency:'￥'}}</div>
+        </div>
+        <div class="row m-b-lg">
+            <div class="col-md-2">运费：</div>
+            <div class="col-md-4">{{Model.TransCost|currency:'￥'}}</div>
+            <div class="col-md-2">商品总价：</div>
+            <div class="col-md-4">{{Model.ProductCost|currency:'￥'}}</div>
+        </div>
+        <div class="row m-b-lg">
+            <div class="col-md-2">折扣：</div>
+            <div class="col-md-4">{{Model.Discount|currency:'￥'}}</div>
+            <div class="col-md-2">订单状态：</div>
+            <div class="col-md-4">{{Model.StatusString}}</div>
+        </div>
+        <div class="row m-b-lg">
+            <div class="col-md-2">送货地址：</div>
+            <div class="col-md-4">{{Model.DeliveryAddress}}</div>
+            <div class="col-md-2">是否打印：</div>
+            <div class="col-md-4">{{Model.IsPrint}}</div>
+        </div>
+        <div class="row m-b-lg">
+            <div class="col-md-2">联系人：</div>
+            <div class="col-md-4">{{Model.Adduser.UserName}}</div>
+            <div class="col-md-2">联系电话：</div>
+            <div class="col-md-4">{{Model.PhoneNumber}}</div>
+        </div>
+        <div class="row m-b-lg">
+            <div class="col-md-2">订单类型：</div>
+            <div class="col-md-4">{{Model.TypeString}}</div>
+            <div class="col-md-2">支付方式：</div>
+            <div class="col-md-4">{{Model.PayTypeString}}</div>
+        </div>
+        <div class="row m-b-lg">
+            <div class="col-md-2">支付坐标：</div>
+            <div class="col-md-4">{{Model.LocationX + ',' +Model.LocationY}}</div>
+            <div class="col-md-6"></div>
+        </div>
+        <div class="row m-b-lg">
+            <div class="col-md-2">下单时间：</div>
+            <div class="col-md-4">{{Model.Addtime}}</div>
+            <div class="col-md-2">操作人员：</div>
+            <div class="col-md-4">{{Model.Adduser.UserName}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">更新时间：</div>
+            <div class="col-md-4">{{Model.Updtime}}</div>
+            <div class="col-md-2">更新人员：</div>
+            <div class="col-md-4">{{Model.Upduser.UserName}}</div>
+        </div>
+    </div>
+    <div class="panel-heading">
+        <h3>订单明细</h3>
+    </div>
+    <div class="panel-body  b-b b-light">
+        <!--<div class="md-list md-whiteframe-z0 bg-white m-b">-->
+            <!--<div class="md-list-item" ng-repeat="item in Model.Details">-->
+                <!--<div class="md-list-item-left circle indigo">-->
+                    <!--<span class="font-thin text-lg">{{$index+1}}</span>-->
+                <!--</div>-->
+                <!--<div class="md-list-item-content">-->
+                    <!--<div class="row m-b-lg">-->
+                        <!--<div class="col-md-3">{{item.ProductName}}</div>-->
+                        <!--<div class="col-md-3">{{item.UnitPrice | currency:'￥'}}</div>-->
+                        <!--<div class="col-md-3">{{item.Count}}</div>-->
+                        <!--<div class="col-md-3">{{item.TotalPrice| currency:'￥'}}</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <table class="table table-bordered table-hover bg-white ng-scope">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>商品名称</th>
+                    <th>单价</th>
+                    <th>数目</th>
+                    <th>总价</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in Model.Details">
+                    <td>{{$index+1}}</td>
+                    <td>{{item.ProductName}}</td>
+                    <td>{{item.UnitPrice | currency:'￥'}}</td>
+                    <td>{{item.Count}}</td>
+                    <td>{{item.TotalPrice| currency:'￥'}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="col-md-12 text-center">
+            <a ui-sref="app.order.index"><button class="md-btn md-raised m-b btn-fw pink"><i class="fa fa-reply  m-r-sm"></i>返回<div class="md-ripple-container"></div></button></a>
+        </div>
+    </div>
+</div>
