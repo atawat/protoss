@@ -12,8 +12,9 @@ namespace YooPoon.Common.WC.Common
         private readonly IWCHelper _helper;
 
         private string _accessToken;
-        private int _tokenExpiresIn;
+        private int _tokenExpiresIn = 0;
         private DateTime _tokenUpdTime;
+        private bool _tokenRefreshLock = false;
         
         private string _jsAPITicket;
 
@@ -28,8 +29,11 @@ namespace YooPoon.Common.WC.Common
         {
             get
             {
-                if (!string.IsNullOrEmpty(_accessToken))
+                if (!string.IsNullOrEmpty(_accessToken) && _tokenUpdTime != DateTime.MinValue && _tokenUpdTime.AddSeconds(_tokenExpiresIn) < DateTime.Now)
                     return _accessToken;
+                if (!_tokenRefreshLock)
+                    RefreshToken();
+                return _accessToken;
             }
         }
 
@@ -42,6 +46,7 @@ namespace YooPoon.Common.WC.Common
         /// </summary>
         public void RefreshToken()
         {
+            _tokenRefreshLock = true;
             var param = new Dictionary<string, string>
             {
                 {"grant_type", "client_credential"},
@@ -67,6 +72,7 @@ namespace YooPoon.Common.WC.Common
                 var errorJson = JsonConvert.DeserializeAnonymousType(reponseStr, responseErrorObj);
                 _log.Error("获取AccessToken出错，错误代码{0}，错误信息：{1}",errorJson.errcode,errorJson.errmsg);
             }
+            _tokenRefreshLock = false;
         }
     }
 }
