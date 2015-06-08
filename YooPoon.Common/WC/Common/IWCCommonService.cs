@@ -8,8 +8,11 @@ namespace YooPoon.Common.WC.Common
         string JsAPITicket { get; }
         string AppId { get; }
 
-        string Secret { get; }
+        string AppSecret { get; }
 
+        /// <summary>
+        /// 获取AccessToken
+        /// </summary>
         void RefreshToken();
     }
 }
