@@ -1,4 +1,5 @@
-﻿using YooPoon.Core.Autofac;
+﻿using System.Collections.Generic;
+using YooPoon.Core.Autofac;
 
 namespace YooPoon.Common.WC.Common
 {
@@ -14,5 +15,7 @@ namespace YooPoon.Common.WC.Common
         /// 获取AccessToken
         /// </summary>
         void RefreshToken();
+
+        string MakeSign(SortedDictionary<string, string> dic);
     }
 }

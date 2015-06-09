@@ -1,4 +1,6 @@
-﻿using YooPoon.Core.Autofac;
+﻿using System.Collections.Generic;
+using System.Collections.Specialized;
+using YooPoon.Core.Autofac;
 
 namespace YooPoon.Common.WC.WePay
 {
@@ -15,5 +17,7 @@ namespace YooPoon.Common.WC.WePay
         string Key { get; }
 
         object UnifiedOrder();
+
+        string MakeSign(SortedDictionary<string,string> dic);
     }
 }

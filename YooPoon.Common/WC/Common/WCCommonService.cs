@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using Newtonsoft.Json;
+using YooPoon.Core.Data;
 using YooPoon.Core.Logging;
 
 namespace YooPoon.Common.WC.Common
@@ -9,6 +13,7 @@ namespace YooPoon.Common.WC.Common
     {
         private readonly ILog _log;
         private readonly IWCHelper _helper;
+        private readonly DataSettings _dataSettings;
 
         private string _accessToken;
         private int _tokenExpiresIn;
@@ -20,10 +25,11 @@ namespace YooPoon.Common.WC.Common
         private DateTime _ticketUpdTime;
         private bool _ticketRefreshLock;
 
-        public WCCommonService(ILog log,IWCHelper helper)
+        public WCCommonService(ILog log,IWCHelper helper,DataSettings dataSettings)
         {
             _log = log;
             _helper = helper;
+            _dataSettings = dataSettings;
         }
 
         public string AccessToken
@@ -50,8 +56,21 @@ namespace YooPoon.Common.WC.Common
             }
         }
 
-        public string AppId { get; private set; }
-        public string AppSecret { get; private set; }
+        public string AppId
+        {
+            get
+            {
+                return _dataSettings.RawDataSettings["AppId"];
+            }
+        }
+
+        public string AppSecret
+        {
+            get
+            {
+                return _dataSettings.RawDataSettings["AppSecret"];
+            }
+        }
 
         /// <summary>
         /// 获取AccessToken
@@ -116,6 +135,21 @@ namespace YooPoon.Common.WC.Common
                 _log.Error("获取AccessToken出错，错误代码{0}，错误信息：{1}", responseJson.errcode, responseJson.errmsg);
             }
             _ticketRefreshLock = false;
+        }
+
+        public string MakeSign(SortedDictionary<string, string> dic)
+        {
+            var urlFormatString = string.Join("&", dic.Select(d => d.Key + "=" + d.Value));
+            //MD5加密
+            var sha = SHA1.Create();
+            var bs = sha.ComputeHash(Encoding.UTF8.GetBytes(urlFormatString));
+            var sb = new StringBuilder();
+            foreach (byte b in bs)
+            {
+                sb.Append(b.ToString("x2"));
+            }
+            //所有字符转为大写
+            return sb.ToString().ToUpper();
         }
     }
 }

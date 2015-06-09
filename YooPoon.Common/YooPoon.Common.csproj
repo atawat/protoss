@@ -54,6 +54,7 @@
     <Compile Include="WC\Common\WCCommonService.cs" />
     <Compile Include="WC\Common\WCHelper.cs" />
     <Compile Include="WC\WePay\IWePayService.cs" />
+    <Compile Include="WC\WePay\WePayService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YooPoon.Core\YooPoon.Core.csproj">
