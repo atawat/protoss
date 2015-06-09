@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Newtonsoft.Json;
 using YooPoon.Core.Logging;
 
@@ -12,12 +11,14 @@ namespace YooPoon.Common.WC.Common
         private readonly IWCHelper _helper;
 
         private string _accessToken;
-        private int _tokenExpiresIn = 0;
+        private int _tokenExpiresIn;
         private DateTime _tokenUpdTime;
-        private bool _tokenRefreshLock = false;
+        private bool _tokenRefreshLock;
         
         private string _jsAPITicket;
-
+        private int _ticketExpiresIn;
+        private DateTime _ticketUpdTime;
+        private bool _ticketRefreshLock;
 
         public WCCommonService(ILog log,IWCHelper helper)
         {
@@ -37,7 +38,18 @@ namespace YooPoon.Common.WC.Common
             }
         }
 
-        public string JsAPITicket { get; private set; }
+        public string JsAPITicket
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(_jsAPITicket) && _ticketUpdTime != DateTime.MinValue && _ticketUpdTime.AddSeconds(_ticketExpiresIn) < DateTime.Now)
+                    return _jsAPITicket;
+                if (!_ticketRefreshLock)
+                    RefreshTicket();
+                return _jsAPITicket;
+            }
+        }
+
         public string AppId { get; private set; }
         public string AppSecret { get; private set; }
 
@@ -65,6 +77,7 @@ namespace YooPoon.Common.WC.Common
             {
                 _accessToken = responseJson.access_token;
                 _tokenExpiresIn = responseJson.expires_in;
+                _tokenUpdTime = DateTime.Now;
             }
             else
             {
@@ -73,6 +86,36 @@ namespace YooPoon.Common.WC.Common
                 _log.Error("获取AccessToken出错，错误代码{0}，错误信息：{1}",errorJson.errcode,errorJson.errmsg);
             }
             _tokenRefreshLock = false;
+        }
+
+        private void RefreshTicket()
+        {
+            _ticketRefreshLock = true;
+            var param = new Dictionary<string, string>
+            {
+                {"access_token", AccessToken},
+                {"type", "jsapi"}
+            };
+            var reponseStr = _helper.SendGet("https://api.weixin.qq.com/cgi-bin/ticket/getticket", param);
+            if (reponseStr == null)
+            {
+                _log.Error("获取AccessToken出错，请检查错误");
+                return;
+            }
+            //Response容器
+            var responseObj = new { errcode = 0, errmsg = "", ticket="", expires_in = 0 };
+            var responseJson = JsonConvert.DeserializeAnonymousType(reponseStr, responseObj);
+            if (responseJson.errcode == 0)
+            {
+                _jsAPITicket = responseJson.ticket;
+                _ticketExpiresIn = responseJson.expires_in;
+                _ticketUpdTime = DateTime.Now;
+            }
+            else
+            {
+                _log.Error("获取AccessToken出错，错误代码{0}，错误信息：{1}", responseJson.errcode, responseJson.errmsg);
+            }
+            _ticketRefreshLock = false;
         }
     }
 }
