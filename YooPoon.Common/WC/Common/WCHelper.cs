@@ -104,5 +104,31 @@ namespace YooPoon.Common.WC.Common
             }
 
         }
+
+        public string ConvertToXml(SortedDictionary<string, string> dic)
+        {
+            if (dic.Count == 0)
+                return null;
+            string xml = "<xml>";
+            foreach (KeyValuePair<string, string> pair in dic)
+            {
+                //字段值不能为null，会影响后续流程
+                if (pair.Value == null)
+                {
+                    _log.Error("WxPayData内部含有值为null的字段!");
+                    throw new Exception("WxPayData内部含有值为null的字段!");
+                }
+
+                xml += "<" + pair.Key + ">" + pair.Value + "</" + pair.Key + ">";
+               
+            }
+            xml += "</xml>";
+            return xml;
+        }
+
+        public string ConvertToJson(SortedDictionary<string, string> dic)
+        {
+            return JsonConvert.SerializeObject(dic);
+        }
     }
 }

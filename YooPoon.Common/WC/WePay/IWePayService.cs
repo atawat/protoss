@@ -4,7 +4,7 @@ using YooPoon.Core.Autofac;
 
 namespace YooPoon.Common.WC.WePay
 {
-    public interface IWePayService:ISingletonDependency
+    public interface IWePayService:IDependency
     {
         /// <summary>
         /// 商户ID
@@ -16,8 +16,12 @@ namespace YooPoon.Common.WC.WePay
         /// </summary>
         string Key { get; }
 
-        object UnifiedOrder();
+        string ProductId { get; }
+
+        object UnifiedOrder(SortedDictionary<string, string> dic);
 
         string MakeSign(SortedDictionary<string,string> dic);
+
+        string GenerateNonceStr();
     }
 }

@@ -48,7 +48,7 @@ namespace YooPoon.Common.WC.Common
         {
             get
             {
-                if (!string.IsNullOrEmpty(_jsAPITicket) && _ticketUpdTime != DateTime.MinValue && _ticketUpdTime.AddSeconds(_ticketExpiresIn) < DateTime.Now)
+                if (!string.IsNullOrEmpty(_jsAPITicket) && _ticketUpdTime != DateTime.MinValue && _ticketUpdTime.AddSeconds(_ticketExpiresIn) > DateTime.Now)
                     return _jsAPITicket;
                 if (!_ticketRefreshLock)
                     RefreshTicket();

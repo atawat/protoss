@@ -7,5 +7,9 @@ namespace YooPoon.Common.WC.Common
     {
         string SendGet(string url, Dictionary<string, string> paramsDic);
         string SendPost(string url, string postData);
+
+        string ConvertToXml(SortedDictionary<string, string> dic);
+
+        string ConvertToJson(SortedDictionary<string, string> dic);
     }
 }

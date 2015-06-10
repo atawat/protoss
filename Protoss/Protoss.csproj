@@ -141,6 +141,7 @@
     <Compile Include="Controllers\UEditor\PathFormater.cs" />
     <Compile Include="Controllers\UEditor\UploadHandler.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WCController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
