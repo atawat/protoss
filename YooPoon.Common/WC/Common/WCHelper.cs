@@ -130,5 +130,16 @@ namespace YooPoon.Common.WC.Common
         {
             return JsonConvert.SerializeObject(dic);
         }
+
+        public string GenerateNonceStr()
+        {
+            return Guid.NewGuid().ToString().Replace("-", "");
+        }
+
+        public string GenerateTimeStamp()
+        {
+            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return Convert.ToInt64(ts.TotalSeconds).ToString();
+        }
     }
 }

@@ -88,7 +88,7 @@ namespace YooPoon.Common.WC.WePay
             dic.Add("appid",_commonService.AppId);
             dic.Add("mch_id",Mchid);
             dic.Add("spbill_create_ip","127.0.0.1");
-            dic.Add("nonce_str",GenerateNonceStr());
+            dic.Add("nonce_str",_helper.GenerateNonceStr());
 
             dic.Add("sign", MakeSign(dic));
             var xml = _helper.ConvertToXml(dic);
@@ -111,11 +111,6 @@ namespace YooPoon.Common.WC.WePay
             }
             //所有字符转为大写
             return sb.ToString().ToUpper();
-        }
-
-        public string GenerateNonceStr()
-        {
-            return Guid.NewGuid().ToString().Replace("-", "");
         }
     }
 }

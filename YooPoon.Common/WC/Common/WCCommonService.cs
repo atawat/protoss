@@ -18,12 +18,12 @@ namespace YooPoon.Common.WC.Common
         private string _accessToken;
         private int _tokenExpiresIn;
         private DateTime _tokenUpdTime;
-        private bool _tokenRefreshLock;
+        private bool _tokenRefreshLock =false;
         
         private string _jsAPITicket;
         private int _ticketExpiresIn;
         private DateTime _ticketUpdTime;
-        private bool _ticketRefreshLock;
+        private bool _ticketRefreshLock =false;
 
         public WCCommonService(ILog log,IWCHelper helper,DataSettings dataSettings)
         {

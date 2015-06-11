@@ -11,5 +11,11 @@ namespace YooPoon.Common.WC.Common
         string ConvertToXml(SortedDictionary<string, string> dic);
 
         string ConvertToJson(SortedDictionary<string, string> dic);
+
+
+        string GenerateNonceStr();
+
+
+        string GenerateTimeStamp();
     }
 }

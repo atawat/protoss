@@ -152,6 +152,7 @@
     <Compile Include="Models\ContentModel.cs" />
     <Compile Include="Models\CouponModel.cs" />
     <Compile Include="Models\CreateOrderModel.cs" />
+    <Compile Include="Models\JSConfigModel.cs" />
     <Compile Include="Models\MemberModel.cs" />
     <Compile Include="Models\OrderDetailModel.cs" />
     <Compile Include="Models\OrderModel.cs" />

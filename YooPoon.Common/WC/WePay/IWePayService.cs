@@ -21,7 +21,5 @@ namespace YooPoon.Common.WC.WePay
         object UnifiedOrder(SortedDictionary<string, string> dic);
 
         string MakeSign(SortedDictionary<string,string> dic);
-
-        string GenerateNonceStr();
     }
 }
