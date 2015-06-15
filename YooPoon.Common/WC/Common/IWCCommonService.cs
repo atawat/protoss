@@ -17,5 +17,7 @@ namespace YooPoon.Common.WC.Common
         void RefreshToken();
 
         string MakeSign(SortedDictionary<string, string> dic);
+
+        OAuthAccessToken GetOAuthAccessToken(string code);
     }
 }

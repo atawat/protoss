@@ -51,6 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WC\Common\IWCCommonService.cs" />
     <Compile Include="WC\Common\IWChelper.cs" />
+    <Compile Include="WC\Common\OAuthAccessToken.cs" />
     <Compile Include="WC\Common\WCCommonService.cs" />
     <Compile Include="WC\Common\WCHelper.cs" />
     <Compile Include="WC\WePay\IWePayService.cs" />

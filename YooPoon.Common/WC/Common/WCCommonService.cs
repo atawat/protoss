@@ -9,7 +9,7 @@ using YooPoon.Core.Logging;
 
 namespace YooPoon.Common.WC.Common
 {
-    public class WCCommonService:IWCCommonService
+    public class WCCommonService : IWCCommonService
     {
         private readonly ILog _log;
         private readonly IWCHelper _helper;
@@ -18,14 +18,14 @@ namespace YooPoon.Common.WC.Common
         private string _accessToken;
         private int _tokenExpiresIn;
         private DateTime _tokenUpdTime;
-        private bool _tokenRefreshLock =false;
-        
+        private bool _tokenRefreshLock = false;
+
         private string _jsAPITicket;
         private int _ticketExpiresIn;
         private DateTime _ticketUpdTime;
-        private bool _ticketRefreshLock =false;
+        private bool _ticketRefreshLock = false;
 
-        public WCCommonService(ILog log,IWCHelper helper,DataSettings dataSettings)
+        public WCCommonService(ILog log, IWCHelper helper, DataSettings dataSettings)
         {
             _log = log;
             _helper = helper;
@@ -90,7 +90,7 @@ namespace YooPoon.Common.WC.Common
                 _log.Error("获取AccessToken出错，请检查错误");
                 return;
             }
-            var responseObj = new {access_token = "", expires_in = 0};
+            var responseObj = new { access_token = "", expires_in = 0 };
             var responseJson = JsonConvert.DeserializeAnonymousType(reponseStr, responseObj);
             if (responseJson != null)
             {
@@ -100,9 +100,9 @@ namespace YooPoon.Common.WC.Common
             }
             else
             {
-                var responseErrorObj = new { errcode = "", errmsg =""};
+                var responseErrorObj = new { errcode = "", errmsg = "" };
                 var errorJson = JsonConvert.DeserializeAnonymousType(reponseStr, responseErrorObj);
-                _log.Error("获取AccessToken出错，错误代码{0}，错误信息：{1}",errorJson.errcode,errorJson.errmsg);
+                _log.Error("获取AccessToken出错，错误代码{0}，错误信息：{1}", errorJson.errcode, errorJson.errmsg);
             }
             _tokenRefreshLock = false;
         }
@@ -122,7 +122,7 @@ namespace YooPoon.Common.WC.Common
                 return;
             }
             //Response容器
-            var responseObj = new { errcode = 0, errmsg = "", ticket="", expires_in = 0 };
+            var responseObj = new { errcode = 0, errmsg = "", ticket = "", expires_in = 0 };
             var responseJson = JsonConvert.DeserializeAnonymousType(reponseStr, responseObj);
             if (responseJson.errcode == 0)
             {
@@ -150,6 +150,21 @@ namespace YooPoon.Common.WC.Common
             }
             //所有字符转为大写
             return sb.ToString().ToUpper();
+        }
+
+        public OAuthAccessToken GetOAuthAccessToken(string code)
+        {
+            if (string.IsNullOrEmpty(code))
+                return null;
+            var param = new Dictionary<string, string>()
+            {
+                {"appid",AppId},
+                {"secret",AppSecret},
+                {"code",code},
+                {"grant_type","authorization_code"}
+            };
+            var response = _helper.SendGet("https://api.weixin.qq.com/sns/oauth2/access_token", param);
+            return JsonConvert.DeserializeObject<OAuthAccessToken>(response);
         }
     }
 }
