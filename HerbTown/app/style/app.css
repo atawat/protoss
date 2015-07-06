@@ -238,4 +238,20 @@ input{
 .detail .row:first-child{
     line-height: 30px;
     padding-bottom: 10px;
+}.arrow-down {
+    width: 100%;
+    height: 0;
+    border-left: 320px solid transparent;
+    border-right: 320px solid transparent;
+    border-top: 100px solid rgb(35,24,22);
+    position: absolute;
+    bottom: -70px;
+}
+.detail{
+    border-top:solid 1px black;
+}
+
+.item.pthumbnail img{
+    width: 640px;
+    max-height: 480px;
 }
