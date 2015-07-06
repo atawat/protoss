@@ -1,20 +1,32 @@
 <footer class="contentBg">
     <div class="row">
         <div class="col-xs-3 text-center">
-            <i class="glyphicon glyphicon-home img-circle icon"></i>
-            <div class="glyphicon-class">首页</div>
+            <a ui-sref="home.index">
+                <i class="glyphicon glyphicon-home img-circle icon"></i>
+
+                <div class="glyphicon-class">首页</div>
+            </a>
         </div>
         <div class="col-xs-3 text-center">
-            <i class="glyphicon glyphicon-shopping-cart img-circle  icon"></i>
-            <div class="glyphicon-class">购物车</div>
+            <a ui-sref="order.cart">
+                <i class="glyphicon glyphicon-shopping-cart img-circle  icon"></i>
+
+                <div class="glyphicon-class">购物车</div>
+            </a>
         </div>
         <div class="col-xs-3 text-center">
-            <i class="glyphicon glyphicon-user img-circle  icon"></i>
-            <div class="glyphicon-class">用户中心</div>
+            <a ui-sref="user.index">
+                <i class="glyphicon glyphicon-user img-circle  icon"></i>
+
+                <div class="glyphicon-class">用户中心</div>
+            </a>
         </div>
         <div class="col-xs-3 text-center">
-            <i class="glyphicon glyphicon-credit-card img-circle  icon"></i>
-            <div class="glyphicon-class">我的订单</div>
+            <a ui-sref="order.preOrder">
+                <i class="glyphicon glyphicon-credit-card img-circle  icon"></i>
+
+                <div class="glyphicon-class">我的订单</div>
+            </a>
         </div>
     </div>
 </footer>

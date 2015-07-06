@@ -16,6 +16,7 @@ header{
     min-height: 90px;
     position: fixed;
     top: 0;
+    z-index: 10000;
 }
 
 header .content{
@@ -23,18 +24,19 @@ header .content{
     height: 80px;
     margin: 0 auto;
     color: white;
+    z-index: 10000;
 }
 
 header.home{
     height: 210px;
-    z-index: 9999;
+    z-index: 10000;
 }
 
 footer{
     width: 100%;
-    height: 120px;
+    height: 130px;
     position: fixed;
-    bottom: 0px;
+    bottom: 0;
     color: white;
     padding-top: 20px;
 }
@@ -50,18 +52,20 @@ footer{
     height: 50px;
     background-color: white;
     color:rgb(35,24,22);
-    line-height: 45px;
+    line-height: 50px;
 }
 .home .main{
-    margin-top: 250px;
+    margin-top: 280px;
     padding-top: 10px;
-    padding-bottom: 120px;
+    padding-right: 20px;
+    padding-left: 20px;
 }
 .main{
     padding-top: 10px;
-    margin: 100px auto 0;
-    width: 600px;
-    padding-bottom: 120px;
+    margin: 100px auto 130px;
+    width: 640px;
+    padding-right: 0;
+    padding-left: 0;
 }
 
 .pItem{
@@ -72,13 +76,20 @@ footer{
     word-wrap: break-word;
 }
 
+.pItem a{
+    color: black;
+}
+footer a{
+    color: white;
+}
+
 .price{
     color: red;
 }
 
 .pImage{
     width: 100%;
-    height: 500px;
+    min-height: 500px;
 }
 
 .m-t-b{
@@ -133,12 +144,16 @@ input{
     width: 100%;
 }
 .cart-line{
-    height: 80px;
-    line-height: 70px;
+    height: 150px;
+    line-height: 150px;
+}
+.cart-line div:last-child{
+    padding-left: 50px;
+
 }
 .pThumbnail{
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
 }
 
 .border-bottom{
@@ -151,9 +166,10 @@ input{
 }
 
 .pos-fix.bottom.contentBg button{
-    width: 160px;
+    width:100%;
     height: 80px;
     background-color: rgb(255,191,37);
+    border: none;
 }
 
 .img-box{
@@ -203,20 +219,23 @@ input{
     color: white;
     line-height: 90px;
 }
-.arrow-down {
-    width: 100%;
-    height: 0;
-    border-left: 320px solid transparent;
-    border-right: 320px solid transparent;
-    border-top: 100px solid rgb(35,24,22);
-    position: absolute;
-    bottom: -70px;
+.carousel-control{
+    background: none;
 }
-.detail{
-    border-top:solid 1px black;
+.carousel-control.left,.carousel-control.right {
+    background: none;
 }
 
-.item.pthumbnail img{
-    width: 640px;
-    max-height: 480px;
+.pItem span.shoping {
+    width: 70px;
+    height: 70px;
+    background-image: url(../static/shopping.png);
+    background-size:cover ;
+    position: absolute;
+    top: 240px;
+    left: 230px;
+}
+.detail .row:first-child{
+    line-height: 30px;
+    padding-bottom: 10px;
 }

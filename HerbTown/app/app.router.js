@@ -7,10 +7,6 @@ app.run(
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
             $rootScope.$on('$stateChangeStart', function (event,next) {
-                if(next.name ==='detail'){
-                    event.preventDefault();
-                    return;
-                }
                 //if(next.name==='access.signin' || next.name==='access.signup' || next.name==='access.forgot-password'){
                 //    return;
                 //}
