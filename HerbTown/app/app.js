@@ -8,7 +8,7 @@ var app = angular.module('app', [
 ]);
 
 var SETTING = {
-    APIURL:''
+    APIURL:'http://www.ynwebapp.cn/api'
 };
 
 
