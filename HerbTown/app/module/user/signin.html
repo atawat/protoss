@@ -1,25 +1,30 @@
-<div class="main mainBg">
-    <form class="form-horizontal">
+<div class="main mainBg" ng-controller="signInController">
+    <form class="form-horizontal" name="signForm" ng-submit="sign()">
         <div class="form-group form-group-lg">
             <div class="col-xs-12">
-                <input type="text" class="form-control input-group-lg" name="userName" placeholder="请输入用户名"/>
+                <input type="text" class="form-control input-group-lg" name="userName"  ng-pattern="/^[u4E00-u9FA5uf900-ufa2dw]{4,16}$/" placeholder="请输入用户名"  required/>
             </div>
+            <div class="text-yellow" ng-show="signForm.userName.$invalid&&signForm.userName.$dirty">错误提示</div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="col-xs-12">
+                <input type="password" class="form-control input-group-lg" name="FPassword" id="FPassword" placeholder="请输入密码" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,22}$/" required/>
+            </div>
+            <div class="text-yellow" ng-show="signForm.userName.$invalid&&signForm.userName.$dirty">错误提示</div>
         </div>
         <div class="form-group form-group-lg">
             <div class="col-xs-12">
-                <input type="password" class="form-control input-group-lg" name="password" placeholder="亲输入密码"/>
+                <input type="password" class="form-control input-group-lg" name="SPassword" id="SPassword" placeholder="再次输入密码" onchange="check()" required/>
             </div>
+
         </div>
-        <div class="form-group form-group-lg">
-            <div class="col-xs-12">
-                <input type="password" class="form-control input-group-lg" name="password" placeholder="再次输入密码"/>
-            </div>
-        </div>
-        <button type="submit" class="btn-block submit">确定</button>
+        <button type="submit" class="btn-block submit" ng-disabled="signForm.$invalid">确定</button>
+        <p class="text-yellow" id="errorTip">{{errorTip}}</p>
     </form>
     <div class="container m-t">
         <div class="row">
-            <div class="col-xs-12 text-center">已有账号马上 <a href="#" class="text-yellow">注册</a></div>
+            <div class="col-xs-12 text-center">已有账号马上 <a ui-sref="user.signin" class="text-yellow">注册</a></div>
         </div>
     </div>
     <div class="pos-fix bottom text-center">

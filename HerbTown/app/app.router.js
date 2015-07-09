@@ -24,7 +24,7 @@ app.run(
             });
         }
     ]
-).config(['$stateProvider', '$urlRouterProvider',function($stateProvider,$urlRouterProvider){
+).config(['$stateProvider', '$urlRouterProvider','MAIN_CONFIG',function($stateProvider,$urlRouterProvider,MAIN_CONFIG){
         $urlRouterProvider
             .otherwise('/home/index');
         $stateProvider
@@ -96,11 +96,14 @@ app.run(
             })
             .state('user.login',{
                 url:'/login',
-                templateUrl:'module/user/login.html'
+                templateUrl:'module/user/login.html',
+                resolve: load('module/user/loginController.js')
             })
             .state('user.signin',{
                 url:'/signin',
-                templateUrl:'module/user/signin.html'
+                templateUrl:'module/user/signin.html',
+                resolve: load('module/user/signin.js')
+
             })
             .state('user.index',{
                 url:'/index',
@@ -114,4 +117,39 @@ app.run(
                 url:'/preOrder',
                 templateUrl:'module/order/preOrder.html'
             })
+
+
+        function load(srcs, callback) {
+            return {
+                deps: ['$ocLazyLoad', '$q',
+                    function ($ocLazyLoad, $q) {
+                        var deferred = $q.defer();
+                        var promise = false;
+                        srcs = angular.isArray(srcs) ? srcs : srcs.split(/\s+/);
+                        if (!promise) {
+                            promise = deferred.promise;
+                        }
+                        angular.forEach(srcs, function (src) {
+                            promise = promise.then(function () {
+                                angular.forEach(MAIN_CONFIG, function (module) {
+                                    if (module.name == src) {
+                                        if (!module.module) {
+                                            name = module.files;
+                                        } else {
+                                            name = module.name;
+                                        }
+                                    } else {
+                                        name = src;
+                                    }
+                                });
+                                return $ocLazyLoad.load(name);
+                            });
+                        });
+                        deferred.resolve();
+                        return callback ? promise.then(function () { return callback(); }) : promise;
+                    }]
+            }
+        }
+
+
     }]);
