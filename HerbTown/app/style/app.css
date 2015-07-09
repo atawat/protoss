@@ -108,6 +108,7 @@ button.submit{
     font-family: 'Microsoft YaHei';
     font-size: 22px;
     color: white;
+    border: none;
 }
 
 input{
@@ -254,4 +255,26 @@ input{
 .item.pthumbnail img{
     width: 640px;
     max-height: 480px;
+}
+
+/*about*/
+.about_Introduce{
+    padding-top: 40px;
+    padding-bottom: 60px;
+}
+.about_Introduce p{
+    margin-top: 40px;
+}
+.aboutAddress{
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 20px;
+}
+.about_content{
+    margin: 100px auto 130px;
+    width: 640px;
+}
+.about_content div img{
+    width: 100%;
+    height: auto;
 }
