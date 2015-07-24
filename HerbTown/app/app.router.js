@@ -88,7 +88,9 @@ app.run(
             })
             .state('app.about',{
                 url:'/about',
-                templateUrl:'module/about/about.html'
+                templateUrl:'module/about/about.html',
+                data:{title:'关于'}
+
             })
             .state('app.detail',{
                 url:'/detail?id',
@@ -97,7 +99,8 @@ app.run(
             .state('user.login',{
                 url:'/login',
                 templateUrl:'module/user/login.html',
-                resolve: load('module/user/loginController.js')
+                resolve: load('module/user/loginController.js'),
+                data:{title:'关于'}
             })
             .state('user.signin',{
                 url:'/signin',
@@ -109,9 +112,14 @@ app.run(
                 url:'/index',
                 templateUrl:'module/user/index.html'
             })
+            .state('user.changePW',{
+                url:'/changePW',
+                templateUrl:'module/user/changePW.html'
+            })
             .state('order.cart',{
                 url:'/cart',
-                templateUrl:'module/order/cart.html'
+                templateUrl:'module/order/cart.html',
+                resolve: load('module/order/cart.js')
             })
             .state('order.preOrder',{
                 url:'/preOrder',
