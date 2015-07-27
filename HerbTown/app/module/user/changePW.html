@@ -1,21 +1,22 @@
-<div class="main mainBg" ng-controller="">
+<div class="main mainBg user-offset" ng-controller="">
     <form class="form-horizontal" name="" ng-submit="">
         <div class="form-group form-group-lg">
-            <div class="col-xs-12">
+            <div class="col-xs-10 col-xs-offset-1 ">
                 <input type="password" class="form-control input-group-lg"   placeholder="请输入旧密码" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,22}$/" required/>
             </div>
         </div>
-        <div class="form-group form-group-lg">
-            <div class="col-xs-12">
-                <input type="password" class="form-control input-group-lg"   placeholder="请输入新密码" required/>
+        <div class="form-group form-group-lg ">
+            <div class="col-xs-10 col-xs-offset-1">
+                <input type="password" class="form-control input-group-lg "   placeholder="请输入新密码" required/>
             </div>
         </div>
-        <div class="form-group form-group-lg">
-            <div class="col-xs-12">
+        <div class="form-group form-group-lg ">
+            <div class="col-xs-10 col-xs-offset-1">
                 <input type="password" class="form-control input-group-lg"  i placeholder="请确认新密码" required/>
+                <button type="submit" class="btn-block submit" >确认修改</button>
             </div>
         </div>
-        <button type="submit" class="btn-block submit" >确定</button>
+
     </form>
     <div class="pos-fix bottom text-center">
         -----   黑舞堂冷饮店   -----

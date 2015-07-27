@@ -106,9 +106,10 @@ button.submit{
     height: 80px;
     background-color:  rgb(35,24,22);
     font-family: 'Microsoft YaHei';
-    font-size: 22px;
+    font-size: 30px;
     color: white;
     border: none;
+    margin-top: 92px;
 }
 
 input{
@@ -277,4 +278,8 @@ input{
 .about_content div img{
     width: 100%;
     height: auto;
+}
+/*userIndex*/
+.user-offset .form-group-lg .form-control{
+    font-size: 30px;
 }
