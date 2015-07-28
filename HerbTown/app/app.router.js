@@ -112,9 +112,10 @@ app.run(
                 url:'/index',
                 templateUrl:'module/user/index.html'
             })
-            .state('user.changePW',{
-                url:'/changePW',
-                templateUrl:'module/user/changePW.html'
+
+            .state('user.coupon',{
+                url:'/coupon',
+                templateUrl:'module/user/coupon.html'
             })
             .state('order.cart',{
                 url:'/cart',
