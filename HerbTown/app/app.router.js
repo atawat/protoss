@@ -99,8 +99,7 @@ app.run(
             .state('user.login',{
                 url:'/login',
                 templateUrl:'module/user/login.html',
-                resolve: load('module/user/loginController.js'),
-                data:{title:'关于'}
+                resolve: load('module/user/loginController.js')
             })
             .state('user.signin',{
                 url:'/signin',
@@ -111,6 +110,10 @@ app.run(
             .state('user.index',{
                 url:'/index',
                 templateUrl:'module/user/index.html'
+            })
+            .state('user.changePW',{
+                url:'/changePW',
+                templateUrl:'module/user/changePW.html'
             })
 
             .state('user.coupon',{
@@ -125,6 +128,10 @@ app.run(
             .state('order.preOrder',{
                 url:'/preOrder',
                 templateUrl:'module/order/preOrder.html'
+            })
+            .state('order.listOrder',{
+                url:'/listOrder',
+                templateUrl:'module/order/listOrder.html'
             })
 
 

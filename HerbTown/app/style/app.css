@@ -293,7 +293,6 @@ input{
 }
 .couponBg div p span{
     font-size: 3.5em;
-
     margin-left: 4px;
 }
 .div-float-right{
@@ -301,4 +300,20 @@ input{
 }
 .div-opacity{
     opacity: 0.5;
+}
+.listBg{
+    background-color: #ffffff;
+}
+.container .listBg{
+    margin-top: 20px;
+    height: 145px;
+    width:640px;
+    padding-top: 20px;
+}
+.container .listBg .div-float-right{
+
+    margin-top: 25px;
+}
+.container .listBg strong{
+    font-size: 35px;
 }
