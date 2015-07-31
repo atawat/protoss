@@ -9,13 +9,13 @@ app.controller('signInController',['$http','$scope','$state','AuthService',funct
         SPassword:''
     }
     $scope.sign = function(){
-        $http.post(SETTING.APIURL+'',$scope.signer,{'withCredentials':true}).success(function(data){
+        $http.post(SETTING.APIURL+'/user/SignUp',$scope.signer,{'withCredentials':true}).success(function(data){
             if(data.Status==false){
                 $scope.errorTip=data.Msg;
             }
             else{
                 AuthService.doLogin($scope.signer.userName,$scope.FPassword,function(){
-                    $state.go('');
+                    $state.go('user.index');
                 })
             }
         })
