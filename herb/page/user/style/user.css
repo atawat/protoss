@@ -1,0 +1,35 @@
+.up-bg{
+    height: 200px;
+    text-align: center;
+    padding-top: 15%;
+}
+.user-content{
+    width: 100%;
+    top: 44px;
+}
+.up-photo{
+    width: 100px;
+    height: 100px;
+    border-radius: 50% ;
+    background-color: white;
+    padding: 20px;
+    margin: 0 auto;
+}
+.coupon-bg{
+    background:url("../../../img/coupon.png");
+    padding: 45px 0 10px  34px;
+    margin-bottom: 20px;
+
+}
+.coupon-price{
+    width: 40%;
+    float: left;
+    padding-top: 20px;
+}
+.coupon-price span{
+    font-size: 3.5em;
+}
+.coupon-detail{
+    width: 60%;
+    float: left;
+}

@@ -33,7 +33,7 @@ namespace Protoss.Controllers
             _userService = userService;
         }
 
-        public OrderModel Get(int id)
+        public HttpResponseMessage Get(int id)
         {
             var entity = _OrderService.GetOrderById(id);
             var model = new OrderModel
@@ -90,10 +90,10 @@ namespace Protoss.Controllers
                 }).ToList()
 
             };
-            return model;
+            return PageHelper.toJson(new { List = model });
         }
 
-        public List<OrderModel> GetByCondition(int? page = 1,
+        public HttpResponseMessage GetByCondition(int? page = 1,
                                                     int? pageCount = 10,
                                                     string ids ="",
                                                     bool isDescending = false,
@@ -183,7 +183,7 @@ namespace Protoss.Controllers
                 }).ToList()
 
             }).ToList();
-            return model;
+            return PageHelper.toJson(new { List = model });
         }
 
         public HttpResponseMessage GetCount(int? page = 1,

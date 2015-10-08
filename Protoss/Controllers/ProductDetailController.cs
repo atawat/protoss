@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Web.Http;
+using Protoss.Common;
 using System.Web.Http.Cors;
 using Protoss.Entity.Model;
 using Protoss.Service.ProductDetail;
@@ -14,6 +15,7 @@ using Protoss.Models;
 namespace Protoss.Controllers
 {
     [AllowAnonymous]
+    [EnableCors("*", "*", "*", SupportsCredentials = true)]
 	public class ProductDetailController : ApiController
 	{
 		private readonly IProductDetailService _ProductDetailService;
@@ -22,8 +24,8 @@ namespace Protoss.Controllers
 		{
 			_ProductDetailService = ProductDetailService;
 		}
-
-		public ProductDetailModel Get(int id)
+        [HttpGet]
+        public HttpResponseMessage productDetail(int id)
 		{
 			var entity =_ProductDetailService.GetProductDetailById(id);
 		    var model = new ProductDetailModel
@@ -46,10 +48,10 @@ namespace Protoss.Controllers
 //		        Product = entity.Product,
 
 		    };
-			return model;
+            return PageHelper.toJson(new { List=model });
 		}
 
-		public List<ProductDetailModel> Get(ProductDetailSearchCondition condition)
+        public HttpResponseMessage Get(ProductDetailSearchCondition condition)
 		{
 			var model = _ProductDetailService.GetProductDetailsByCondition(condition).Select(c=>new ProductDetailModel
 			{
@@ -71,7 +73,7 @@ namespace Protoss.Controllers
 //				Product = c.Product,
 
 			}).ToList();
-			return model;
+            return PageHelper.toJson(new { List = model });
 		}
 
 		public bool Post(ProductDetailModel model)

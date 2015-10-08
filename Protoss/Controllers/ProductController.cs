@@ -97,7 +97,7 @@ namespace Protoss.Controllers
         }
 
         [HttpGet]
-        public List<ProductModel> GetByCondition(
+        public HttpResponseMessage GetByCondition(
             int? categoryId = null,
             decimal? priceBegin = null,
             decimal? priceEnd = null,
@@ -155,7 +155,8 @@ namespace Protoss.Controllers
                 //				PropertyValues = c.PropertyValues,
 
             }).ToList();
-            return model;
+            return PageHelper.toJson(new { List = model });
+            //return model;
         }
 
         [HttpGet]

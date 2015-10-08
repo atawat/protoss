@@ -1,0 +1,32 @@
+.cart-footer{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    padding: 0
+}
+.col-height{
+    height: 150px;
+}
+.col-height div{
+    width: 100px;
+    height: 100px;
+    margin-left: 18%;
+    padding-top: 12%;
+}
+.col-height div i{
+    font-size: 4em;
+}
+.position-bottom{
+    position: fixed;
+    bottom: 0;
+}
+.energized-bg .title{
+    font-size: 1.4em;
+    font-family: "Microsoft YaHei";
+}
+.row .col-25 select{
+    width: 100px;
+    height: 30px;
+    font-size: 1.1em;
+    font-family: "Microsoft YaHei";
+}

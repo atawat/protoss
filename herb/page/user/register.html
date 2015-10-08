@@ -1,0 +1,31 @@
+<div class="bar  bg-grey " style="height: 44px">
+    <button class="button  button-icon icon ion-chevron-left color-white"></button>
+    <h1 class="title color-white font-15">注&nbsp;&nbsp;&nbsp;册</h1>
+</div>
+
+<ion-view hide-tabs="true">
+    <ion-content class=" stable-bg padding-top ">
+        <div class="padding-top padding-bottom">
+            <div class="item ">
+                <input class="font-15 width-100 " type="text" placeholder="请输入用户名" style="font-size: 1em" ng-model="signer.UserName">
+            </div>
+            <div class=" item top-30 ">
+                <input class="font-15 width-100 " type="text" placeholder="请输入密码"  style="font-size: 1em" ng-model="signer.Password">
+            </div>
+            <div class=" item top-30 ">
+                <input class="font-15 width-100 " type="text" placeholder="请再次输入密码"  style="font-size: 1em">
+            </div>
+        </div>
+        <div class="top-30 ">
+            <button class="button button-full bg-grey color-white font-15" ng-click="sign()">确&nbsp;&nbsp;&nbsp;认</button>
+        </div>
+
+        <div class="item item-borderless text-center top-30 stable-bg">
+            <p >已有账号？马上<a class="energized" ui-sref="page.login">登录</a></p>
+        </div>
+
+    </ion-content>
+</ion-view>
+<div class="bar bar-footer stable-bg">
+    <h1 class="title font-15">  -----   黑舞堂冷饮店   -----</h1>
+</div>

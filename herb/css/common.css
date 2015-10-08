@@ -1,0 +1,46 @@
+
+.bg-grey{
+    background-color: #231816;
+}
+.color-white{
+    color: white;
+}
+.width-100{
+    width: 100%;
+}
+.top-30{
+    margin-top: 30px;
+}
+.font-15{
+    font-family: "Microsoft YaHei";
+    font-size: 1.5em;
+}
+.font-16{
+    font-size:4em;
+}
+.border-circle{
+    border-radius: 10px;
+}
+.bg-yellow{
+    background-color: rgb(250, 255, 189);
+}
+.padding-top .item p{
+    font-size: 1.1em;
+}
+.div-opacity{
+    opacity: 0.6;
+}
+.float-right{
+    float: right;
+}
+.font-13{
+    font-size: 1.3em;
+    font-family: "Microsoft YaHei";
+}
+.float-left{
+    float: left;
+}
+.font-12{
+    font-size: 1.2em;
+    font-family: "Microsoft YaHei";
+}

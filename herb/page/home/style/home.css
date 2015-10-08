@@ -1,0 +1,16 @@
+.MyClass>.tabs{
+    background-color: #231816;
+    color: white;
+}
+.cart-i{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    padding: 10px
+}
+.cart-i i{
+    font-size: 2em;
+}

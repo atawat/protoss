@@ -1,0 +1,124 @@
+
+
+<ion-view view-title="黑舞堂" hide-tabs="false" hide-nav-bar="true">
+    <ion-content class="scroll-content" no-header="true" >
+
+        <ion-slide-box auto-play="true" does-continue="true" slide-interval=2000 show-pager="true">
+            <ion-slide>
+                <div class="box">
+                     <img src="img/banner.png"/>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div class="box">
+                     <img src="img/banner.png"/>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+        <!--<ion-refresher pulling-text="下拉刷新" on-refresh="doRefrsh()"></ion-refresher>-->
+            <ul class="padding" >
+                <li style="width:50%;float:left;position: relative" ng-repeat="row in items" >
+                    <div class="col " >
+                        <img src="img/pic3.png" ui-sref="page.product-detail({id:row.Id})">
+                        <div class="text-center">
+                            <p>{{row.Name}}</p>
+                            <p>￥<span>{{row.Price}}</span></p>
+                        </div>
+                    </div>
+                    <div class="bg-grey text-center cart-i" >
+                        <i class="icon-gouwuche light" ></i>
+                    </div>
+                </li>
+                <!--<li style="width:50%;float:left;position: relative" >-->
+                    <!--<div class="col ">-->
+                        <!--<img src="img/pic3.png">-->
+                        <!--<div class="text-center">-->
+                            <!--<p>测试商品</p>-->
+                            <!--<p>￥56.00</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="bg-grey text-center cart-i" >-->
+                        <!--<i class="icon-gouwuche light" ></i>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li style="width:50%;float:left;position: relative" >-->
+                    <!--<div class="col ">-->
+                        <!--<img src="img/pic3.png">-->
+                        <!--<div class="text-center">-->
+                            <!--<p>测试商品</p>-->
+                            <!--<p>￥56.00</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="bg-grey text-center cart-i" >-->
+                        <!--<i class="icon-gouwuche light" ></i>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li style="width:50%;float:left;position: relative" >-->
+                    <!--<div class="col ">-->
+                        <!--<img src="img/pic3.png">-->
+                        <!--<div class="text-center">-->
+                            <!--<p>测试商品</p>-->
+                            <!--<p>￥56.00</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="bg-grey text-center cart-i" >-->
+                        <!--<i class="icon-gouwuche light" ></i>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li style="width:50%;float:left;position: relative" >-->
+                    <!--<div class="col ">-->
+                        <!--<img src="img/pic3.png">-->
+                        <!--<div class="text-center">-->
+                            <!--<p>测试商品</p>-->
+                            <!--<p>￥56.00</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="bg-grey text-center cart-i" >-->
+                        <!--<i class="icon-gouwuche light" ></i>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li style="width:50%;float:left;position: relative" >-->
+                    <!--<div class="col ">-->
+                        <!--<img src="img/pic3.png">-->
+                        <!--<div class="text-center">-->
+                            <!--<p>测试商品</p>-->
+                            <!--<p>￥56.00</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="bg-grey text-center cart-i" >-->
+                        <!--<i class="icon-gouwuche light" ></i>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li style="width:50%;float:left;position: relative" >-->
+                    <!--<div class="col ">-->
+                        <!--<img src="img/pic3.png">-->
+                        <!--<div class="text-center">-->
+                            <!--<p>测试商品</p>-->
+                            <!--<p>￥56.00</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="bg-grey text-center cart-i" >-->
+                        <!--<i class="icon-gouwuche light" ></i>-->
+                    <!--</div>-->
+                <!--</li>-->
+
+
+            </ul>
+    </ion-content>
+
+
+
+
+</ion-view>
+
+
+
+
+
+
+
+
+
+
+
+
