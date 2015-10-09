@@ -6,15 +6,23 @@
  */
 //¶©µ¥ÁÐ±í
 app.controller('orderList',['$http','$scope',function($http,$scope){
-     $scope.condition={
+     $scope.condition = {
          PageCount:10,
-         Page:1
-
+         Page:1,
+         IsDescending:true
      };
-     $http.get(SETTING.ApiUrl+"/Order/GetByCondition", {params:$scope.condition,
+
+     //$http.get(SETTING.ApiUrl+"/Order/GetByCondition", {params:$scope.condition,
+     //    'withCredentials': true
+     //}).success(function(data){
+     //    $scope.orderList=data.List;
+     //    console.log($scope.orderList);
+     //})
+     $http.get(SETTING.ApiUrl + '/OrderDetail/Get', {
+         params: $scope.condition,
          'withCredentials': true
      }).success(function(data){
-         $scope.orderList=data;
-         console.log(data);
+         $scope.orderDetail=data.List;
+         console.log( $scope.orderDetail);
      })
 }])

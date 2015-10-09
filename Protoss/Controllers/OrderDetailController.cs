@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Web.Http;
+using Protoss.Common;
 using System.Web.Http.Cors;
 using Protoss.Entity.Model;
 using Protoss.Service.OrderDetail;
@@ -14,6 +15,7 @@ using Protoss.Models;
 namespace Protoss.Controllers
 {
     [AllowAnonymous]
+    [EnableCors("*", "*", "*", SupportsCredentials = true)]
 	public class OrderDetailController : ApiController
 	{
 		private readonly IOrderDetailService _OrderDetailService;
@@ -44,8 +46,8 @@ namespace Protoss.Controllers
 		    };
 			return model;
 		}
-
-		public List<OrderDetailModel> Get(OrderDetailSearchCondition condition)
+        [HttpGet]
+        public HttpResponseMessage Get([FromUri]OrderDetailSearchCondition condition)
 		{
 			var model = _OrderDetailService.GetOrderDetailsByCondition(condition).Select(c=>new OrderDetailModel
 			{
@@ -63,7 +65,7 @@ namespace Protoss.Controllers
 //				Order = c.Order,
 
 			}).ToList();
-			return model;
+            return PageHelper.toJson(new { List = model });
 		}
 
         public List<OrderDetailModel> GetOrderDetailByOrder(int orderId)
