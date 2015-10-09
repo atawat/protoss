@@ -35,8 +35,8 @@ namespace Protoss.Controllers
             _propertyService = propertyService;
             _propertyValueService = propertyValueService;
         }
-
-        public ProductModel Get(int id)
+        [HttpGet]
+        public HttpResponseMessage Get(int id)
         {
             var entity = _productService.GetProductById(id);
             var model = entity == null ? new ProductModel() : new ProductModel
@@ -93,7 +93,7 @@ namespace Protoss.Controllers
                 }).ToList(),
 
             };
-            return model;
+            return PageHelper.toJson(new { List = model });
         }
 
         [HttpGet]

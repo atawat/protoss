@@ -74,10 +74,14 @@ namespace Protoss.Controllers
             {
                 return PageHelper.toJson(PageHelper.ReturnValue(false, "用户名已经存在"));
             }
+            if (model.Password != model.SecondPassword) {
+                return PageHelper.toJson(PageHelper.ReturnValue(false, "两次密码不一致"));
+            }
             var newUser = new UserBase
             {
                 UserName = model.UserName,
                 Password = model.Password,
+                
                 RegTime = DateTime.Now,
                 NormalizedName = model.UserName.ToLower(),
                 Status = 0
@@ -144,11 +148,15 @@ namespace Protoss.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage ChangePassword(string oldPassword,string newPassword)
+        public HttpResponseMessage ChangePassword(string oldPassword,string newPassword,string secondPassword)
         {
+            if (newPassword != secondPassword) {
+                return PageHelper.toJson(PageHelper.ReturnValue(false, "两次密码不一致"));
+            }
             var user =(UserBase) _workContext.CurrentUser;
             if (user!=null && PasswordHelper.ValidatePasswordHashed(user,newPassword))
-            {
+            {  
+               
                 PasswordHelper.SetPasswordHashed(user, newPassword);
                 return PageHelper.toJson(PageHelper.ReturnValue(true,"数据更新成功！"));
             }

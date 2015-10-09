@@ -99,7 +99,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/user/changePW',
             views: {
                 'page-user': {
-                    templateUrl: 'page/user/changePW.html'
+                    templateUrl: 'page/user/changePW.html',
+                    controller:'changePW'
                 }
             }
         })
@@ -147,7 +148,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             }
         })
         .state('page.orderCertain', {
-            url: '/order/orderCertain',
+            url: '/order/orderCertain?pricecount',
             views: {
                 'page-order': {
                     templateUrl: 'page/order/orderCertain.html'

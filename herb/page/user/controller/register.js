@@ -5,7 +5,8 @@
 app.controller('register',['$http','$scope','$state','AuthService','$ionicLoading','$timeout',function($http,$scope,$state,AuthService,$ionicLoading,$timeout){
     $scope.signer ={
         UserName:'',
-        Password:''
+        Password:'',
+        SecondPassword:''
     }
     $scope.sign = function(){
         $http.post(SETTING.ApiUrl+'/User/SignUp',$scope.signer,{'withCredentials':true}).success(function(data){

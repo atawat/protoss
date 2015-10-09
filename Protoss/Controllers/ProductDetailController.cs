@@ -28,6 +28,9 @@ namespace Protoss.Controllers
         public HttpResponseMessage productDetail(int id)
 		{
 			var entity =_ProductDetailService.GetProductDetailById(id);
+            if(entity==null){
+                return PageHelper.toJson("Êý¾ÝÎª¿Õ");
+            }
 		    var model = new ProductDetailModel
 		    {
 

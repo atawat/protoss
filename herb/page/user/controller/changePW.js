@@ -5,7 +5,8 @@
 app.controller('changePW',['$http','$scope','$state','$ionicLoading','$timeout',function($http,$scope,$state,$ionicLoading,$timeout){
     $scope.pw ={
         oldPassword:'',
-        newPassword:''
+        newPassword:'',
+        secondPassword:''
 
     }
     $scope.change = function(){
