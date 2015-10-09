@@ -1,7 +1,7 @@
 /**
  * Created by Yunjoy on 2015/9/23.
  */
-app.controller('cartCtrl',['$scope',function($scope){
+app.controller('cartCtrl',['$scope','cartservice',function($scope,cartservice){
 
         //    从localStorage获取购物车信息
         var carlistcount=0;
@@ -20,18 +20,18 @@ app.controller('cartCtrl',['$scope',function($scope){
 
 
 
-        //数量加减
-        $scope.numbers=1;
-        $scope.addNumbers=function(){
-            $scope.numbers=$scope.numbers+1;
-        };
-        $scope.deNumbers=function(){
-            if($scope.numbers>=2)
-                $scope.numbers-=1;
-            else{
-                $scope.numbers=1;
-            }
-        }
+        ////数量加减
+        //$scope.numbers=1;
+        //$scope.addNumbers=function(){
+        //    $scope.numbers=$scope.numbers+1;
+        //};
+        //$scope.deNumbers=function(){
+        //    if($scope.numbers>=2)
+        //        $scope.numbers-=1;
+        //    else{
+        //        $scope.numbers=1;
+        //    }
+        //}
 
         //region 数量增加减
 
@@ -66,20 +66,15 @@ app.controller('cartCtrl',['$scope',function($scope){
         //endregion
 
         //region 计算总价
-        $scope.dprice=0;
+
 
         var allprice=function(){
-            var prices=0;
 
-            for(i=0;i< $scope.choseArr.length;i++)
-            {
                 for(j=0;j<$scope.productlist.length;j++){
-                    if($scope.choseArr[i]==$scope.productlist[j].id){
-                        prices+= parseInt($scope.productlist[j].price * $scope.productlist[j].count);
-                    }
+                        $scope.total+= parseInt($scope.productlist[j].price * $scope.productlist[j].count);
                 }
-            }
-            $scope.dprice=prices;
+
+
         }
         //endregion
 

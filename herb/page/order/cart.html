@@ -6,58 +6,58 @@
     <ion-content>
 
         <ion-list >
-            <ion-item class="item-thumbnail-left " >
+            <ion-item class="item-thumbnail-left " ng-repeat="item in productlist" >
                 <img src="img/pic1.png" alt=""/>
 
                 <div class="padding-top font-13" >
 
-                    <span class="" style="float: left">原味奶茶</span>
+                    <span class="" style="float: left">{{item.name}}</span>
 
                     <div class="float-right">
                     <strong>
-                        <i class="ion-plus-round" ng-click="addNumbers()"></i>
-                        <span>{{numbers}}</span>
-                        <i class="ion-minus-round" ng-click="deNumbers()"></i>
+                        <i class="ion-plus-round" ng-click="adding(item.id)"></i>
+                        <span>{{item.count}}</span>
+                        <i class="ion-minus-round" ng-click="decrease(item.id)"></i>
                     </strong><br><br>
-                        <span class="assertive">￥5.00</span>
+                        <span class="assertive">￥{{item.price}}</span>
                     </div>
                 </div>
             </ion-item >
-            <ion-item class="item-thumbnail-left " >
-                <img src="img/pic1.png" alt=""/>
-                <div class="padding-top font-13" >
-                    <span class="" style="float: left">原味奶茶</span>
-                    <div class="float-right">
-                        <strong>
-                            <i class="ion-plus-round"></i>
-                            <span>1</span>
-                            <i class="ion-minus-round"></i>
-                        </strong><br><br>
-                        <span class="assertive">￥5.00</span>
-                    </div>
-                </div>
-            </ion-item >
-            <ion-item class="item-thumbnail-left " >
-                <img src="img/pic1.png" alt=""/>
+            <!--<ion-item class="item-thumbnail-left " >-->
+                <!--<img src="img/pic1.png" alt=""/>-->
+                <!--<div class="padding-top font-13" >-->
+                    <!--<span class="" style="float: left">原味奶茶</span>-->
+                    <!--<div class="float-right">-->
+                        <!--<strong>-->
+                            <!--<i class="ion-plus-round"></i>-->
+                            <!--<span>1</span>-->
+                            <!--<i class="ion-minus-round"></i>-->
+                        <!--</strong><br><br>-->
+                        <!--<span class="assertive">￥5.00</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</ion-item >-->
+            <!--<ion-item class="item-thumbnail-left " >-->
+                <!--<img src="img/pic1.png" alt=""/>-->
 
-                <div class="padding-top font-13" >
+                <!--<div class="padding-top font-13" >-->
 
-                    <span class="" style="float: left">原味奶茶</span>
+                    <!--<span class="" style="float: left">原味奶茶</span>-->
 
-                    <div class="float-right">
-                        <strong>
-                            <i class="ion-plus-round"></i>
-                            <span>1</span>
-                            <i class="ion-minus-round"></i>
-                        </strong><br><br>
-                        <span class="assertive">￥5.00</span>
-                    </div>
-                </div>
-            </ion-item >
+                    <!--<div class="float-right">-->
+                        <!--<strong>-->
+                            <!--<i class="ion-plus-round"></i>-->
+                            <!--<span>1</span>-->
+                            <!--<i class="ion-minus-round"></i>-->
+                        <!--</strong><br><br>-->
+                        <!--<span class="assertive">￥5.00</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</ion-item >-->
         </ion-list>
     </ion-content>
     <div class=" row bar cart-footer font-13 text-center" >
-        <div class="col col-70  bg-grey  padding-top light" >总计：150.00</div>
+        <div class="col col-70  bg-grey  padding-top light" >总计：{{total}}</div>
         <a class="col col-30   energized-bg padding-top light">提交订单</a>
     </div>
 </ion-view>

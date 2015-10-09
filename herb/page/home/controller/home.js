@@ -29,15 +29,14 @@ app.controller('home',['$scope','$http','cartservice',function($scope,$http,cart
         name: null,
         count: null,
         price: null,
-        oldprice: null,
+        image:null,
         parameterValue:[]
     };
     $scope.AddCart = function (data) {
         $scope.cartinfo.id = data.row.Id;
         $scope.cartinfo.name = data.row.Name;
-        $scope.cartinfo.mainimg = data.row.MainImg;
+        $scope.cartinfo.image = data.row.image;
         $scope.cartinfo.price = data.row.Price;
-        $scope.cartinfo.oldprice = data.row.OldPrice;
         $scope.cartinfo.count = 1;
         cartservice.add($scope.cartinfo);
     }

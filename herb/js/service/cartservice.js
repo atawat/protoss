@@ -15,9 +15,7 @@ app.service("cartservice", ['$rootScope',
 			id: null,
 			name: null,
 			count: null,
-            mainimg:null,
             price:null,
-            newprice:null,
 		    parameterValue:[]
 		};
 
@@ -29,9 +27,8 @@ app.service("cartservice", ['$rootScope',
 			cartinfo.id = data.id;
 			cartinfo.name = data.name;
 			cartinfo.count = data.count;
-            cartinfo.mainimg=data.mainimg;
+            cartinfo.image=data.image;
             cartinfo.price=data.price;
-            cartinfo.newprice=data.newprice;
 			cartinfo.parameterValue=data.parameterValue
 			var storage = localStorage.getItem("ShoppingCart");
 			//第一次加入商品 
@@ -41,9 +38,8 @@ app.service("cartservice", ['$rootScope',
 						"id": cartinfo.id,
 						"name": cartinfo.name,
 						"count": cartinfo.count,
-                        "mainimg":cartinfo.mainimg,
+                        "image":cartinfo.image,
                         "price":cartinfo.price,
-                        "newprice":cartinfo.newprice,
 						"parameterValue":cartinfo.parameterValue
 					}]
 				};
@@ -65,9 +61,8 @@ app.service("cartservice", ['$rootScope',
 						"id": cartinfo.id,
 						"name": cartinfo.name,
 						"count": cartinfo.count,
-                        "mainimg":cartinfo.mainimg,
+                        "image":cartinfo.image,
                         "price":cartinfo.price,
-                        "newprice":cartinfo.newprice,
 						"parameterValue":cartinfo.parameterValue
 					});
 				}
@@ -134,6 +129,24 @@ app.service("cartservice", ['$rootScope',
 					console.log("删除失败,没有这个商品的ID");
 					
 				}
+			}
+			jsonstr.productlist = productlist;
+			localStorage.setItem("ShoppingCart", "'" + JSON.stringify(jsonstr));
+		};
+
+		//商品添加数量，
+		this.addone = function(id) {
+			var storage = localStorage.getItem("ShoppingCart");
+			var jsonstr = JSON.parse(storage.substr(1, storage.length));
+			var productlist = jsonstr.productlist;
+			for (var i in productlist) {
+				if (productlist[i].id == id) {
+
+					productlist[i].count = parseInt(productlist[i].count) + 1;
+
+
+				}
+
 			}
 			jsonstr.productlist = productlist;
 			localStorage.setItem("ShoppingCart", "'" + JSON.stringify(jsonstr));
