@@ -55,7 +55,7 @@ app.controller('detailCtrl',['$scope','$http','cartservice','$stateParams','$ion
     //endregion
     //region  Á¢¼´¹ºÂò
     $scope.buy=function(){
-        $state.go("page.cart",{productId: $scope.product.Id,count:$scope.numbers})
+        $state.go("page.orderCertain",{productId:  $scope.items.Id,total:$scope.items.Price})
     }
     //endregion
    }])

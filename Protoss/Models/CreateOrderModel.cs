@@ -24,6 +24,13 @@ namespace Protoss.Models
         public decimal LocationY { get; set; }
 
         public decimal Discount { get; set; }
+        //public int ProductId { get; set; }
+
+        //public decimal Count { get; set; }
+
+        //public string ProductName { get; set; }
+
+        //public string Remark { get; set; }
 
         public List<CreateOrderDetailModel> Details { get; set; }
     }

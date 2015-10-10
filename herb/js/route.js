@@ -148,10 +148,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             }
         })
         .state('page.orderCertain', {
-            url: '/order/orderCertain?pricecount',
+            url: '/order/orderCertain?productId&total&productcount',
             views: {
                 'page-order': {
-                    templateUrl: 'page/order/orderCertain.html'
+                    templateUrl: 'page/order/orderCertain.html',
+                    controller:'orderCertain'
                 }
             }
         });

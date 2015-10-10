@@ -331,11 +331,11 @@ namespace Protoss.Controllers
 
                 PhoneNumber = model.PhoneNumber,
 
-                Adduser = model.Type == EnumOrderType.OffLine ? _userService.GetUserByName("admin") : (UserBase)_workContext.CurrentUser,
+                Adduser = model.Type == EnumOrderType.OffLine ? _userService.GetUserByName("13629609670") : (UserBase)_workContext.CurrentUser,
 
                 Addtime = DateTime.Now,
 
-                Upduser = model.Type == EnumOrderType.OffLine ? _userService.GetUserByName("admin") : (UserBase)_workContext.CurrentUser,
+                Upduser = model.Type == EnumOrderType.OffLine ? _userService.GetUserByName("13629609670") : (UserBase)_workContext.CurrentUser,
 
                 Updtime = DateTime.Now,
 

@@ -53,9 +53,8 @@ app.controller('cartCtrl',['$scope','cartservice','$state',function($scope,carts
                 for(j=0;j<$scope.productlist.length;j++){
                         $scope.productcount.push($scope.productlist[j])
                 }
-            $state.go("page.orderCertain",{pricecount:$scope.total})
+            $state.go("page.orderCertain",{productcount:$scope.productcount,total:$scope.total})
         }
-       console.log($scope.productlist);
         //endregion
 
 
