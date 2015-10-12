@@ -4,7 +4,7 @@
 /**
  * Created by 10138 on 2015/10/6.
  */
-//∂©µ•¡–±Ì
+//ËÆ¢ÂçïÂàóË°®
 app.controller('orderList',['$http','$scope',function($http,$scope){
      $scope.condition = {
          PageCount:10,
@@ -12,17 +12,17 @@ app.controller('orderList',['$http','$scope',function($http,$scope){
          IsDescending:true
      };
 
-     //$http.get(SETTING.ApiUrl+"/Order/GetByCondition", {params:$scope.condition,
-     //    'withCredentials': true
-     //}).success(function(data){
-     //    $scope.orderList=data.List;
-     //    console.log($scope.orderList);
-     //})
-     $http.get(SETTING.ApiUrl + '/OrderDetail/Get', {
-         params: $scope.condition,
+     $http.get(SETTING.ApiUrl+"/Order/GetByCondition", {params:$scope.condition,
          'withCredentials': true
      }).success(function(data){
-         $scope.orderDetail=data.List;
-         console.log( $scope.orderDetail);
+         $scope.orderList=data.List;
+         console.log($scope.orderList);
      })
+     //$http.get(SETTING.ApiUrl + '/OrderDetail/Get', {
+     //    params: $scope.condition,
+     //    'withCredentials': true
+     //}).success(function(data){
+     //    $scope.orderDetail=data.List;
+     //    console.log( $scope.orderDetail);
+     //})
 }])

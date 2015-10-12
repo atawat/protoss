@@ -1,6 +1,6 @@
 <div class="bar  bg-grey " style="height: 44px">
     <button class="button  button-icon icon ion-chevron-left color-white"></button>
-    <h1 class="title color-white font-15">原味奶茶</h1>
+    <h1 class="title color-white font-15">{{items.Name}}</h1>
 </div>
 <ion-view hide-tabs="true">
     <ion-content>
@@ -19,6 +19,9 @@
             </ion-slide-box>
             <div class="padding item font-15" >
                 <span>{{items.Name}}</span><strong class="float-right assertive">￥{{items.Price}}</strong>
+            </div>
+            <div class="padding font-15">
+                {{items.Detail.Detail}}
             </div>
         </div>
     </ion-content>

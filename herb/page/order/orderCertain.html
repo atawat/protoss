@@ -19,7 +19,7 @@
                     <option value="">昆明</option></select>
             </div>
             <div class="col-25 col-offset-10 ">
-                <select id="sect"  ng-options="option.name as option.name for option in town" ng-model="choice" ng-change="select()">
+                <select id="sect"  ng-options="option.name as option.name for option in town" ng-model="choice" ng-change="select(choice)">
                     <!--<option value="五华区">五华区</option>-->
                     <!--<option value="盘龙区">盘龙区</option>-->
                     <!--<option value="官渡区">官渡区</option>-->
@@ -29,7 +29,7 @@
 
         </div>
         <div class="item item-input">
-            <input class="font-15 width-100 " type="text" placeholder="请输入详细地址" style="font-size: 1em" >
+            <input class="font-15 width-100 " type="text" placeholder="请输入详细地址" style="font-size: 1em" ng-model="HouseAddress.HouseAddress">
         </div>
         </div>
         <h3 class="font-15">
@@ -54,9 +54,9 @@
         </div>
         <div class="item item-borderless font-12"><strong>配送费:￥</strong><strong>5</strong></div>
         <div class="bar text-center energized-bg light">
-          <h1 class="title"><span>订单总额：￥</span><span>{{condition.TotalPrice}}</span></h1>
+          <h1 class="title"><span>订单总额：￥</span><span>{{TotalPrice}}</span></h1>
         </div>
-        <button class="button button-block bg-grey light font-15 " style="margin-top: 50px">确&nbsp;&nbsp;&nbsp;&nbsp;定</button>
+        <button class="button button-block bg-grey light font-15 " style="margin-top: 50px" ng-click="createOrder()">确&nbsp;&nbsp;&nbsp;&nbsp;定</button>
     </ion-content>
 
 </ion-view>

@@ -3,15 +3,15 @@
  */
 
 
-app.controller('detailCtrl',['$scope','$http','cartservice','$stateParams','$ionicSlideBoxDelegate','$state',function($scope,$http,cartservice,$stateParams,$ionicSlideBoxDelegate,$state) {
+app.controller('detailCtrl',['$scope','$http','cartservice','$stateParams','$ionicSlideBoxDelegate','$state','$ionicLoading','$timeout',function($scope,$http,cartservice,$stateParams,$ionicSlideBoxDelegate,$state,$ionicLoading,$timeout) {
 
     $scope.Img=SETTING.ImgUrl;
-    //region ÂÖ²¥Í¼
+    //region è½®æ’­å›¾
     $scope.$on('$ionicView.enter', function () {
         $ionicSlideBoxDelegate.start();
     });
     //endregion
-    //»ñÈ¡Í¼Æ¬ÏêÇé
+    //è·å–å›¾ç‰‡è¯¦æƒ…
     var load_detail = function () {
             $http.get(SETTING.ApiUrl + "/ProductDetail/productDetail?id=" + $stateParams.id, {
                 'withCredentials': true
@@ -20,7 +20,7 @@ app.controller('detailCtrl',['$scope','$http','cartservice','$stateParams','$ion
             });
     };
     load_detail();
-    //»ñÈ¡ÉÌÆ·¼Û¸ñµÈÏêÇé
+    //è·å–å•†å“ä»·æ ¼ç­‰è¯¦æƒ…
     $scope.items = [];
     var getList = function () {
         $http.get(SETTING.ApiUrl + "/Product/Get?id=" + $stateParams.id,  {
@@ -36,7 +36,7 @@ app.controller('detailCtrl',['$scope','$http','cartservice','$stateParams','$ion
     getList();
 
 
-    //region ¼ÓÈë¹ºÎï³µ
+    //region åŠ å…¥è´­ç‰©è½¦
     $scope.cartinfo = {
         id: null,
         name: null,
@@ -51,11 +51,24 @@ app.controller('detailCtrl',['$scope','$http','cartservice','$stateParams','$ion
         $scope.cartinfo.price = $scope.items.Price;
         $scope.cartinfo.count = 1;
         cartservice.add($scope.cartinfo);
+
+        $ionicLoading.show({
+            template: "åŠ å…¥è´­ç‰©è½¦æˆåŠŸ..."
+        });
+        $timeout(function(){
+            $ionicLoading.hide();
+        },2000);
     }
     //endregion
-    //region  Á¢¼´¹ºÂò
+    //region  ç«‹å³è´­ä¹°
     $scope.buy=function(){
-        $state.go("page.orderCertain",{productId:  $scope.items.Id,total:$scope.items.Price})
+        $scope.cartinfo.id = $scope.items.Id;
+        $scope.cartinfo.name = $scope.items.Name;
+        $scope.cartinfo.image = $scope.items.Image;
+        $scope.cartinfo.price = $scope.items.Price;
+        $scope.cartinfo.count = 1;
+        cartservice.add($scope.cartinfo);
+        $state.go("page.cart");
     }
     //endregion
    }])

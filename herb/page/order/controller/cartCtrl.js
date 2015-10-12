@@ -1,7 +1,7 @@
 
 app.controller('cartCtrl',['$scope','cartservice','$state',function($scope,cartservice,$state){
 
-        //    ´ÓlocalStorage»ñÈ¡¹ºÎï³µĞÅÏ¢
+        //    ä»localStorageè·å–è´­ç‰©è½¦ä¿¡æ¯
         var carlistcount=0;
         var getcar =function (){
             var storage=window.localStorage.ShoppingCart;
@@ -13,7 +13,7 @@ app.controller('cartCtrl',['$scope','cartservice','$state',function($scope,carts
             }
         };
         getcar();
-        //region ÊıÁ¿Ôö¼Ó¼õ
+        //region æ•°é‡å¢åŠ å‡
         $scope.adding=function(id){
             cartservice.addone(id);
             for(j=0;j<$scope.productlist.length;j++){
@@ -38,7 +38,7 @@ app.controller('cartCtrl',['$scope','cartservice','$state',function($scope,carts
 
         //endregion
 
-        //region ¼ÆËã×Ü¼Û
+        //region è®¡ç®—æ€»ä»·
         var allprice=function(){
                 $scope.total=0;
                 for(j=0;j<$scope.productlist.length;j++){
@@ -47,13 +47,13 @@ app.controller('cartCtrl',['$scope','cartservice','$state',function($scope,carts
         }
         allprice();
         //endregion
-        //region Ìá½»¶©µ¥
+        //region æäº¤è®¢å•
         $scope.submit=function(){
             $scope.productcount=[];
                 for(j=0;j<$scope.productlist.length;j++){
                         $scope.productcount.push($scope.productlist[j])
                 }
-            $state.go("page.orderCertain",{productcount:$scope.productcount,total:$scope.total})
+            $state.go("page.orderCertain",{productcount:$scope.productcount,TotalPrice:$scope.total})
         }
         //endregion
 

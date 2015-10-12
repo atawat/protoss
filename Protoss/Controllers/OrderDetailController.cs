@@ -53,15 +53,12 @@ namespace Protoss.Controllers
 			{
 
 				Id = c.Id,
-
-//				Product = c.Product,
-
+				ProductName = c.Product.Name,
+                Image = c.Product.Image,
 				Count = c.Count,
-
 				TotalPrice = c.TotalPrice,
-
-                Remark = c.Remark
-
+                Remark = c.Remark,
+                AddTime = c.Order.Addtime
 //				Order = c.Order,
 
 			}).ToList();

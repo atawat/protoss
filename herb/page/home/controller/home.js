@@ -3,8 +3,8 @@
  */
 
 
-app.controller('home',['$scope','$http','cartservice',function($scope,$http,cartservice){
-    //��ȡ��Ʒ
+app.controller('home',['$scope','$http','cartservice','$ionicLoading','$timeout',function($scope,$http,cartservice,$ionicLoading,$timeout){
+    //获取商品
     $scope.items = [];
     $scope.searchCondition = {
         Page: 1,
@@ -23,7 +23,7 @@ app.controller('home',['$scope','$http','cartservice',function($scope,$http,cart
     };
     getList();
 
-//���빺�ﳵ
+//加入购物车
     $scope.cartinfo = {
         id: null,
         name: null,
@@ -38,6 +38,13 @@ app.controller('home',['$scope','$http','cartservice',function($scope,$http,cart
         $scope.cartinfo.price = data.row.Price;
         $scope.cartinfo.count = 1;
         cartservice.add($scope.cartinfo);
+
+        $ionicLoading.show({
+            template: "加入购物车成功..."
+        });
+        $timeout(function(){
+            $ionicLoading.hide();
+        },2000);
     }
 
 }])

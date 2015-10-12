@@ -16,7 +16,10 @@ namespace Protoss.Models
         /// </summary>
 		public int Id {get;set;}
 
-
+        /// <summary>
+        /// 主图
+        /// </summary>
+        public virtual string Image { get; set; }
 		/// <summary>
         /// 对应商品
         /// </summary>
@@ -48,5 +51,6 @@ namespace Protoss.Models
         /// 备注
         /// </summary>
         public virtual string Remark { get; set; }
+        public DateTime AddTime { get; set; }
 	}
 }

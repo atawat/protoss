@@ -2,7 +2,7 @@
  * Created by gaofengming on 2015/9/15.
  */
 app.controller('login',['$scope','$state','AuthService','$ionicLoading','$timeout',function($scope,$state,AuthService,$ionicLoading,$timeout){
-    console.log("111");
+
     $scope.user={
         userName:'',
         password:''
