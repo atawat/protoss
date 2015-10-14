@@ -1,5 +1,10 @@
 
-app.controller('cartCtrl',['$scope','cartservice','$state',function($scope,cartservice,$state){
+app.controller('cartCtrl',['$scope','cartservice','$state','AuthService',function($scope,cartservice,$state,AuthService){
+        $scope.currentuser= AuthService.CurrentUser(); //调用service服务来获取当前登陆信息
+        if( $scope.currentuser==undefined ||  $scope.currentuser=="")
+        {
+            $state.go("page.login");//调到登录页面
+        }
 
         //    从localStorage获取购物车信息
         var carlistcount=0;

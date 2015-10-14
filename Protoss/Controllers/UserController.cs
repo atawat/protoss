@@ -148,6 +148,7 @@ namespace Protoss.Controllers
         }
 
         [HttpPost]
+        [EnableCors("*", "*", "*", SupportsCredentials = true)]
         public HttpResponseMessage ChangePassword(string oldPassword,string newPassword,string secondPassword)
         {
             if (newPassword != secondPassword) {

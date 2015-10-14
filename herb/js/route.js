@@ -116,7 +116,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/user/about',
             views: {
                 'page-user': {
-                    templateUrl: 'page/user/about.html'
+                    templateUrl: 'page/user/about.html',
+                    controller:'about'
                 }
             }
         })
@@ -124,7 +125,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/user/userCenter',
             views: {
                 'page-user': {
-                    templateUrl: 'page/user/userCenter.html'
+                    templateUrl: 'page/user/userCenter.html',
+                    controller:'userCenter'
                 }
             }
         })

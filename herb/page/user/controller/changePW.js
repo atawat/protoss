@@ -1,8 +1,13 @@
 /**
  * Created by 10138 on 2015/10/6.
  */
-//ĞŞ¸ÄÃÜÂë
-app.controller('changePW',['$http','$scope','$state','$ionicLoading','$timeout',function($http,$scope,$state,$ionicLoading,$timeout){
+//ä¿®æ”¹å¯†ç 
+app.controller('changePW',['$http','$scope','$state','$ionicLoading','$timeout','AuthService',function($http,$scope,$state,$ionicLoading,$timeout,AuthService){
+    $scope.currentuser= AuthService.CurrentUser(); //è°ƒç”¨serviceæœåŠ¡æ¥è·å–å½“å‰ç™»é™†ä¿¡æ¯
+    if( $scope.currentuser==undefined ||  $scope.currentuser=="")
+    {
+        $state.go("page.login");//è°ƒåˆ°ç™»å½•é¡µé¢
+    }
     $scope.pw ={
         oldPassword:'',
         newPassword:'',
@@ -23,7 +28,7 @@ app.controller('changePW',['$http','$scope','$state','$ionicLoading','$timeout',
             else{
                 AuthService.doLogin($scope.signer.UserName,$scope.signer.Password,function(){
                     $ionicLoading.show({
-                        template:"ĞŞ¸ÄÃÜÂë³É¹¦£¬ÇëÖØĞÂµÇÂ½"
+                        template:"ä¿®æ”¹å¯†ç æˆåŠŸï¼Œè¯·é‡æ–°ç™»é™†"
                     });
                     $timeout(function(){
                         $state.go("page.login");

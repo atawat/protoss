@@ -1,7 +1,12 @@
 /**
  * Created by Yunjoy on 2015/10/8.
  */
-app.controller('orderCertain',['$http','$scope','$stateParams','$ionicLoading','$timeout','$state',function($http,$scope,$stateParams,$ionicLoading,$timeout,$state){
+app.controller('orderCertain',['$http','$scope','$stateParams','$ionicLoading','$timeout','$state','$ionicPopup','AuthService',function($http,$scope,$stateParams,$ionicLoading,$timeout,$state,$ionicPopup,AuthService){
+    $scope.currentuser= AuthService.CurrentUser(); //调用service服务来获取当前登陆信息
+    if( $scope.currentuser==undefined ||  $scope.currentuser=="")
+    {
+        $state.go("page.login");//调到登录页面
+    }
 //获取购物车信息
     var storage=window.localStorage.ShoppingCart;
     var jsonstr = JSON.parse(storage.substr(1, storage.length));
@@ -21,6 +26,30 @@ app.controller('orderCertain',['$http','$scope','$stateParams','$ionicLoading','
         //$scope.Details.join($scope.DetailModel)
         $scope.Details.push($scope.DetailModel);
     }
+    //留言板
+    $scope.showPopup = function() {
+        $scope.data = {}
+
+        // 调用$ionicPopup弹出定制弹出框
+        $ionicPopup.show({
+            template: "<input type='text' ng-model=''>",
+            title: "留言板",
+            scope: $scope,
+            buttons: [
+                { text: "取消" },
+                {
+                    text: "<b>保存</b>",
+                    type: "button-positive",
+                    onTap: function(e) {
+                        return $scope.data.wifi;
+                    }
+                }
+            ]
+        })
+            .then(function(res) {
+                $scope.status = ["Wi-Fi密码到手了",":",res].join(" ");
+            });
+    };
 
 
     //地址

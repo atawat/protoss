@@ -23,12 +23,12 @@ app.filter('dateFilter',function(){
             + month
             + "-"
             + currentDate
-            + "  "
-            + newDate.getHours()
-            + ":"
-            + newDate.getMinutes()
-            + ":"
-            + newDate.getSeconds()
+            //+ "  "
+            //+ newDate.getHours()
+            //+ ":"
+            //+ newDate.getMinutes()
+            //+ ":"
+            //+ newDate.getSeconds()
             ;
     }
 });

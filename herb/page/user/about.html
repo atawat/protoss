@@ -1,5 +1,5 @@
 <div class="bar  bg-grey " style="height: 44px">
-    <button class="button  button-icon icon ion-chevron-left color-white"></button>
+    <button class="button  button-icon icon ion-chevron-left color-white" onclick="javascript:history.back(-1);"></button>
     <h1 class="title color-white font-15">关&nbsp;&nbsp;&nbsp;于</h1>
 </div>
 <ion-view >
@@ -49,7 +49,8 @@
                 <strong>传真： 0871-60897869</strong>
             </li>
         </ul>
-        <button class="button button-block  button-large bg-grey light font-13">一&nbsp;&nbsp;&nbsp;&nbsp;键&nbsp;&nbsp;&nbsp;&nbsp;咨&nbsp;&nbsp;&nbsp;&nbsp;询</button>
-        <img src="img/about-f.png">
+        <a class="button button-block  button-large bg-grey light font-13" href="tel:0871-68986908">一&nbsp;&nbsp;&nbsp;&nbsp;键&nbsp;&nbsp;&nbsp;&nbsp;咨&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+        <!--<img src="img/about-f.png">-->
+        <div class="map font-16" id="map"></div>
     </ion-content>
 </ion-view>
