@@ -22,7 +22,7 @@
                         <img src="img/pic3.png" ui-sref="page.product-detail({id:row.Id})">
                         <div class="text-center">
                             <p>{{row.Name}}</p>
-                            <p>￥<span>{{row.Price}}</span></p>
+                            <p><span>{{row.Price | currency:"￥"}}</span></p>
                         </div>
                     </div>
                     <div class="bg-grey text-center cart-i"  ng-click="AddCart(this)">

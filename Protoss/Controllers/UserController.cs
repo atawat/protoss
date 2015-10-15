@@ -146,19 +146,24 @@ namespace Protoss.Controllers
             };
             return PageHelper.toJson(userDetail);
         }
-
+        public class password {
+            public string oldPassword {get;set;}
+            public string newPassword {get;set;}
+            public string secondPassword{get;set;}
+        }
         [HttpPost]
         [EnableCors("*", "*", "*", SupportsCredentials = true)]
-        public HttpResponseMessage ChangePassword(string oldPassword,string newPassword,string secondPassword)
+        public HttpResponseMessage ChangePassword( password pwd)
         {
-            if (newPassword != secondPassword) {
+            if (pwd.newPassword != pwd.secondPassword) {
                 return PageHelper.toJson(PageHelper.ReturnValue(false, "两次密码不一致"));
             }
             var user =(UserBase) _workContext.CurrentUser;
-            if (user!=null && PasswordHelper.ValidatePasswordHashed(user,newPassword))
+            if (user!=null && PasswordHelper.ValidatePasswordHashed(user,pwd.oldPassword))
             {  
                
-                PasswordHelper.SetPasswordHashed(user, newPassword);
+                PasswordHelper.SetPasswordHashed(user, pwd.newPassword);
+                _userService.ModifyUser(user);
                 return PageHelper.toJson(PageHelper.ReturnValue(true,"数据更新成功！"));
             }
             return PageHelper.toJson(PageHelper.ReturnValue(false, "数据更新失败！"));

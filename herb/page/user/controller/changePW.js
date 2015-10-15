@@ -8,34 +8,34 @@ app.controller('changePW',['$http','$scope','$state','$ionicLoading','$timeout',
     {
         $state.go("page.login");//调到登录页面
     }
-    $scope.pw ={
+    $scope.pwd ={
         oldPassword:'',
         newPassword:'',
         secondPassword:''
 
     }
-    $scope.change = function(){
-        $http.post(SETTING.ApiUrl+'/User/ChangePassword',$scope.pw,{'withCredentials':true}).success(function(data){
-            if(data.Status==false){
+    $scope.change = function() {
+        $http.post(SETTING.ApiUrl + '/User/ChangePassword', $scope.pwd, {'withCredentials': true}).success(function (data) {
+            if (data.Status == false) {
                 $ionicLoading.show({
-                    template:data.Msg,
-                    noBackdrop:true
+                    template: data.Msg,
+                    noBackdrop: false
                 });
-                $timeout(function(){
+                $timeout(function () {
                     $ionicLoading.hide();
-                },3000);
+                }, 3000);
             }
-            else{
-                AuthService.doLogin($scope.signer.UserName,$scope.signer.Password,function(){
-                    $ionicLoading.show({
-                        template:"修改密码成功，请重新登陆"
-                    });
-                    $timeout(function(){
-                        $state.go("page.login");
-                        $ionicLoading.hide();
-                    },1000);
-                })
+            else {
+
+                $ionicLoading.show({
+                    template: "修改密码成功，请重新登陆"
+                });
+                $timeout(function () {
+                    $state.go("page.login");
+                    $ionicLoading.hide();
+                }, 1000);
+
             }
+
         })
-    }
-}])
+    }}])

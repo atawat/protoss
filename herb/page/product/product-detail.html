@@ -18,7 +18,7 @@
                 </ion-slide>
             </ion-slide-box>
             <div class="padding item font-15" >
-                <span>{{items.Name}}</span><strong class="float-right assertive">￥{{items.Price}}</strong>
+                <span>{{items.Name}}</span><strong class="float-right assertive">{{items.Price | currency:"￥" }}</strong>
             </div>
             <div class="padding font-15">
                 {{items.Detail.Detail}}

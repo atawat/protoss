@@ -95,20 +95,29 @@ app.controller('orderCertain',['$http','$scope','$stateParams','$ionicLoading','
     };
     $scope.createOrder=function(){
         $scope.orderModel.DeliveryAddress = $scope.DeliveryAddress+$scope.HouseAddress.HouseAddress;
-        $http.post(SETTING.ApiUrl + '/Order/CreateOrder',$scope.orderModel ,{
-            'withCredentials': true
-        }).success(function(data){
-           $scope.order = data;
+        if($scope.HouseAddress.HouseAddress==""||$scope.HouseAddress.HouseAddress==undefined){
             $ionicLoading.show({
-                template: "订单提交成功，请付款..."
+                template: "请填写收货地址"
             });
             $timeout(function(){
                 $ionicLoading.hide();
-                $state.go("page.orderList")
+                return;
             },2000);
-        })
+        }
+        else{
+            $http.post(SETTING.ApiUrl + '/Order/CreateOrder',$scope.orderModel ,{
+                'withCredentials': true
+            }).success(function(data){
+                $scope.order = data;
+                $ionicLoading.show({
+                    template: "订单提交成功，请付款..."
+                });
+                $timeout(function(){
+                    $ionicLoading.hide();
+                    $state.go("page.orderList")
+                },2000);
+            })
+        }
+
     }
-
-
-
 }])

@@ -11,7 +11,7 @@
                     <strong class="font-12" >{{item.OrderNum}}</strong><br><br>
                 </div>
                 <div class="  padding-top">
-                    <strong >￥{{item.TotalPrice}}元</strong>
+                    <strong >{{item.TotalPrice| currency:"￥"}}</strong>
                     <strong class="float-right">{{item.Addtime | dateFilter}}</strong>
                 </div>
             </ion-item >
@@ -39,8 +39,8 @@
         </ion-list>
     </ion-content>
 </ion-view>
-<div class="bar bar-footer stable-bg">
-    <h1 class="title font-15">  -----   黑舞堂冷饮店   -----</h1>
-</div>
+<!--<div class="bar bar-footer stable-bg">-->
+    <!--<h1 class="title font-15">  -&#45;&#45;&#45;&#45;   黑舞堂冷饮店   -&#45;&#45;&#45;&#45;</h1>-->
+<!--</div>-->
 
 

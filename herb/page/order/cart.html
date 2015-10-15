@@ -19,7 +19,7 @@
                         <span>{{item.count}}</span>
                         <i class="ion-minus-round" ng-click="decrease(item.id)"></i>
                     </strong><br><br>
-                        <span class="assertive">￥{{item.price}}</span>
+                        <span class="assertive">{{item.price| currency:"￥"}}</span>
                     </div>
                 </div>
             </ion-item >
