@@ -3,8 +3,9 @@
  */
 
 
-app.controller('detailCtrl',['$scope','$http','cartservice','$stateParams','$ionicSlideBoxDelegate','$state','$ionicLoading','$timeout',function($scope,$http,cartservice,$stateParams,$ionicSlideBoxDelegate,$state,$ionicLoading,$timeout) {
-
+app.controller('detailCtrl',['$scope','$http','cartservice','$stateParams','$ionicSlideBoxDelegate','$state','$ionicLoading','$timeout','$ionicHistory',function($scope,$http,cartservice,$stateParams,$ionicSlideBoxDelegate,$state,$ionicLoading,$timeout,$ionicHistory) {
+    //清除页面堆栈
+    $ionicHistory.clearHistory();
     $scope.Img=SETTING.ImgUrl;
     //region 轮播图
     $scope.$on('$ionicView.enter', function () {

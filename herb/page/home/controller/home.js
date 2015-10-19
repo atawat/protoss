@@ -3,7 +3,9 @@
  */
 
 
-app.controller('home',['$scope','$http','cartservice','$ionicLoading','$timeout',function($scope,$http,cartservice,$ionicLoading,$timeout){
+app.controller('home',['$scope','$http','cartservice','$ionicLoading','$timeout','$ionicHistory',function($scope,$http,cartservice,$ionicLoading,$timeout,$ionicHistory){
+    //清除页面堆栈
+    $ionicHistory.clearHistory();
     //获取商品
     $scope.items = [];
     $scope.searchCondition = {
@@ -45,6 +47,11 @@ app.controller('home',['$scope','$http','cartservice','$ionicLoading','$timeout'
         $timeout(function(){
             $ionicLoading.hide();
         },2000);
+    }
+    //页面跳转
+    $scope.go = function(state) {
+        $ionicHistory.clearHistory();
+        window.location.href = state;
     }
 
 }])

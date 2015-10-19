@@ -1,8 +1,9 @@
 /**
  * Created by gaofengming on 2015/9/15.
  */
-app.controller('login',['$scope','$state','AuthService','$ionicLoading','$timeout',function($scope,$state,AuthService,$ionicLoading,$timeout){
-
+app.controller('login',['$scope','$state','AuthService','$ionicLoading','$timeout','$ionicHistory',function($scope,$state,AuthService,$ionicLoading,$timeout,$ionicHistory){
+    //清除页面堆栈
+    $ionicHistory.clearHistory();
     $scope.user={
         userName:'',
         password:''

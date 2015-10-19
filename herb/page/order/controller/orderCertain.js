@@ -1,7 +1,9 @@
 /**
  * Created by Yunjoy on 2015/10/8.
  */
-app.controller('orderCertain',['$http','$scope','$stateParams','$ionicLoading','$timeout','$state','$ionicPopup','AuthService',function($http,$scope,$stateParams,$ionicLoading,$timeout,$state,$ionicPopup,AuthService){
+app.controller('orderCertain',['$http','$scope','$stateParams','$ionicLoading','$timeout','$state','$ionicPopup','AuthService','$ionicHistory',function($http,$scope,$stateParams,$ionicLoading,$timeout,$state,$ionicPopup,AuthService,$ionicHistory){
+    //清除页面堆栈
+    $ionicHistory.clearHistory();
     $scope.currentuser= AuthService.CurrentUser(); //调用service服务来获取当前登陆信息
     if( $scope.currentuser==undefined ||  $scope.currentuser=="")
     {

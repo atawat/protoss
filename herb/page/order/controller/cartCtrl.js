@@ -1,5 +1,7 @@
 
-app.controller('cartCtrl',['$scope','cartservice','$state','AuthService',function($scope,cartservice,$state,AuthService){
+app.controller('cartCtrl',['$scope','cartservice','$state','AuthService','$ionicHistory',function($scope,cartservice,$state,AuthService,$ionicHistory){
+        //清除页面堆栈
+        $ionicHistory.clearHistory();
         $scope.currentuser= AuthService.CurrentUser(); //调用service服务来获取当前登陆信息
         if( $scope.currentuser==undefined ||  $scope.currentuser=="")
         {
@@ -59,6 +61,8 @@ app.controller('cartCtrl',['$scope','cartservice','$state','AuthService',functio
                         $scope.productcount.push($scope.productlist[j])
                 }
             $state.go("page.orderCertain",{productcount:$scope.productcount,TotalPrice:$scope.total})
+
+
         }
         //endregion
 

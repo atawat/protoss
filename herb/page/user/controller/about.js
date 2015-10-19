@@ -1,8 +1,9 @@
 /**
  * Created by Yunjoy on 2015/10/14.
  */
-app.controller('about',function(){
-
+app.controller('about',function($ionicHistory){
+    //清除页面堆栈
+    $ionicHistory.clearHistory();
     //创建和初始化地图函数：
     function initMap(){
         createMap();//创建地图

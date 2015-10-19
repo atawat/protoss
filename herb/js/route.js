@@ -9,7 +9,7 @@ var app = angular.module('starter', ['ionic', 'ngCordova', 'ngStorage']);
 var SETTING = {
     BaseUrl: 'http://www.iyookee.cn/',
     ApiUrl: 'http://localhost:22572/api',
-    ImgUrl: 'http://img.iyookee.cn/',
+    ImgUrl: 'http://localhost:22572/upload',
     eventApiUrl: 'http://www.iyookee.cn/API'
 };
 app.run(function ($ionicPlatform, $ionicHistory, $ionicLoading) {
