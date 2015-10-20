@@ -2,3 +2,5 @@
 DataConnectionString: Data Source=.;Initial Catalog=Protoss;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=123;MultipleActiveResultSets=True
 AppId:wx30f6e2dfd55c3e62
 AppSecret:e59b34d2eb1ac43fc5790027d4d4d593
+Mchid:
+Key:

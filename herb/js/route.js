@@ -7,10 +7,9 @@
 // 'starter.controllers' is found in controllers.js
 var app = angular.module('starter', ['ionic', 'ngCordova', 'ngStorage']);
 var SETTING = {
-    BaseUrl: 'http://www.iyookee.cn/',
+    BaseUrl: 'http://localhost:22572/',
     ApiUrl: 'http://localhost:22572/api',
-    ImgUrl: 'http://img.iyookee.cn/',
-    eventApiUrl: 'http://www.iyookee.cn/API'
+    ImgUrl: 'http://localhost:22572/upload/'
 };
 app.run(function ($ionicPlatform, $ionicHistory, $ionicLoading) {
     $ionicPlatform.ready(function () {

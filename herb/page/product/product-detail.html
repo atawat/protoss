@@ -20,8 +20,8 @@
             <div class="padding item font-15" >
                 <span>{{items.Name}}</span><strong class="float-right assertive">{{items.Price | currency:"￥" }}</strong>
             </div>
-            <div class="padding font-15">
-                {{items.Detail.Detail}}
+            <div class="padding font-15" ng-bind-html="items.Detail.Detail">
+
             </div>
         </div>
     </ion-content>
