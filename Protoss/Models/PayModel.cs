@@ -8,5 +8,7 @@
         public string Package { get; set; }
         public string SignType { get; set; }
         public string PaySign { get; set; }
+
+        public decimal TotalFee { get; set; }
     }
 }

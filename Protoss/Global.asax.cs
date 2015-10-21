@@ -8,6 +8,9 @@ using System.Web.SessionState;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
+using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
+using YooPoon.Core.Autofac;
 
 namespace Protoss
 {
@@ -20,6 +23,21 @@ namespace Protoss
             GlobalConfiguration.Configure(WebApiConfig.Register);
 //            RouteConfig.RegisterRoutes(RouteTable.Routes);            
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+
+            #region IOC配置
+
+            //DI配置
+            var initialize = new InitializeContainer();
+            initialize.Initializing();
+            //WebAPI
+            GlobalConfiguration.Configuration.DependencyResolver =
+                new AutofacWebApiDependencyResolver(initialize.ContainerManager.Container);
+
+            //MVC
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(initialize.ContainerManager.Container));
+            
+            #endregion
+
 
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
