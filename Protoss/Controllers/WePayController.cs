@@ -57,7 +57,7 @@ namespace Protoss.Controllers
             };
             var unifiedReponse = (XmlDocument)_wePayService.UnifiedOrder(payParamDic);
             XmlNode xmlNode = unifiedReponse.FirstChild;//获取到根节点<xml>
-            XmlNodeList nodes = xmlNode.ChildNodes;
+//            XmlNodeList nodes = xmlNode.ChildNodes;
             if(xmlNode.Attributes["return_code"].Value != "SUCCESS" || xmlNode.Attributes["result_code"].Value != "SUCCESS")
                 return RedirectToAction("Error", new { msg = xmlNode.Attributes["return_msg"].Value });
             var payModel = new PayModel
