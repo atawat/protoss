@@ -2,7 +2,9 @@
  * Created by Yunjoy on 2015/9/15.
  */
 
-app.controller('register',['$http','$scope','$state','AuthService','$ionicLoading','$timeout',function($http,$scope,$state,AuthService,$ionicLoading,$timeout){
+app.controller('register',['$http','$scope','$state','AuthService','$ionicLoading','$timeout','$ionicHistory',function($http,$scope,$state,AuthService,$ionicLoading,$timeout,$ionicHistory){
+    //清除页面堆栈
+    $ionicHistory.clearHistory();
     $scope.signer ={
         UserName:'',
         Password:'',
