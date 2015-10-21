@@ -6,6 +6,8 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Http;
+using System.Web.Mvc;
+using System.Web.Optimization;
 
 namespace Protoss
 {
@@ -18,6 +20,11 @@ namespace Protoss
             GlobalConfiguration.Configure(WebApiConfig.Register);
 //            RouteConfig.RegisterRoutes(RouteTable.Routes);            
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+
+            AreaRegistration.RegisterAllAreas();
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }

@@ -20,7 +20,7 @@ app.controller('orderIndexController',['$http','$state','$scope',function($http,
             params:$scope.searchCondition,
             'withCredentials':true
         }).success(function(data){
-            $scope.list = data;
+            $scope.list = data.List;
         });
 
         $http.get(SETTING.ApiUrl+'/order/GetCount',{
