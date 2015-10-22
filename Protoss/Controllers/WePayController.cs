@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Xml;
@@ -84,6 +85,26 @@ namespace Protoss.Controllers
             if (string.IsNullOrEmpty(msg))
                 errorMsg = "出错啦，无法完成支付";
             return View(errorMsg);
+        }
+
+        public ActionResult GetOpenId(string code, string state)
+        {
+            if (string.IsNullOrEmpty(code))
+                return null;
+            string a = state;
+            if (string.IsNullOrEmpty(a))
+                return null;
+            string[] sArray = a.Split('&');
+            var openid = _commonService.GetOAuthAccessToken(code).openid;
+            var customerParamString = "";
+            var redirectUrl = sArray[1] + "?openid=" + openid;
+            if (sArray.Length > 2)
+            {
+                customerParamString = sArray[2].Replace(",", "&");
+            }
+            if (!string.IsNullOrEmpty(customerParamString))
+                redirectUrl += "&" + customerParamString;
+            return Redirect(redirectUrl);
         }
     }
 }
