@@ -110,6 +110,7 @@ app.controller('orderCertain',['$http','$scope','$stateParams','$ionicLoading','
             $http.post(SETTING.ApiUrl + '/Order/CreateOrder',$scope.orderModel ,{
                 'withCredentials': true
             }).success(function(data){
+                console.log(data);
                 $scope.order = data;
                 $ionicLoading.show({
                     template: "订单提交成功，请付款..."
