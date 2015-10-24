@@ -40,7 +40,7 @@ app.service("cartservice", ['$rootScope',
 						"name": cartinfo.name,
 						"count": cartinfo.count,
                         "image":cartinfo.image,
-                        "price":cartinfo.price,
+                        "price":cartinfo.price
 						//"parameterValue":cartinfo.parameterValue
 					}]
 				};
