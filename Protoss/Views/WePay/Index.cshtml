@@ -1,0 +1,52 @@
+﻿@model Protoss.Models.PayModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>黑舞堂——支付</title>
+</head>
+<body>
+    <div class="cube">
+        请点击立即支付按钮进行支付<br />
+        本次支付金额共计:￥@Model.TotalFee.ToString("F2")<br />
+        <button type="submit" id="pay" onclick="doPayAction()">支付</button>
+    </div>
+    <script type="text/javascript">
+        function onBridgeReady() {
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest', {
+                    "appId": "@Model.AppId", //公众号名称，由商户传入     
+                    "timeStamp": " @Model.TimeStamp", //时间戳，自1970年以来的秒数     
+                    "nonceStr": "@Model.NonceStr", //随机串     
+                    "package": "@Model.Package",
+                    "signType": "@Model.SignType", //微信签名方式：     
+                    "paySign": "@Model.PaySign" //微信签名 
+                },
+                function(res) {
+                    if (res.err_msg === "get_brand_wcpay_request：ok") {
+                    } // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
+                }
+            );
+        }
+
+        function doPayAction() {
+            if (typeof WeixinJSBridge == "undefined") {
+                if (document.addEventListener) {
+                    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                } else if (document.attachEvent) {
+                    document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                    document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                }
+            } else {
+                onBridgeReady();
+            }
+        }
+    </script>
+</body>
+
+</html>

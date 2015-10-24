@@ -82,5 +82,10 @@ namespace Protoss.Controllers
                 return PageHelper.toJson(new ResultModel() { Msg = "获取配置文件失败", Status = false });
             }
         }
+
+        public HttpResponseMessage GetAppId()
+        {
+            return PageHelper.toJson(new { appId=_wcCommonService.AppId });
+        }
     }
 }

@@ -7,11 +7,16 @@
 // 'starter.controllers' is found in controllers.js
 var app = angular.module('starter', ['ionic', 'ngCordova', 'ngStorage']);
 var SETTING = {
-    BaseUrl: 'http://www.iyookee.cn/',
+    BaseUrl: 'http://localhost:22572/',
     ApiUrl: 'http://localhost:22572/api',
-    ImgUrl: 'http://localhost:22572/upload',
-    eventApiUrl: 'http://www.iyookee.cn/API'
+    ImgUrl: 'http://localhost:22572/upload/'
 };
+app.run( ['wc',function(wc) {
+    //$rootScope.loading = false;
+    //alert("开始initWC");
+    wc.initWC();
+    //alert("initWC完成");
+}]);
 app.run(function ($ionicPlatform, $ionicHistory, $ionicLoading) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

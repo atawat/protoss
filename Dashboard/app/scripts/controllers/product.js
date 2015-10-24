@@ -20,7 +20,7 @@ app.controller('productIndexController',['$http','$state','$scope','$modal',func
             params:$scope.searchCondition,
             'withCredentials':true
         }).success(function(data){
-            $scope.list = data;
+            $scope.list = data.List;
         });
 
         $http.get(SETTING.ApiUrl+'/product/GetCount',{
