@@ -90,6 +90,7 @@ namespace Protoss.Controllers
             return View(errorMsg);
         }
 
+        [AllowAnonymous]
         public ActionResult GetOpenId(string code, string state)
         {
             if (string.IsNullOrEmpty(code))
@@ -100,7 +101,7 @@ namespace Protoss.Controllers
             string[] sArray = a.Split('&');
             var openid = _commonService.GetOAuthAccessToken(code).openid;
             var customerParamString = "";
-            var redirectUrl = sArray[1] + "?openid=" + openid;
+            var redirectUrl = sArray[1] + "?openId=" + openid;
             if (sArray.Length > 2)
             {
                 customerParamString = sArray[2].Replace(",", "&");

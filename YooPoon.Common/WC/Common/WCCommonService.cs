@@ -36,7 +36,7 @@ namespace YooPoon.Common.WC.Common
         {
             get
             {
-                if (!string.IsNullOrEmpty(_accessToken) && _tokenUpdTime != DateTime.MinValue && _tokenUpdTime.AddSeconds(_tokenExpiresIn) < DateTime.Now)
+                if (!string.IsNullOrEmpty(_accessToken) && _tokenUpdTime != DateTime.MinValue && _tokenUpdTime.AddSeconds(_tokenExpiresIn) > DateTime.Now)
                     return _accessToken;
                 if (!_tokenRefreshLock)
                     RefreshToken();
@@ -164,7 +164,10 @@ namespace YooPoon.Common.WC.Common
                 {"grant_type","authorization_code"}
             };
             var response = _helper.SendGet("https://api.weixin.qq.com/sns/oauth2/access_token", param);
-            return JsonConvert.DeserializeObject<OAuthAccessToken>(response);
+            var token = JsonConvert.DeserializeObject<OAuthAccessToken>(response);
+            if(token.openid == null)
+                _log.Error("获取openId出错，消息回传：{0}",new {response});
+            return token;
         }
     }
 }
