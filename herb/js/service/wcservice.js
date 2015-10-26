@@ -6,7 +6,7 @@ app.service('wc', ['$http', '$state','$rootScope','$sessionStorage',function ($h
         var _appId;
         var _openId;
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("get", SETTING.ApiUrl + "WC/GetJSConfig?url=" + encodeURIComponent(location.href.split('#')[0]), false);
+        xmlhttp.open("get", SETTING.ApiUrl + "/WC/GetJSConfig?url=" + encodeURIComponent(location.href.split('#')[0]), false);
         //xmlhttp.withCredentials = true;
         xmlhttp.send();
         var data = angular.fromJson(xmlhttp.response);
@@ -121,7 +121,7 @@ app.service('wc', ['$http', '$state','$rootScope','$sessionStorage',function ($h
         this.initWC = function () {
             if(!_appId) {
                 _appId = this.getQueryStringByName("appId");
-                if(!appId){
+                if(!_appId){
                     $http.get(SETTING.ApiUrl + '/wc/GetAppId').success(function (res) {
                         _appId = res.appId
                     });

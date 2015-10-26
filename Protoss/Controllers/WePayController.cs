@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 using System.Xml;
 using Protoss.Entity.Model;
@@ -30,6 +32,7 @@ namespace Protoss.Controllers
         }
 
         // GET: WePay
+        [AllowAnonymous]
         public ActionResult Index(string orderNo,string openId)
         {
             if (string.IsNullOrEmpty(orderNo))
@@ -49,8 +52,8 @@ namespace Protoss.Controllers
                 {"detail",order.Details.First().Product.Name+"等商品"},
                 {"attach",""},
                 {"out_trade_no",order.OrderNum},
-                {"total_fee",order.TotalPrice.ToString("F")},
-                {"notify_url",Request.Url.Host},
+                {"total_fee",(order.TotalPrice * 100).ToString("F0")},
+                {"notify_url",Request.Url.Host + "/wepay/notifyurl"},
                 {"trade_type","JSAPI"},
                 {"openid",openId}
             };
@@ -105,6 +108,124 @@ namespace Protoss.Controllers
             if (!string.IsNullOrEmpty(customerParamString))
                 redirectUrl += "&" + customerParamString;
             return Redirect(redirectUrl);
+        }
+
+        public string NotifyUurl()
+        {
+            //获取流
+            Stream s = System.Web.HttpContext.Current.Request.InputStream;
+            //转换成Byte数组
+            byte[] b = new byte[s.Length];
+            //读取流
+            s.Read(b, 0, (int)s.Length);
+            //转化成utf8编码
+            string postStr = Encoding.UTF8.GetString(b);
+            //XML
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(postStr);
+            var returnCode = xmlDoc.SelectSingleNode("/xml/return_code");
+            var resultCode = xmlDoc.SelectSingleNode("/xml/result_code");
+            if (returnCode.InnerText == "SUCCESS" && resultCode.InnerText == "SUCCESS")
+            {
+                var sign = xmlDoc.SelectSingleNode("/xml/sign").InnerText;
+                var dic = FromXml(xmlDoc);
+                if (!CheckSign(sign, dic))
+                {
+                    var error = new SortedDictionary<string, string>
+                    {
+                        {"return_code", "FAIL"},
+                        {"return_msg", "签名验证失败"}
+                    };
+                    return _helper.ConvertToXml(error);
+                }
+                var orderNo = xmlDoc.SelectSingleNode("/xml/out_trade_no");
+                var con = new OrderSearchCondition()
+                {
+                    OrderNum = orderNo.InnerText
+                };
+                var order = _orderService.GetOrdersByCondition(con).FirstOrDefault();
+                if (order != null)
+                {
+//                    if (order.Status == EnumOrderStatus.)
+//                    {
+//                        var error = new SortedDictionary<string, string>
+//                        {
+//                             {"return_code", "FAIL"},
+//                             {"return_msg", "没有获取到PrepayId"}
+//                        };
+//                        return _wcHelper.ConvertToXml(error);
+//                    }
+                    if (order.Status == EnumOrderStatus.Payed)
+                    {
+                        var successMsg = new SortedDictionary<string, string>
+                            {
+                                {"return_code", "SUCCESS"},
+                                {"return_msg", "OK"}
+                            };
+                        return _helper.ConvertToXml(successMsg);
+                    }
+                    if (order.Status == EnumOrderStatus.Created)
+                    {
+                        //更新本地订单状态
+                        order.Status = EnumOrderStatus.Payed;
+                        order.Updtime = DateTime.Now;
+                        _orderService.Update(order);
+                        var successMsg = new SortedDictionary<string, string>
+                            {
+                                {"return_code", "SUCCESS"},
+                                {"return_msg", "OK"}
+                            };
+                        return _helper.ConvertToXml(successMsg);
+                    }
+                }
+                var msg = new SortedDictionary<string, string>
+                    {
+                        {"return_code", "FAIL"},
+                        {"return_msg", "本地不存在订单信息"}
+                    };
+                return _helper.ConvertToXml(msg);
+            }
+            var errorMsg = new SortedDictionary<string, string>
+            {
+                 {"return_code", "FAIL"},
+                 {"return_msg", "交易失败"}
+            };
+            return _helper.ConvertToXml(errorMsg);
+
+        }
+
+        /// <summary>
+        /// 获取xml中的节点
+        /// </summary>
+        /// <param name="xml"></param>
+        /// <returns></returns>
+        private SortedDictionary<string, string> FromXml(XmlDocument xml)
+        {
+            SortedDictionary<string, string> dic = new SortedDictionary<string, string>();
+            XmlNode xmlNode = xml.FirstChild;//获取到根节点<xml>
+            XmlNodeList nodes = xmlNode.ChildNodes;
+            foreach (XmlNode xn in nodes)
+            {
+                XmlElement xe = (XmlElement)xn;
+                dic.Add(xe.Name, xe.InnerText);
+            }
+            return dic;
+        }
+        /// <summary>
+        /// 验证签名
+        /// </summary>
+        /// <param name="sign"></param>
+        /// <param name="dic"></param>
+        /// <returns></returns>
+        private bool CheckSign(string sign, SortedDictionary<string, string> dic)
+        {
+            //获取接收到的签名
+            var returnSign = sign;
+
+            //在本地计算新的签名
+            var calSign = _wePayService.MakeSign(dic);
+
+            return calSign == returnSign;
         }
     }
 }

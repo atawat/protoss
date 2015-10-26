@@ -82,7 +82,7 @@ app.controller('orderCertain', ['$http', '$scope', '$stateParams', '$ionicLoadin
     //创建订单
     $scope.orderModel = {
         DeliveryAddress: '',
-        Type: 1,
+        Type: 0,
         TotalPrice: '',
         PhoneNumber: '',
         CounponNum: '0',
@@ -90,6 +90,7 @@ app.controller('orderCertain', ['$http', '$scope', '$stateParams', '$ionicLoadin
         LocationX: '',
         Discount: 1,
         Details: $scope.Details
+
     };
     $scope.HouseAddress = {
         HouseAddress: ''

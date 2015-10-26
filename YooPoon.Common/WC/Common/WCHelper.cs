@@ -67,15 +67,21 @@ namespace YooPoon.Common.WC.Common
         {
             try
             {
+                var data = Encoding.UTF8.GetBytes(postData);
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = WebRequestMethods.Http.Post;
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = Encoding.UTF8.GetByteCount(postData);
+                request.ContentType = "text/xml";
+                request.ContentLength =data.Length;
 
-                Stream myRequestStream = request.GetRequestStream();
-                using (var myStreamWriter = new StreamWriter(myRequestStream, Encoding.UTF8))
+//                Stream myRequestStream = request.GetRequestStream();
+//                using (var myStreamWriter = new StreamWriter(myRequestStream, Encoding.UTF8))
+//                {
+//                    myStreamWriter.Write(postData);
+//                }
+
+                using (var myRequestStream = request.GetRequestStream())
                 {
-                    myStreamWriter.Write(postData);
+                    myRequestStream.Write(data, 0, data.Length);
                 }
 
 
