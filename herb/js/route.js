@@ -13,9 +13,9 @@ var SETTING = {
 };
 app.run( ['wc',function(wc) {
     //$rootScope.loading = false;
-    //alert("¿ªÊ¼initWC");
+    //alert("ï¿½ï¿½Ê¼initWC");
     wc.initWC();
-    //alert("initWCÍê³É");
+    //alert("initWCï¿½ï¿½ï¿½");
 }]);
 app.run(function ($ionicPlatform, $ionicHistory, $ionicLoading) {
     $ionicPlatform.ready(function () {
@@ -136,6 +136,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             }
         })
         .state('page.cart', {
+            cache: false,
             url: '/cart',
             views: {
                 'page-cart': {
