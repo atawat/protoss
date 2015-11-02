@@ -36,7 +36,7 @@ app.controller('cartCtrl',['$scope','cartservice','$state','AuthService','$ionic
                 if($scope.productlist[j].id==id){
                     if(  $scope.productlist[j].count>1){
                         $scope.productlist[j].count=  $scope.productlist[j].count-1;
-                        //cartservice.delete(id);
+                        cartservice.delete(id);
                     }
                 }
             }

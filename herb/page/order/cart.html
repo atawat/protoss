@@ -3,26 +3,26 @@
     <h1 class="title color-white font-15">购&nbsp;物&nbsp;车</h1>
 </div>
 <ion-view  hide-tabs="true">
-    <ion-content>
+    <ion-content style="margin-bottom: 44px">
 
         <ion-list >
-            <ion-item class="item-thumbnail-left " ng-repeat="item in productlist" >
+            <ion-item class="item-thumbnail-left " ng-repeat="item in productlist">
                 <img src="img/pic1.png" alt=""/>
 
-                <div class="padding-top font-13" >
+                <div class="padding-top font-13">
 
                     <span class="" style="float: left">{{item.name}}</span>
 
                     <div class="float-right">
-                    <strong>
-                        <i class="ion-plus-round" ng-click="adding(item.id)"></i>
-                        <span>{{item.count}}</span>
-                        <i class="ion-minus-round" ng-click="decrease(item.id)"></i>
-                    </strong><br><br>
+                        <strong>
+                            <i class="ion-plus-round" ng-click="adding(item.id)"></i>
+                            <span>{{item.count}}</span>
+                            <i class="ion-minus-round" ng-click="decrease(item.id)"></i>
+                        </strong><br><br>
                         <span class="assertive">{{item.price| currency:"￥"}}</span>
                     </div>
                 </div>
-            </ion-item >
+            </ion-item>
             <!--<ion-item class="item-thumbnail-left " >-->
                 <!--<img src="img/pic1.png" alt=""/>-->
                 <!--<div class="padding-top font-13" >-->

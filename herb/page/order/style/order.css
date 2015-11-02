@@ -30,3 +30,13 @@
     font-size: 1.1em;
     font-family: "Microsoft YaHei";
 }
+.float-right strong span{
+    width: 20px;
+    height: 15px;
+    display: inline-block;
+}
+.item-thumbnail-left .padding-top .float-right strong{
+    width: 75px;
+    height: 27px;
+    float: right;
+}
