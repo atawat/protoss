@@ -1,10 +1,13 @@
 <div class="bar  bg-grey " style="height: 44px">
     <button class="button  button-icon icon ion-chevron-left color-white" onclick="javascript:history.back(-1);"></button>
     <h1 class="title color-white font-15">购&nbsp;物&nbsp;车</h1>
+    <!--<button class="button float-right font-15 bg-grey color-white" style="width: 70px;height: 35px;font-size: 1.1em" ng-click="clearAll()">清&nbsp;空</button>-->
 </div>
 <ion-view  hide-tabs="true">
     <ion-content style="margin-bottom: 44px">
-
+        <div class="padding text-center" style="position: absolute;top: 100px;width: 100%" >
+            <em class="font-12"><strong>{{carttips}}</strong></em>
+        </div>
         <ion-list >
             <ion-item class="item-thumbnail-left " ng-repeat="item in productlist">
                 <img src="img/pic1.png" alt=""/>
@@ -58,7 +61,7 @@
     </ion-content>
     <div class=" row bar cart-footer font-13 text-center" >
         <div class="col col-70  bg-grey  padding-top light" >总计：{{total}}</div>
-        <a class="col col-30   energized-bg padding-top light" ng-click="submit()">提交订单</a>
+        <button class="col col-30   energized-bg  light"  id="orderSubmit" ng-click="submit()">提交订单</button>
     </div>
 </ion-view>
 

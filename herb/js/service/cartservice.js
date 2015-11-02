@@ -112,28 +112,30 @@ app.service("cartservice", ['$rootScope',
 			var productlist = jsonstr.productlist;
 			for (var i in productlist) {
 				if (productlist[i].id == id) {
-						//删除这个商品json
-						productlist.splice(i,1)
-						jsonstr.productlist = productlist;
-						if(productlist.length==0){
-							localStorage.removeItem("ShoppingCart");
-							$rootScope.cartProductCount = 0;
-							return;	
-						}
-						localStorage.setItem("ShoppingCart", "'" + JSON.stringify(jsonstr));
-						//总数+1
-						$rootScope.cartProductCount -= 1;
-						return;
+					//删除这个商品json
+					productlist.splice(i,1)
+					jsonstr.productlist = productlist;
+					if(productlist.length==0){
+						localStorage.removeItem("ShoppingCart");
+						$rootScope.cartProductCount = 0;
+
+					}
+					localStorage.setItem("ShoppingCart", "'" + JSON.stringify(jsonstr));
+					//总数+1
+					$rootScope.cartProductCount -= 1;
+					return;
 					productlist[i].count = parseInt(productlist[i].count) - 1;
 					//jsonstr.totalAmount = parseFloat(jsonstr.totalAmount) - parseInt(productlist[i].num) * parseFloat(productlist[i].price);
-				} else {
-					console.log("删除失败,没有这个商品的ID");
-					
 				}
+				//else {
+				//	console.log("删除失败,没有这个商品的ID");
+				//
+				//}
 			}
 			jsonstr.productlist = productlist;
 			localStorage.setItem("ShoppingCart", "'" + JSON.stringify(jsonstr));
 		};
+
 
 		//商品添加数量，
 		this.addone = function(id) {
