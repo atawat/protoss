@@ -6,7 +6,7 @@
     <ion-content>
         <ion-list ng-repeat="item in orderList">
             <ion-item class="item-thumbnail-left " >
-                <img src="img/pic1.png" alt=""/>
+                <img ng-src="{{'http://test.yoopoon.com/upload/'+item.Details[0].Image}}" alt=""/>
                 <div class=" padding-top">
                     <strong class="font-12" >{{item.OrderNum}}</strong><br><br>
                 </div>

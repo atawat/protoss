@@ -10,7 +10,7 @@
         </div>
         <ion-list >
             <ion-item class="item-thumbnail-left " ng-repeat="item in productlist">
-                <img src="img/pic1.png" alt=""/>
+                <img  ng-src="{{'http://test.yoopoon.com/upload/'+item.image}}" alt=""/>
 
                 <div class="padding-top font-13">
 
@@ -60,7 +60,7 @@
         </ion-list>
     </ion-content>
     <div class=" row bar cart-footer font-13 text-center" >
-        <div class="col col-70  bg-grey  padding-top light" >总计：{{total}}</div>
+        <div class="col col-70  bg-grey  padding-top light" >总计：{{total| currency:"￥"}}</div>
         <button class="col col-30   energized-bg  light"  id="orderSubmit" ng-click="submit()">提交订单</button>
     </div>
 </ion-view>
