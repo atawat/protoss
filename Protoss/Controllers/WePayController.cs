@@ -81,7 +81,7 @@ namespace Protoss.Controllers
             payModel.PaySign = _wePayService.MakeSign(signDic);
             return View(payModel);
         }
-
+        [AllowAnonymous]
         public ActionResult Error(string msg)
         {
             var errorMsg = msg;
