@@ -255,7 +255,7 @@ namespace Protoss.Controllers
 
                 TransCost = GetTransCost(model.LocationX, model.LocationY),           //Todo:use db data
 
-                Discount = model.Discount,          //Todo:use db data
+                //Discount = model.Discount,          //Todo:use db data
 
                 Status = EnumOrderStatus.Created,
 
@@ -321,7 +321,7 @@ namespace Protoss.Controllers
 
                 TransCost = GetTransCost(model.LocationX, model.LocationY),           //Todo:use db data
 
-                Discount = model.Discount,          //Todo:use db data
+                //Discount = model.Discount,          //Todo:use db data
 
                 Status = EnumOrderStatus.Created,
 

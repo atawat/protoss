@@ -61,7 +61,7 @@ namespace Protoss.Controllers
             XmlNode xmlNode = unifiedReponse.FirstChild;//获取到根节点<xml>
 
             if (xmlNode["return_code"].InnerText != "SUCCESS" || xmlNode["result_code"].InnerText != "SUCCESS")
-                return RedirectToAction("Error", "WePay", new { msg = xmlNode["return_msg"].InnerText });
+                return RedirectToAction("Error", "WePay",new { msg = xmlNode["return_msg"].InnerText });
             var payModel = new PayModel
             {
                 AppId = _commonService.AppId,
