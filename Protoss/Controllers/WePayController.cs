@@ -79,6 +79,7 @@ namespace Protoss.Controllers
                 {"signType", payModel.SignType},
             };
             payModel.PaySign = _wePayService.MakeSign(signDic);
+            payModel.TotalFee = order.TotalPrice;
             return View(payModel);
         }
         [AllowAnonymous]
