@@ -50,7 +50,7 @@ namespace Protoss.Controllers
                 {"device_info","WEB"},
                 {"body",order.Details.First().Product.Name},
                 {"detail",order.Details.First().Product.Name+"等商品"},
-                {"attach",""},
+//                {"attach",""},
                 {"out_trade_no",order.OrderNum},
                 {"total_fee",(order.TotalPrice * 100).ToString("F0")},
                 {"notify_url",Request.Url.Host + "/wepay/notifyurl"},
@@ -60,7 +60,7 @@ namespace Protoss.Controllers
             var unifiedReponse = (XmlDocument)_wePayService.UnifiedOrder(payParamDic);
             XmlNode xmlNode = unifiedReponse.FirstChild;//获取到根节点<xml>
 
-            if(xmlNode.Attributes["return_code"].Value != "SUCCESS" || xmlNode.Attributes["result_code"].Value != "SUCCESS")
+            if (xmlNode["return_code"].InnerText != "SUCCESS" || xmlNode["result_code"].InnerText != "SUCCESS")
                 return RedirectToAction("Error", new { msg = xmlNode.Attributes["return_msg"].Value });
             var payModel = new PayModel
             {
