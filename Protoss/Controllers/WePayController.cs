@@ -61,12 +61,12 @@ namespace Protoss.Controllers
             XmlNode xmlNode = unifiedReponse.FirstChild;//获取到根节点<xml>
 
             if (xmlNode["return_code"].InnerText != "SUCCESS" || xmlNode["result_code"].InnerText != "SUCCESS")
-                return RedirectToAction("Error", new { msg = xmlNode.Attributes["return_msg"].Value });
+                return RedirectToAction("Error", new { msg = xmlNode["return_msg"].InnerText });
             var payModel = new PayModel
             {
                 AppId = _commonService.AppId,
                 NonceStr = _helper.GenerateNonceStr(),
-                Package = "prepay_id=" + xmlNode.Attributes["prepay_id"].Value,
+                Package = "prepay_id=" + xmlNode["prepay_id"].InnerText,
                 SignType = "MD5",
                 TimeStamp = _helper.GenerateTimeStamp()
             };
