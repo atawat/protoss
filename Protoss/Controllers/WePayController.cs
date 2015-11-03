@@ -22,7 +22,7 @@ namespace Protoss.Controllers
         private readonly IWCCommonService _commonService;
         private readonly IWCHelper _helper;
 
-        public WePayController(IOrderService orderService, IWorkContext workContext, IWePayService wePayService,IWCCommonService commonService,IWCHelper helper)
+        public WePayController(IOrderService orderService, IWorkContext workContext, IWePayService wePayService, IWCCommonService commonService, IWCHelper helper)
         {
             _orderService = orderService;
             _workContext = workContext;
@@ -33,18 +33,18 @@ namespace Protoss.Controllers
 
         // GET: WePay
         [AllowAnonymous]
-        public ActionResult Index(string orderNo,string openId)
+        public ActionResult Index(string orderNo, string openId)
         {
             if (string.IsNullOrEmpty(orderNo))
-                return RedirectToAction("Error");
+                return RedirectToAction("Error", "WePay", new { msg = "请提供订单编号" });
             if (_workContext.CurrentUser == null)
-                return RedirectToAction("Error", new { msg = "无法获取当前用户，支付失败" });
+                return RedirectToAction("Error", "WePay", new { msg = "无法获取当前用户，支付失败" });
             var order =
                 _orderService.GetOrdersByCondition(new OrderSearchCondition { OrderNum = orderNo }).FirstOrDefault();
             if (order == null)
-                return RedirectToAction("Error", new { msg = "无法获取订单信息，支付失败" });
+                return RedirectToAction("Error", "WePay", new { msg = "无法获取订单信息，支付失败" });
             if (order.Adduser != _workContext.CurrentUser)
-                return RedirectToAction("Error", new { msg = "非订单所属客户，支付失败" });
+                return RedirectToAction("Error", "WePay", new { msg = "非订单所属客户，支付失败" });
             var payParamDic = new SortedDictionary<string, string>
             {
                 {"device_info","WEB"},
@@ -61,7 +61,7 @@ namespace Protoss.Controllers
             XmlNode xmlNode = unifiedReponse.FirstChild;//获取到根节点<xml>
 
             if (xmlNode["return_code"].InnerText != "SUCCESS" || xmlNode["result_code"].InnerText != "SUCCESS")
-                return RedirectToAction("Error", new { msg = xmlNode["return_msg"].InnerText });
+                return RedirectToAction("Error", "WePay", new { msg = xmlNode["return_msg"].InnerText });
             var payModel = new PayModel
             {
                 AppId = _commonService.AppId,
@@ -147,15 +147,15 @@ namespace Protoss.Controllers
                 var order = _orderService.GetOrdersByCondition(con).FirstOrDefault();
                 if (order != null)
                 {
-//                    if (order.Status == EnumOrderStatus.)
-//                    {
-//                        var error = new SortedDictionary<string, string>
-//                        {
-//                             {"return_code", "FAIL"},
-//                             {"return_msg", "没有获取到PrepayId"}
-//                        };
-//                        return _wcHelper.ConvertToXml(error);
-//                    }
+                    //                    if (order.Status == EnumOrderStatus.)
+                    //                    {
+                    //                        var error = new SortedDictionary<string, string>
+                    //                        {
+                    //                             {"return_code", "FAIL"},
+                    //                             {"return_msg", "没有获取到PrepayId"}
+                    //                        };
+                    //                        return _wcHelper.ConvertToXml(error);
+                    //                    }
                     if (order.Status == EnumOrderStatus.Payed)
                     {
                         var successMsg = new SortedDictionary<string, string>
