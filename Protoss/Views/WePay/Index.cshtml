@@ -21,7 +21,7 @@
             WeixinJSBridge.invoke(
                 'getBrandWCPayRequest', {
                     "appId": "@Model.AppId", //公众号名称，由商户传入     
-                    "timeStamp": " @Model.TimeStamp", //时间戳，自1970年以来的秒数     
+                    "timeStamp": "@Model.TimeStamp", //时间戳，自1970年以来的秒数     
                     "nonceStr": "@Model.NonceStr", //随机串     
                     "package": "@Model.Package",
                     "signType": "@Model.SignType", //微信签名方式：     
