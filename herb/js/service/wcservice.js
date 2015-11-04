@@ -61,7 +61,7 @@ app.service('wc', ['$http', '$state','$rootScope','$sessionStorage',function ($h
                 });
                 wx.onMenuShareTimeline({
                     title: '黑舞堂', // 分享标题
-                    link: SETTING.baseURI+'wx/', // 分享链接
+                    link: SETTING.baseURI+'www/', // 分享链接
                     imgUrl: SETTING.baseURI+'/wx/app/common/static/images/dahuofang.png', // 分享图标
                     success: function () {
                         alert("恭喜您分享成功！");
@@ -73,7 +73,7 @@ app.service('wc', ['$http', '$state','$rootScope','$sessionStorage',function ($h
                 wx.onMenuShareAppMessage({
                     title: '黑舞堂', // 分享标题
                     desc: '黑舞堂', // 分享描述
-                    link: SETTING.baseURI+'wx/', // 分享链接
+                    link: SETTING.baseURI+'www/', // 分享链接
                     imgUrl:  SETTING.baseURI+'/wx/app/common/static/images/dahuofang.png', // 分享图标
                     type: '', // 分享类型,music、video或link，不填默认为link
                     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
@@ -87,7 +87,7 @@ app.service('wc', ['$http', '$state','$rootScope','$sessionStorage',function ($h
                 wx.onMenuShareQQ({
                     title: '黑舞堂', // 分享标题
                     desc: '黑舞堂', // 分享描述
-                    link: SETTING.baseURI+'wx/', // 分享链接
+                    link: SETTING.baseURI+'www/', // 分享链接
                     imgUrl:  SETTING.baseURI+'/wx/app/common/static/images/dahuofang.png', // 分享图标
                     success: function () {
                         // 用户确认分享后执行的回调函数
@@ -100,7 +100,7 @@ app.service('wc', ['$http', '$state','$rootScope','$sessionStorage',function ($h
                 wx.onMenuShareWeibo({
                     title: '黑舞堂', // 分享标题
                     desc: '黑舞堂', // 分享描述
-                    link: SETTING.baseURI+'wx/', // 分享链接
+                    link: SETTING.baseURI+'www/', // 分享链接
                     imgUrl:  SETTING.baseURI+'/wx/app/common/static/images/dahuofang.png', // 分享图标
                     success: function () {
                         // 用户确认分享后执行的回调函数
@@ -148,7 +148,7 @@ app.service('wc', ['$http', '$state','$rootScope','$sessionStorage',function ($h
                 alert("无法获取openid");
                 return;
             }
-            window.location.href =SETTING.BaseUrl+"/wepay/Index?showwxpaytitle=1&openId="+_openId+"&orderNo="+orderNo;
+            window.location.href =SETTING.BaseUrl+"wepay/Index?showwxpaytitle=1&openId="+_openId+"&orderNo="+orderNo;
         };
         this.getQueryStringByName = function (name) {
             var result = location.search == "" ? undefined : location.search.split('?')[1].split('&');

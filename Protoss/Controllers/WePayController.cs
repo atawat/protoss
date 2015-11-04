@@ -88,7 +88,8 @@ namespace Protoss.Controllers
             var errorMsg = msg;
             if (string.IsNullOrEmpty(msg))
                 errorMsg = "出错啦，无法完成支付";
-            return View(errorMsg);
+            ViewBag.Msg = errorMsg;
+            return View();
         }
 
         [AllowAnonymous]
